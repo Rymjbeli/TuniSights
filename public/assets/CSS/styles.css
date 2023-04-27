@@ -1,0 +1,257 @@
+:root {
+    --main-font-family: "Nunito", sans-serif;
+    --main-color: #02669A;
+    --main-bg-color: rgb(211, 240, 251);
+    --main-border-radius: 20px;
+    --main-transition: 0.3s ease;
+    --main-nav-bg-color: rgba(0, 98, 149, 0.4);
+    --main-nav-link-color: white;
+    --main-nav-link-hover-color: darkblue;
+    --main-nav-profile-bg-color: rgba(0, 95, 149, 0.4);
+    --main-nav-profile-link-bg-color: rgba(105, 169, 215, 0.4);
+    --main-hover-animation: pulse 1s infinite;
+}
+
+body {
+    font-family: var(--main-font-family);
+    scroll-behavior: smooth;
+    background: var(--main-bg-color);
+    margin-bottom: 0px;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--main-nav-link-color);
+}
+
+.angle {
+    color: white;
+}
+
+img {
+    height: 400px;
+    object-fit: cover;
+    width: 300px;
+    border-radius: var(--main-border-radius);
+}
+
+.swiper-slide {
+    overflow: hidden;
+    border-radius: var(--main-border-radius);
+    height: 350px;
+    width: 250px;
+}
+
+.main-header {
+
+
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main-header .container {
+    margin-left: 50px;
+    margin-top: 14vh;
+}
+
+.fa-solid.fa-angles-down {
+    font-size: 25px;
+    color: var(--main-nav-link-color);
+}
+
+.text-center.link-icon {
+    margin-top: 5vh;
+    padding: -50px;
+}
+
+.header-elements {
+    margin-bottom: 5vh;
+}
+
+.section-title {
+    color: var(--main-color);
+}
+
+/* Start Discover */
+
+.slide-container {
+    max-width: 1120px;
+    width: 200vh;
+    padding: 40px 0;
+}
+
+.slide-content {
+    margin: 0 40px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+.card {
+    border-radius: 25px;
+    background-color: var(--main-nav-link-color);
+    height: 70vh;
+
+}
+
+.image-content,
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+}
+
+.image-content {
+    position: relative;
+    row-gap: 5px;
+    padding: 0 0;
+    height: 40vh;
+}
+
+.image-content img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.avatar-img {
+    height: 40px;
+    width: 40px;
+}
+
+.name, .date, .like {
+    font-size: 12px;
+    font-weight: 500;
+    color: #707070;
+    text-align: left;
+    margin: 5px;
+}
+
+.like {
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+    margin-top: 0px;
+}
+
+.description {
+    font-size: 14px;
+    text-align: left;
+    color: #333;
+    margin-bottom: 35px;
+    width: 270px;
+    height: 65px;
+    /* if the paragraph exceed 3 lines the overflow is hidden and replaced by elllipsis  */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* number of lines to display */
+    overflow-wrap: break-word;
+}
+
+
+.fa-heart{
+    margin-left: 4vh;
+}
+
+.swiper-navBtn{
+    color: var(--main-color);
+    transition: color 0.3s ease;
+}
+
+.swiper-navBtn:hover {
+    color: #b8c1d6;
+}
+
+.swiper-navBtn::before,
+.swiper-navBtn::after {
+    font-size: 35px;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-pagination-bullet {
+    background-color: var(--main-color);
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #b8c1d6;
+}
+.div-container {
+    max-width: 200px;
+}
+
+
+
+.text-center {
+    margin: 0;
+    margin-top: 50px;
+}
+
+/* End Discover */
+
+
+/* Define the hover effect */
+.img-hover-pulse:hover {
+    animation: pulse 1s;
+}
+
+/* Define the pulse animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.About-us .container .row, .text-center, .header-elements {
+    margin-top: 50px;
+}
+
+
+/* Start of About Us Section */
+.about-us-container {
+    height: 500px;
+}
+
+
+
+
+.about-us-img {
+    text-align: center;
+    position: relative;
+    height: 50vh;
+}
+
+.about-us-img::before {
+    content: "";
+    width: 300px;
+    height: 400px;
+    background-color: #b8c1d6;
+    position: absolute;
+    right: 75px;
+    z-index: -1;
+    top: -45px;
+    border-radius: var(--main-border-radius);
+}
+
+
+
+/* End of About Us Section */
+
+

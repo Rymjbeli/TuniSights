@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <!-- Page Tile => changeable -->
+    <title> {% block Title %} Tunisights {% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('assets/CSS/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    {% block AddCSSLinks %}
+        <link rel="stylesheet" href="{{ asset('assets/CSS/styles.css') }}">
+    {% endblock %}
+    <link rel="stylesheet" href="{{ asset('assets/CSS/Footer.css') }}">
+
+<body {% block BodynameClass %} {% endblock %} >
+
+{% block SectionsOfTheBody %}
+
+    <!-- Start Header     -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="text-start header-elements">
+                        <h1>Never Stop&nbsp;</h1>
+                        <h1>Exploring Tunisia</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Images Of The Swipper in the HomePage -->
+
+        <section class="home" id="home">
+            <div class="swiper-container home-slider">
+                <div class="swiper-wrapper">
+                    {% for i in 1..2 %}
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/jemaa.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/riviere.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/ljam.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/chalel.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/neigeaindrahem.png') }}" alt="">
+                        </div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/sahra.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/bargou.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/Tozeur.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/Kerkennah.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/Ledahar.png') }}" alt=""></div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Add angle Icon to The Bottom -->
+        <div class="text-center link-icon">
+            <a href="#Discover" class="angle">
+                <i class="fa-solid fa-angles-down"></i>
+            </a>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Start Discover -->
+    <section id="Discover" class="Discover">
+
+        <div class="slide-container swiper">
+            <div class="slide-content">
+                <div class="card-wrapper swiper-wrapper">
+                    {% for i in 1..4 %}
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+
+
+                                <img src="{{ asset('assets/Images/Ledahar.png') }}" alt="" class="card-img">
+
+                            </div>
+
+                            <div class="card-content">
+                                <h5 class="title">Title</h5>
+                                <p class="description">The lorem text the section that contains header with having open
+                                    functionality. Lorem dolor sit amet consectetur adipisicing
+                                    elit.kjhidsknjqdlkzqdnklzsqdxs qx,qsxqzdnqlkzjsqklds,cnc, qjdneqjkdbcqkcsj nq;,dnc
+                                    qlknqskm</p>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col col-lg-2 col-md-6">
+                                            <img class="avatar-img" src="{{ asset('assets/Images/camping.png') }}"
+                                                 alt="">
+                                        </div>
+                                        <div class="col col-lg-6 col-md-6">
+                                            <p class="name">David Dell</p>
+                                            <p class="date">Avril 08,2023 - 22:30</p>
+                                        </div>
+                                        <div class="col col-lg-4 col-md-3">
+                                            <i class="fa-sharp fa-solid fa-heart"></i>
+                                            <p class="like">64 likes</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="swiper-button-next swiper-navBtn"></div>
+                <div class="swiper-button-prev swiper-navBtn"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+    <!-- End Discover -->
+
+    <!-- Start About Us -->
+    <section id="About-us" class="About-us">
+        <div class="container about-us-container">
+            <div class="row about-us-row">
+
+                <div class="col">
+                    <div class="text-center about-us-img">
+                        <img class="img-fluid img-hover-pulse" src="{{ asset('assets/Images/camping.png') }} "></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End About Us -->
+
+{% endblock %}
+
+<!-- Start Footer -->
+<div class="footer">
+    <div class="container_footer">
+        <!-- <img src="../Images/logo.png" alt="Logo"/> -->
+        <p class="parag2">
+            Get In Touch With Us <br/>
+            We Are waiting For Your Message
+        </p>
+        <div class="Email-link">
+            <a class="btn rounded-pill main-btn w-100" href="#">TuniSights@gmail.com</a>
+        </div>
+        <div class="social-icons">
+            <a href=""><i class="fa-brands fa-facebook"></i></a>
+            <a href=""><i class="fa-brands fa-twitter"></i></a>
+            <a href=""><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <div id="google_translate_element"></div>
+        <p class="copyright">&copy; 2023 <span>TuniSights</span> All Right Reserved</p>
+    </div>
+</div>
+<!-- End Footer -->
+
+
+<script src="{{ asset('assets/JS/bootstrap.min.js') }}"></script>
+<script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+{% block AddJSLinks %}
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>
+{% endblock %}
+
+</body>
+</html>
