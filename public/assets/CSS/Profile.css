@@ -1,0 +1,101 @@
+html, body {
+    margin: 100px auto;
+    margin-bottom: 1vh;
+    background-image: url("../Images/search/sky.jpg");
+    background-size: cover;
+    background-position: top;
+    /* move the image down*/
+    background-position-y: -150vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 0.66);
+    background-blend-mode: overlay;
+}
+.Post{
+    height: 500px;
+    object-fit: cover;
+    width: 450px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.mezyan {
+    background-color: rgba(0, 97, 149, 0.651);
+    color: #fff;
+    padding: 0.3em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.mezyan:hover {
+    color: rgb(0, 98, 149);
+    background-color: rgb(211, 240, 251);
+    padding: 0.3em 1em;
+    border: 1px rgb(0, 98, 149);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.container{
+    margin-top: 25px;
+}
+.AddHolder{
+    position: sticky;
+    bottom: 10px;
+    left: 50%;
+}
+.ProfileArea{
+    background-color:rgba(40, 147, 189, 0.2);
+    margin-left: 20vh;
+    margin-right: 20vh;
+    border-radius: 25px;
+    margin-bottom: 20vh;
+}
+.profile_picture{
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    margin-top: 25px;
+}
+.card {
+    width: 250px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+a {
+    text-decoration: none;
+}
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 992px) {
+    .card {
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    footer .container {
+        max-width: 1200px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    footer .btn {
+        width: 100%;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
+@media (max-width: 767px) {
+    body {
+        background-position-y: bottom;
+    }
+}
