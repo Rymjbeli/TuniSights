@@ -9,12 +9,41 @@
     <link rel="stylesheet" href="{{ asset('assets/CSS/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/CSS/NavBar.css') }}">
     {% block AddCSSLinks %}
         <link rel="stylesheet" href="{{ asset('assets/CSS/styles.css') }}">
     {% endblock %}
     <link rel="stylesheet" href="{{ asset('assets/CSS/Footer.css') }}">
 
 <body {% block BodynameClass %} {% endblock %} >
+<!-- Navbar -->
+<nav class="navbar navbar-dark navbar-expand-md fixed-top">
+    <div class="container-fluid"><a class="navbar-brand" href="index.html.twig"><img
+                    src="{{ asset('assets/Images/logo.png' ) }}" alt=""></a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
+                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div id="navcol-1" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#Discover">Discover</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#About-us">About us</a></li>
+                <li class="nav-item"><a class="nav-link active" href="Search.html.twig"><i class="fas fa-search"></i>
+                        Search </a></li>
+                <li class="nav-item"><a class="nav-link active" href="login.html.twig">Login</a></li>
+                <li class="nav-item nav__profile ">
+                    <div class="avatar">
+                        <img class="nav-img" src="{{ asset('assets/Images/camping.png') }}">
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-lg-end">
+                        <li><a href="Profile.html.twig">Profile</a></li>
+                        <li><a href="EditProfile.html.twig">Settings</a></li>
+                        <li><a href="index.html.twig">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--End Navbar -->
 
 {% block SectionsOfTheBody %}
 
@@ -24,8 +53,7 @@
             <div class="row">
                 <div class="col">
                     <div class="text-start header-elements">
-                        <h1>Never Stop&nbsp;</h1>
-                        <h1>Exploring Tunisia</h1>
+                        <h1>Never stop <br>Exploring Tunisia</h1>
                     </div>
                 </div>
             </div>
@@ -66,7 +94,12 @@
 
     <!-- Start Discover -->
     <section id="Discover" class="Discover">
+        <div class="text-center">
+            <h1 class="section-title mx-auto">Discover</h1>
 
+            <hr class="HR-LINE-Discover mx-auto">
+            <h1 class="section-title mx-auto">Most Liked Posts </h1>
+        </div>
         <div class="slide-container swiper">
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
@@ -120,7 +153,27 @@
     <section id="About-us" class="About-us">
         <div class="container about-us-container">
             <div class="row about-us-row">
+                <div class="col col-lg -8 col-md-6 image-About">
+                    <div class="text-center about-us-text">
+                        <h1 class="section-title mx-auto">About Us</h1>
+                        <hr class="HR-LINE-About mx-auto">
+                        <p>
+                            We're on a mission to ignite your sense of adventure and open your eyes to the wonders of
+                            Tunisia. As your trusted travel companion, we provide reliable information and insider tips
+                            to
+                            help you discover the hidden gems of this captivating country. Our values of authenticity,
+                            reliability, respect for culture, and sustainability drive us to create memorable
+                            experiences
+                            for you. Join us on this thrilling journey to uncover the magic of Tunisia with TuniSights
+                            as
+                            your guide. <br>
+                            "Discover the hidden tunisian gems with our community of passionate travelers."<br>
+                            "Come wander with us, where the undiscovered lies, where the hidden gems await, and the
+                            adventure never dies."
+                        </p>
 
+                    </div>
+                </div>
                 <div class="col">
                     <div class="text-center about-us-img">
                         <img class="img-fluid img-hover-pulse" src="{{ asset('assets/Images/camping.png') }} "></div>

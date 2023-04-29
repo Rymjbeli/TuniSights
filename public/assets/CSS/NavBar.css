@@ -1,0 +1,77 @@
+/* Start of Navbar */
+a{
+    color: white;
+}
+.navbar {
+    background-color: rgba(0, 98, 149, 0.4);
+
+}
+
+.nav-item:hover .nav-link {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.avatar {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 0.15rem solid #02669A;
+}
+
+.nav-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.navbar-brand img {
+    width: 140px;
+    height: 70px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    padding: 0;
+}
+.nav__profile {
+    position: relative;
+    cursor: pointer;
+}
+
+.nav__profile ul {
+    list-style-type: none;
+    position: absolute;
+    top: 125%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    width: 200px;
+
+}
+
+.nav__profile ul li a {
+    padding: 1rem;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+.nav__profile ul li a:hover:last-child {
+    background: rgba(0, 98, 149, 0.4);
+    color: darkblue;
+}
+
+.dropdown-menu {
+    background-color: rgba(0, 98, 149, 0.4);
+}
+
+
+/*show nav ul when hover*/
+.nav__profile:hover > ul {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* End of Navbar */

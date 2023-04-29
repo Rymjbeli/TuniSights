@@ -44,8 +44,7 @@ img {
 }
 
 .main-header {
-
-
+    background: url("../Images/djerba2.jpg") center / cover no-repeat;
     height: 100vh;
     overflow: hidden;
 }
@@ -191,7 +190,14 @@ img {
     max-width: 200px;
 }
 
-
+.HR-LINE-Discover {
+    width: 128px;
+    padding-right: 0;
+    margin-right: -48px;
+    padding-left: 108px;
+    margin-left: 589px;
+    margin-bottom: 11px;
+}
 
 .text-center {
     margin: 0;
@@ -223,14 +229,30 @@ img {
     margin-top: 50px;
 }
 
-
 /* Start of About Us Section */
 .about-us-container {
     height: 500px;
 }
 
+.about-us-row {
+    margin-top: 50px;
+    margin-left: 170px
+}
 
+.about-us-text {
+    margin-top: 7vh;
+}
 
+.image-About {
+    background-color: white;
+    border-radius: var(--main-border-radius);
+    background-size: cover;
+    background-position: top center;
+    height: 59vh;
+    margin-top: 3.5vh;
+    display: flex;
+    justify-content: center;
+}
 
 .about-us-img {
     text-align: center;
@@ -250,8 +272,106 @@ img {
     border-radius: var(--main-border-radius);
 }
 
-
+.HR-LINE-About {
+    width: 128px;
+    padding-right: 0;
+    margin-right: -48px;
+    padding-left: 114px;
+    margin-left: 216px;
+    margin-bottom: 24px;
+}
 
 /* End of About Us Section */
 
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
 
+    .main-header .container {
+        margin-left: 20px;
+        margin-top: 8vh;
+    }
+
+    .text-center.link-icon {
+        margin-top: 3vh;
+    }
+
+    .header-elements {
+        margin-bottom: 3vh;
+    }
+
+    .slide-container {
+        max-width: 100%;
+        width: auto;
+        padding: 20px 0;
+    }
+
+    .slide-content {
+        margin: 0 10px;
+    }
+
+    .swiper-navBtn {
+        display: none;
+    }
+
+    .about-us-img::before {
+        width: 200px;
+        height: 300px;
+        right: 50px;
+        top: -35px;
+    }
+
+    .nav-item:hover .nav-link {
+        transform: none;
+    }
+
+    .avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .nav__profile ul {
+        width: 150px;
+        padding: 0.5rem;
+    }
+
+    .nav__profile ul li a:hover:last-child {
+        background: var(--main-nav-profile-bg-color);
+        color: var(--main-nav-link-hover-color);
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .about-us-row {
+        margin-left: 10px;
+    }
+
+    .about-us-text {
+        margin-top: 4vh;
+    }
+
+    .image-About {
+        height: 555px;
+    }
+
+    .about-us-img::before {
+        height: 300px;
+        right: -40px;
+        top: -25px;
+    }
+
+    .HR-LINE-About {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .footer .Email-link, .goog-te-combo {
+        background-color: var(--main-bg-color);
+        margin-right: 65vh;
+        margin-left: 24vh;
+        border-radius: 25px;
+    }
+
+}
