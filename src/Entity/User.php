@@ -40,8 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bio = null;
 
-    #[ORM\Column(length: 25)]
-    private ?string $role = null;
+
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: PasswordResetToken::class, orphanRemoval: true)]
     private Collection $passwordResetTokens;
@@ -161,17 +160,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, PasswordResetToken>
