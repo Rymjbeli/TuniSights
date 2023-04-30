@@ -1,8 +1,10 @@
 {% extends 'index.html.twig' %}
 {% block Title %} Profile {% endblock %}
 {% block AddCSSLinks %}
-  <link rel="stylesheet" href="../public/assets/CSS/Profile.css">
-  <link rel="stylesheet" href="../public/assets/CSS/PostCard.css">
+  <link rel="stylesheet" href="{{ asset('assets/CSS/Profile.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/CSS/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/CSS/PostCard.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/CSS/NavBar.css') }}">
 {% endblock %}
 {% block AddJSLinks %}
   <script src="{{asset('assets/Libs/jquery-3.6.4.min.js')}}"></script>
@@ -15,7 +17,7 @@
 <div class="container col-md-5 col-lg-7">
   <div class="row">
       <div class="col-md-6 col-lg-4 mb-4">
-        <img class=" profile_picture" src="{{ asset('assets/Images/Bouhedma.png') }}">
+        <img class=" profile_picture" src="../Images/Bouhedma.png">
       </div>
     <div class="col-md-6 col-lg-4 mb-4"style="margin-left: 40px;padding-top: 25px">
       <h5 class="card-title">John Doe</h5>
@@ -28,10 +30,10 @@
 <div class="container">
       <div class="row">
         <div class="col-md-6 col-lg-4 mb-4">
-          <img class="img-fluid Post" src="{{ asset('assets/Images/sahara1.jpg') }}/" alt="Gallery Image" style="border-radius: 20px">
+          <img class="img-fluid Post" src="../Images/sahara1.jpg" alt="Gallery Image" style="border-radius: 20px">
         </div>
         <div class="col-md-6 col-lg-4 mb-4">
-          <img  class="img-fluid Post" src="{{ asset('assets/Images/riviere.png') }}" alt="Gallery Image">
+          <img  class="img-fluid Post" src="../Images/riviere.png" alt="Gallery Image">
         </div>
         <div class="col-md-6 col-lg-4 mb-4">
           <img class="img-fluid Post" src="https://via.placeholder.com/400x400" alt="Gallery Image">
