@@ -26,11 +26,11 @@ a{
     object-fit: cover;
 }
 .navbar-brand img {
-    width: 140px;
+    width: 100%;
     height: 70px;
     margin-top: -20px;
     margin-bottom: -20px;
-    padding: 0;
+    padding: -3vh;
 }
 .nav__profile {
     position: relative;

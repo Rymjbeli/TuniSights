@@ -6,10 +6,12 @@
 
     <!-- Page Tile => changeable -->
     <title> {% block Title %} Tunisights {% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('assets/CSS/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/Libs/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/Libs/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/CSS/NavBar.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,500;0,700;1,600&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
+          rel="stylesheet"/>
     {% block AddCSSLinks %}
         <link rel="stylesheet" href="{{ asset('assets/CSS/styles.css') }}">
     {% endblock %}
@@ -18,7 +20,7 @@
 <body {% block BodynameClass %} {% endblock %} >
 <!-- Navbar -->
 <nav class="navbar navbar-dark navbar-expand-md fixed-top">
-    <div class="container-fluid"><a class="navbar-brand" href="index.html.twig"><img
+    <div class="container-fluid"><a class="navbar-brand" href=""><img
                     src="{{ asset('assets/Images/logo.png' ) }}" alt=""></a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -26,17 +28,17 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link active" href="#Discover">Discover</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#About-us">About us</a></li>
-                <li class="nav-item"><a class="nav-link active" href="Search.html.twig"><i class="fas fa-search"></i>
+                <li class="nav-item"><a class="nav-link active" href=""><i class="fas fa-search"></i>
                         Search </a></li>
-                <li class="nav-item"><a class="nav-link active" href="login.html.twig">Login</a></li>
+                <li class="nav-item"><a class="nav-link active" href="">Login</a></li>
                 <li class="nav-item nav__profile ">
                     <div class="avatar">
                         <img class="nav-img" src="{{ asset('assets/Images/camping.png') }}">
                     </div>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
-                        <li><a href="Profile.html.twig">Profile</a></li>
-                        <li><a href="EditProfile.html.twig">Settings</a></li>
-                        <li><a href="index.html.twig">Logout</a></li>
+                        <li><a href="">Profile</a></li>
+                        <li><a href="">Settings</a></li>
+                        <li><a href="">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -46,6 +48,7 @@
 <!--End Navbar -->
 
 {% block SectionsOfTheBody %}
+    <div class="CardLoader" id="enabled"></div>
 
     <!-- Start Header     -->
     <header class="main-header">
@@ -103,12 +106,11 @@
         <div class="slide-container swiper">
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
-                    {% for i in 1..4 %}
+                    {% for i in 1..15 %}
                         <div class="card swiper-slide">
                             <div class="image-content">
 
-
-                                <img src="{{ asset('assets/Images/Ledahar.png') }}" alt="" class="card-img">
+                                <img src="{{ asset('assets/Images/Ledahar.png') }}" alt="" class="card-img Post">
 
                             </div>
 
@@ -121,12 +123,12 @@
 
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col col-lg-2 col-md-6">
+                                        <a class="col col-lg-2 col-md-6">
                                             <img class="avatar-img" src="{{ asset('assets/Images/camping.png') }}"
                                                  alt="">
-                                        </div>
+                                        </a>
                                         <div class="col col-lg-6 col-md-6">
-                                            <p class="name">David Dell</p>
+                                            <a class="name">David Dell</a>
                                             <p class="date">Avril 08,2023 - 22:30</p>
                                         </div>
                                         <div class="col col-lg-4 col-md-3">
@@ -194,7 +196,9 @@
             We Are waiting For Your Message
         </p>
         <div class="Email-link">
-            <a class="btn rounded-pill main-btn w-100" href="#">TuniSights@gmail.com</a>
+            <a class="btn rounded-pill main-btn w-100"
+               href="https://mail.google.com/mail/?view=cm&to=TuniSights@gmail.com"
+               target="_blank">TuniSights@gmail.com</a>
         </div>
         <div class="social-icons">
             <a href=""><i class="fa-brands fa-facebook"></i></a>
@@ -212,10 +216,11 @@
 <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-
 {% block AddJSLinks %}
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="{{ asset('assets/Libs/swiper-bundle.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>
+    <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/PostCard.js') }}"></script>
 {% endblock %}
 
 </body>

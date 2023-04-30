@@ -17,7 +17,7 @@ $(document).ready(function(){
         const loader = $('.CardLoader:first');
         loader.hide();
         if(loader.attr('id') === 'enabled'){
-            loader.load('../HTML/PostCard.html.twig');
+            loader.load('@App/templates/PostCard.html.twig');
             loader.fadeIn(350);
             loader.attr('id','Disabled');
             $(document).mouseup(function(e){

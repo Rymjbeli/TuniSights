@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -38,7 +39,7 @@ class Post
     private ?string $location = null;
 
     #[ORM\Column]
-    private ?float $rating = null;
+    private ?int $rating = null;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
@@ -49,6 +50,9 @@ class Post
 
     #[ORM\OneToMany(mappedBy: 'targetPost', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Image = null;
 
     public function __construct()
     {
@@ -226,6 +230,18 @@ class Post
                 $like->setTargetPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->Image;
+    }
+
+    public function setImage(string $Image): self
+    {
+        $this->Image = $Image;
 
         return $this;
     }
