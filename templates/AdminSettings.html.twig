@@ -1,0 +1,48 @@
+{% extends 'index.html.twig' %}
+{% block AddCSSLinks %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('assets/CSS/admin.css') }}">
+{% endblock %}
+{% block Title %} AdminSettings {% endblock %}
+{% block BodynameClass%} id="body-pd" {% endblock %}
+{% block SectionsOfTheBody %}
+<header class="header" id="header">
+    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+</header>
+<div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+        <div>
+            <div class="nav_logo">
+                <i class="fa-solid fa-gear"></i>
+                <span class="nav_logo-name">Settings</span>
+            </div>
+
+
+            <div class="nav_list">
+                <a href="" class="nav_link active">
+                    <i class="fa-solid fa-user-pen"></i>
+                    <span class="nav_name">Edit Profile</span>
+                </a>
+                <a href="#" class="nav_link">
+                    <i class="fa-solid fa-user-minus"></i>
+                    <span class="nav_name">Delete Users</span>
+                </a>
+                <a href="" class="nav_link">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="nav_name">Add Admin</span> </a>
+                <a href="#" class="nav_link">
+                    <i class="fa-solid fa-trash"></i>
+                    <span class="nav_name">Delete Posts</span>
+                </a>
+            </div>
+    </nav>
+</div>
+
+{% endblock %}
+{% block AddJSLinks %}
+    <script src="{{ asset('assets/JS/AdminSettings.js')}}"></script>
+    <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js')}}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
