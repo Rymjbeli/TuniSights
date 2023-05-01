@@ -1,0 +1,22 @@
+{% extends 'index.html.twig' %}
+
+{% block Title %} Add Post {% endblock %}
+
+{% block AddCSSLinks %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="{{ asset('assets/CSS/addPost.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+{% endblock %}
+
+{% block SectionsOfTheBody %}
+    <!-- start add post -->
+    <section class="post">
+        <h1>{{ AddEdit }} your post</h1>
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+        {{ form_rest(form) }}
+    </section>
+    <!-- end add post -->
+{% endblock %}
+{% block AddJSLinks %}
+    <script src="{{asset('assets/JS/addpost.js')}}"></script>
+{% endblock %}

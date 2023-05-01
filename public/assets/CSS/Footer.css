@@ -96,5 +96,14 @@
 .footer .goog-te-combo {
     border-radius: 20px;
 }
+@media screen and (max-width: 768px) {
+    .footer .Email-link, .goog-te-combo {
+        background-color: var(--main-bg-color);
+        margin-right: 65vh;
+        margin-left: 24vh;
+        border-radius: 25px;
+    }
+}
+
 
 /* End Footer */

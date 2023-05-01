@@ -103,32 +103,35 @@
             <hr class="HR-LINE-Discover mx-auto">
             <h1 class="section-title mx-auto">Most Liked Posts </h1>
         </div>
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
         <div class="slide-container swiper">
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
-                    {% for i in 1..15 %}
+
+                    {% for post in posts %}
                         <div class="card swiper-slide">
                             <div class="image-content">
-
-                                <img src="{{ asset('assets/Images/Ledahar.png') }}" alt="" class="card-img Post">
-
+                                <img src="{{asset('assets/Images/' ~ post.image)}}" alt="" class="card-img Post">
                             </div>
 
                             <div class="card-content">
-                                <h5 class="title">Title</h5>
-                                <p class="description">The lorem text the section that contains header with having open
-                                    functionality. Lorem dolor sit amet consectetur adipisicing
-                                    elit.kjhidsknjqdlkzqdnklzsqdxs qx,qsxqzdnqlkzjsqklds,cnc, qjdneqjkdbcqkcsj nq;,dnc
-                                    qlknqskm</p>
+                                <h5 class="title">{{ post.title }}</h5>
+                                <p class="description">{{post.description}}</p>
 
                                 <div class="container">
                                     <div class="row">
-                                        <a class="col col-lg-2 col-md-6">
+                                        <a href="{{ path('show.user',{'username': post.owner.username}) }}" class="col col-lg-2 col-md-6">
                                             <img class="avatar-img" src="{{ asset('assets/Images/camping.png') }}"
                                                  alt="">
                                         </a>
                                         <div class="col col-lg-6 col-md-6">
-                                            <a class="name">David Dell</a>
+                                            <a href="{{ path('show.user',{'username': post.owner.username}) }}" class="name">{{ post.owner.username }}</a>
                                             <p class="date">Avril 08,2023 - 22:30</p>
                                         </div>
                                         <div class="col col-lg-4 col-md-3">
@@ -212,14 +215,14 @@
 <!-- End Footer -->
 
 
-<script src="{{ asset('assets/JS/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/Libs/bootstrap.min.js') }}"></script>
 <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
 
 {% block AddJSLinks %}
     <script src="{{ asset('assets/Libs/swiper-bundle.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>
-    <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
     <script src="{{ asset('assets/JS/PostCard.js') }}"></script>
 {% endblock %}
 

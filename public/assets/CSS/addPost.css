@@ -1,0 +1,287 @@
+* {
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 100px 0 0 0;
+  background-image: url("../Images/sky.jpg");
+  background-size: cover;
+  background-position: top;
+  /* move the image down*/
+  background-position-y: -150vh;
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: rgba(255, 255, 255, 0.66);
+  background-blend-mode: overlay;
+}
+
+/*Styling the h1*/
+h1 {
+  letter-spacing: 1px;
+  line-height: 1.2;
+  color: #130550;
+  text-shadow: 0.5px 0.5px 0.5px #000e46;
+  text-align: left;
+  /* adjust as needed */
+}
+
+
+
+/*styling the post section (form)*/
+.post {
+  justify-content: center;
+  align-items: center;
+  width: 100vh;
+  height: 100%;
+  opacity: 0.9;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 50px;
+  margin: auto;
+}
+
+@media (max-width: 767px) {
+  .post {
+    display: block;
+    box-sizing: border-box;
+    opacity: 0.9;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 50px;
+    line-height: 2.5;
+    margin: 20px;
+    width: auto;
+    height: 100%;
+    align-items: center;
+  }
+}
+
+/* Style the form inputs and labels */
+form label {
+  display: block;
+  margin-top: 0.5em;
+}
+
+form input[type="text"],
+form textarea {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+#char-counter{
+  text-align: right;
+  font-size: 0.8rem;
+  color: grey;
+
+}
+form select {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+form textarea {
+  overflow-y: auto;
+  line-height: 1.5;
+}
+/* Style the image input */
+form input[type="file"] {
+  width: 100%;
+}
+
+form input[type="file"]::-webkit-file-upload-button {
+  background-color: rgba(0, 97, 149, 0.651);
+  color: #fff;
+  padding: 0.3em 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form input[type="file"]::-webkit-file-upload-button:hover {
+  color: rgb(0, 98, 149);
+  background-color: rgb(211, 240, 251);
+  padding: 0.3em 1em;
+  border: 1px rgb(0, 98, 149);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.19);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Style the form submit button */
+form button[type="submit"]{
+  background-color: rgba(0, 97, 149, 0.651);
+  color: #fff;
+  padding: 0.3em 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 60%;
+  margin-bottom: 0.5rem;
+  margin-left: 7.5rem;
+}
+
+form button[type="submit"]:hover{
+  color: rgb(0, 98, 149);
+  background-color: rgb(211, 240, 251);
+  padding: 0.3em 1em;
+  border: 1px rgb(0, 98, 149);
+  border-radius: 8px;
+  cursor: pointer;
+
+}
+
+/*Style the tag button*/
+form button[id="add-tag-btn"] {
+  background-color: rgba(0, 97, 149, 0.651);
+  color: #fff;
+  padding: 0.3em 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+form button[id="add-tag-btn"]:hover {
+  color: rgb(0, 98, 149);
+  background-color: rgb(211, 240, 251);
+  padding: 0.3em 1em;
+  border: 1px rgb(0, 98, 149);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Style the form reset button */
+form button[type="reset"] {
+  background-color: rgba(0, 97, 149, 0.651);
+  color: #fff;
+  padding: 0.3em 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 60%;
+  margin-bottom: 0.5rem;
+  margin-left: 7.5rem;
+}
+
+form button[type="reset"]:hover {
+  color: rgb(0, 98, 149);
+  background-color: rgb(211, 240, 251);
+  padding: 0.3em 1em;
+  border: 1px rgb(0, 98, 149);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Style the form cancel button */
+form button[type="cancel"] {
+  background-color: rgba(0, 97, 149, 0.651);
+  color: #fff;
+  padding: 0.3em 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+form button[type="cancel"]:hover {
+  color: rgb(0, 98, 149);
+  background-color: rgb(211, 240, 251);
+  padding: 0.3em 1em;
+  border: 1px rgb(0, 98, 149);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+/* Styling the rating stars */
+.rate p {
+  float: left;
+}
+.rate {
+  float: left;
+  margin: 10px 0;
+  padding: 0px;
+}
+
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+}
+
+.rate:not(:checked) > label:before {
+  content: "★ ";
+}
+
+.rate > input:checked ~ label {
+  color: #ffc700;
+}
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+
+
+
+

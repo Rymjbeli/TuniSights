@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -17,7 +18,7 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100,nullable: true)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -26,7 +27,7 @@ class Post
     #[ORM\Column(length: 50)]
     private ?string $category = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100,nullable: true)]
     private ?string $place = null;
 
     #[ORM\Column(length: 50)]
@@ -157,7 +158,7 @@ class Post
 
     public function setRating(float $rating): self
     {
-        $this->rating = $rating;
+        $this->rating = (int) $rating;
 
         return $this;
     }
@@ -245,4 +246,5 @@ class Post
 
         return $this;
     }
+
 }

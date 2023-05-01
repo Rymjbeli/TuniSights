@@ -343,6 +343,7 @@ img {
 }
 
 
+
 @media screen and (max-width: 768px) {
     .about-us-row {
         margin-left: 10px;
@@ -365,13 +366,6 @@ img {
     .HR-LINE-About {
         margin-left: 10px;
         margin-right: 10px;
-    }
-
-    .footer .Email-link, .goog-te-combo {
-        background-color: var(--main-bg-color);
-        margin-right: 65vh;
-        margin-left: 24vh;
-        border-radius: 25px;
     }
 
 }
