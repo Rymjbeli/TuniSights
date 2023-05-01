@@ -118,7 +118,7 @@ class PostFixture extends Fixture
         // Create 20 Posts
         for ($i = 0; $i < 20; $i++) {
             $userRepository = $manager->getRepository(User::class);
-            $user = $userRepository->findOneBy(['id' => ($i % 10) + 6]);
+            $user = $userRepository->findOneBy(['id' => rand(1, 10)]);
 
             $post = new Post();
 

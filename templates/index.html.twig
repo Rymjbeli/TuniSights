@@ -30,17 +30,22 @@
                 <li class="nav-item"><a class="nav-link active" href="#About-us">About us</a></li>
                 <li class="nav-item"><a class="nav-link active" href=""><i class="fas fa-search"></i>
                         Search </a></li>
-                <li class="nav-item"><a class="nav-link active" href="">Login</a></li>
-                <li class="nav-item nav__profile ">
-                    <div class="avatar">
-                        <img class="nav-img" src="{{ asset('assets/Images/camping.png') }}">
-                    </div>
-                    <ul class="dropdown-menu dropdown-menu-lg-end">
-                        <li><a href="">Profile</a></li>
-                        <li><a href="">Settings</a></li>
-                        <li><a href="">Logout</a></li>
-                    </ul>
-                </li>
+                {% if not app.user %}
+                    <li class="nav-item"><a class="nav-link active" href="{{ path('app_login') }}">Login</a></li>
+                {% else %}
+                    <li class="nav-item nav__profile ">
+                        <div class="avatar">
+                            <img class="nav-img" src="{{ asset('assets/Images/camping.png') }}">
+                        </div>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li class="nav-item"><a href="">Profile</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item"><a href="">Settings</a></li>
+                            {% endif %}
+                            <li class="nav-item"><a href="{{ path('app_logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -212,7 +217,7 @@
 <!-- End Footer -->
 
 
-<script src="{{ asset('assets/JS/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/Libs/bootstrap.min.js') }}"></script>
 <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
