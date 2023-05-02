@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset('assets/CSS/NavBar.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,500;0,700;1,600&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
           rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
     {% block AddCSSLinks %}
         <link rel="stylesheet" href="{{ asset('assets/CSS/styles.css') }}">
     {% endblock %}
@@ -103,13 +105,13 @@
             <hr class="HR-LINE-Discover mx-auto">
             <h1 class="section-title mx-auto">Most Liked Posts </h1>
         </div>
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ type }}">
-                {{ message }}
-            </div>
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
         <div class="slide-container swiper">
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
@@ -117,21 +119,23 @@
                     {% for post in posts %}
                         <div class="card swiper-slide">
                             <div class="image-content">
-                                <img src="{{asset('assets/Images/' ~ post.image)}}" alt="" class="card-img Post">
+                                <img src="{{ asset('assets/Images/' ~ post.image) }}" alt="" class="card-img Post">
                             </div>
 
                             <div class="card-content">
                                 <h5 class="title">{{ post.title }}</h5>
-                                <p class="description">{{post.description}}</p>
+                                <p class="description">{{ post.description }}</p>
 
                                 <div class="container">
                                     <div class="row">
-                                        <a href="{{ path('show.user',{'username': post.owner.username}) }}" class="col col-lg-2 col-md-6">
+                                        <a href="{{ path('show.user',{'username': post.owner.username}) }}"
+                                           class="col col-lg-2 col-md-6">
                                             <img class="avatar-img" src="{{ asset('assets/Images/camping.png') }}"
                                                  alt="">
                                         </a>
                                         <div class="col col-lg-6 col-md-6">
-                                            <a href="{{ path('show.user',{'username': post.owner.username}) }}" class="name">{{ post.owner.username }}</a>
+                                            <a href="{{ path('show.user',{'username': post.owner.username}) }}"
+                                               class="name">{{ post.owner.username }}</a>
                                             <p class="date">Avril 08,2023 - 22:30</p>
                                         </div>
                                         <div class="col col-lg-4 col-md-3">
@@ -219,6 +223,7 @@
 <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 {% block AddJSLinks %}
     <script src="{{ asset('assets/Libs/swiper-bundle.js') }}"></script>

@@ -95,7 +95,7 @@ class AddPostType extends AbstractType
                     ])
                 ],
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control select2',
                 ]
             ])
             ->add('city', null, [

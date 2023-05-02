@@ -343,6 +343,13 @@ img {
 }
 
 
+.alert-success{
+    text-align: center;
+    color:white;
+    background-color: rgba(0, 98, 149, 0.6);
+    width: 40rem;
+    margin-left: 28rem
+}
 
 @media screen and (max-width: 768px) {
     .about-us-row {
