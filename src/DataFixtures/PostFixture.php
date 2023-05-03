@@ -109,16 +109,16 @@ class PostFixture extends Fixture
         $finder = new Finder();
         $finder->files()->in('public/assets/Images')->name('*.jpg');
 
-        // Build an array of file paths
-        $imagePaths = [];
+        // Build an array of file names
+        $imageNames = [];
         foreach ($finder as $fileInfo) {
-            $imagePaths[] = $fileInfo->getRealPath();
+            $imageNames[] = basename($fileInfo->getRealPath());
         }
 
         // Create 20 Posts
         for ($i = 0; $i < 20; $i++) {
             $userRepository = $manager->getRepository(User::class);
-            $user = $userRepository->findOneBy(['id' => ($i % 10) + 6]);
+            $user = $userRepository->findOneBy(['id' => rand(6,10)]);
 
             $post = new Post();
 
@@ -134,7 +134,7 @@ class PostFixture extends Fixture
             $post->setLocation('Location ' . ($i + 1));
             $post->setOwner($user);
             $post->setRating(intval(rand(1, 5)));
-            $post->setImage($imagePaths[array_rand($imagePaths)]);
+            $post->setImage($imageNames[array_rand($imageNames)]);
             $manager->persist($post);
         }
 

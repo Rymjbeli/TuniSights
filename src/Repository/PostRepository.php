@@ -65,13 +65,18 @@ class PostRepository extends ServiceEntityRepository
 //    }
     public function findMostLikedPostsInAYear()
     {
-        $qb = $this->createQueryBuilder('p')
-            ->select('p, COUNT(l) as like_count')
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
             ->leftJoin('p.likes', 'l')
-            ->groupBy('p')
-            ->orderBy('like_count', 'Asc')
+            ->leftJoin('p.owner', 'u')
+            ->where('p.createdAt >= :lastYear')
+            ->setParameter('lastYear', new \DateTime('-1 year'))
+            ->groupBy('p.id')
+            ->orderBy('COUNT(l.id)', 'DESC')
             ->setMaxResults(15);
+
         return $qb->getQuery()->getResult();
     }
+
 
 }

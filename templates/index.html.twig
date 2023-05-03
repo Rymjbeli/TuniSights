@@ -119,7 +119,7 @@
                     {% for post in posts %}
                         <div class="card swiper-slide">
                             <div class="image-content">
-                                <img src="{{ asset('assets/Images/' ~ post.image) }}" alt="" class="card-img Post">
+                                <img src="{{ asset('assets/Images/' ~ post.Image) }}" alt="" class="card-img Post">
                             </div>
 
                             <div class="card-content">
@@ -136,11 +136,11 @@
                                         <div class="col col-lg-6 col-md-6">
                                             <a href="{{ path('show.user',{'username': post.owner.username}) }}"
                                                class="name">{{ post.owner.username }}</a>
-                                            <p class="date">Avril 08,2023 - 22:30</p>
+                                            <p class="date">{{  post.createdAt|date('j F Y') }}</p>
                                         </div>
                                         <div class="col col-lg-4 col-md-3">
                                             <i class="fa-sharp fa-solid fa-heart"></i>
-                                            <p class="like">64 likes</p>
+                                            <p class="like">{{ post.likes.count() }}</p>
                                         </div>
                                     </div>
                                 </div>

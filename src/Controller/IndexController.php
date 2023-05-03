@@ -20,7 +20,7 @@ class IndexController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(Post::class);
-        $posts = $repository->findAll();
+        $posts = $repository->findMostLikedPostsInAYear();
         return $this->render('index.html.twig', ['posts' => $posts]);
     }
 
