@@ -1,0 +1,315 @@
+:root {
+    --color1: #3e3516;
+    --color2:rgba(0, 98, 149, 0.6);
+    --color3: #d5cbb2;
+    --color4: #2d3030;
+    --color: rgba(230, 227, 227, 0.641);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    background-image: url("../Images/login2.jpg");
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    /* move the image down*/
+
+    background-position-x: center;
+    background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 0.66);
+    background-blend-mode: overlay;
+    overflow-y: auto;
+}
+
+/* styling the navbar */
+/*
+.navbar {
+    background-color: rgba(0, 98, 149, 0.6);
+    height: 3.5rem;
+}
+
+.nav-item:hover .nav-link {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+}
+*/
+
+@media (max-width: 767px) {
+    body {
+        background-position-y: bottom;
+    }
+   /* .navbar-nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: rgba(0, 98, 149, 0.5);
+        width: 100%;
+    }
+
+    .navbar-nav .nav-item {
+        display: block;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 1rem;
+        color: #fff;
+        text-align: center;
+    }
+
+    .nav-item:hover .nav-link {
+        transform: scale(1.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: rgba(0, 98, 149, 0.5);
+    }
+    */
+}
+/* end of styling the navbar */
+
+.container {
+    position: relative;
+    max-width: 430px;
+    width: 100%;
+    opacity: 0.92;
+    background-color: #fff;
+    border-radius: 20px;
+    margin-top: 1rem ;
+}
+
+.form {
+    border-radius: 6px;
+    padding: 30px;
+
+}
+
+/* styling the title */
+.title {
+    position: relative;
+    font-size: 27px;
+    font-weight: 600;
+    color: var(--color1);
+}
+
+.title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background-color: var(--color2);
+    border-radius: 25px;
+}
+
+.form a.back {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+/* styling the input */
+.input-info {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 15px;
+}
+.input-info input {
+    position: absolute;
+    height: 100%;
+    width: 95%;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--color1);
+    padding: 0 35px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+.options input[type="radio"] {
+    display: inline-block;
+    width: 30px;
+    position: relative;
+    margin-right: 5px;
+}
+
+.options label {
+   /* margin-top: 25px;*/
+    display: inline-block;
+}
+
+.input-info input:focus,
+.input-info input:valid {
+    border-bottom-color: var(--color2);
+}
+
+/* styling the icons */
+.input-info i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color1);
+    font-size: 23px;
+}
+
+.input-info input:focus ~ i,
+.input-info input:valid ~ i {
+    color: var(--color2);
+}
+
+.input-info i.icon {
+    left: 0;
+}
+.input-info i.showHidePw {
+    right: 5%;
+}
+.input-info i.showHidePw:hover {
+    cursor: pointer;
+}
+
+/* styling the checkbox */
+.checkbox-text {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.checkbox-text.checkbox-content {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-content input {
+    margin: 0 8px 0 4px;
+    width: 20px;
+    cursor: pointer;
+}
+
+/* styling the text */
+.form .text {
+    color: var(--color4);
+    font-size: 14px;
+}
+
+.form a {
+    color: var(--color2);
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.form a.text {
+    color: var(--color1);
+    font-size: 15px;
+}
+
+.form a:hover {
+    text-decoration: underline;
+    color: var(--color2);
+}
+
+.login-signup {
+    text-align: center;
+    font-size: 50px;
+}
+
+.login-signup .login {
+    color: var(--color2);
+    font-size: 15px;
+}
+
+/* styling the button */
+
+
+.form .button input {
+    background-color: var(--color2);
+    border: none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button input:hover {
+    color: var(--color1);
+    font-size: 18px;
+    letter-spacing: 1.2px;
+    border: solid 1px black;
+    transform: translateY(-3px);
+    background-color: #368bb3;
+}
+
+.form .button button {
+    /* background-color: var(--color2); */
+    border: none;
+    /* color: #fff; */
+    font-size: 17px;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 15px;
+
+    background-color: rgba(0, 97, 149, 0.651);
+    color: #fff;
+}
+
+.button button:hover {
+    /* color: var(--color1); */
+    font-size: 18px;
+    /* letter-spacing: 1.2px; */
+    /* border: solid 1px black; */
+    transform: translateY(-3px);
+    /* background-color: #368bb3; */
+
+    color: rgb(0, 98, 149);
+    background-color: rgb(211, 240, 251);
+    padding: 0.3em 1em;
+    border: 1px rgb(0, 98, 149);
+    border-radius: 8px;
+    /* cursor: pointer; */
+}
+
+/* styling the error message */
+.error-message {
+    position: absolute;
+    top: 140px;
+    left: 0;
+}
+
+.v {
+    margin-bottom: 20px;
+    padding-top: 50px;
+    left: 0;
+    color: var(--color2);
+    font-size: 15px;
+
+}
+
+/* end of css */

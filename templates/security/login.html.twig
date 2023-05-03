@@ -1,0 +1,96 @@
+{% extends 'index.html.twig' %}
+
+{% block Title %}Log in{% endblock %}
+
+{% block AddCSSLinks %}
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+    <link
+            rel="stylesheet"
+            href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+{% endblock %}
+
+{% block SectionsOfTheBody %}
+    <div class="container">
+        <div class="form">
+            <a href= "{{ path('app_index') }}" class="back">&times;</a>
+            <span class="title">Login</span>
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" style="font-size: 15px; text-decoration: none">Logout</a>
+                    </div>
+                {% endif %}
+
+                <div class="input-info">
+                    <label for="inputEmail"></label>
+                    <input type="email" id="inputEmail" placeholder="Enter your email" value="{{ last_username }}" name="email" autocomplete="email" required autofocus />
+                    <!-- email icon -->
+                    <i class="uil uil-envelope icon"></i>
+                </div>
+
+                <div class="input-info">
+                    <label for="inputPassword"></label>
+                    <input
+                            type="password"
+                            id="inputPassword"
+                            name="password"
+                            class="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                    />
+                    <!-- lock icon -->
+                    <i class="uil uil-lock icon"></i>
+                    <!-- eye icon -->
+                    <span id="show-password">
+                      <i class="uil uil-eye-slash showHidePw"></i>
+                    </span>
+                </div>
+
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+
+
+                {#   Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
+                #}
+                <div class="checkbox-text">
+                    <div class="checkbox-content">
+                        <input type="checkbox" id="logCheck" name="_remember_me"/>
+                        <label for="logCheck" class="text">Remember me</label>
+                    </div>
+                    <a href="{{ path('app_login') }}" class="text">Forgot password?</a>
+                </div>
+
+
+                <div class="input-info button">
+                    <button type="submit" id="loginn">Sign In</button>
+                </div>
+            </form>
+
+            <div class="login-signup">
+              <span class="text"
+              >Not a member?
+                <a
+                        href="{{ path('app_register') }}"
+                        class="text signup-link"
+                        style="color: #146c94"
+                >SignUp</a
+                >
+              </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block AddJSLinks %}
+    <script src="{{ asset('assets/JS/Login.js') }}"></script>
+{% endblock %}

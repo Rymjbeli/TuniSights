@@ -1,0 +1,99 @@
+{% extends 'index.html.twig' %}
+
+{% block Title %}SignUp{% endblock %}
+
+{% block AddCSSLinks %}
+<link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+<link
+        rel="stylesheet"
+        href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+/>
+{% endblock %}
+
+{% block SectionsOfTheBody %}
+
+
+<div class="container">
+
+    <div class="forms">
+        <div class="form">
+            <a href="{{ path('app_index') }}" class="back">&times;</a>
+            <span class="title">Register</span>
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+            {{ form_start(registrationForm) }}
+
+            <div class="input-info">
+                <!-- userName -->
+                {{ form_row(registrationForm.username) }}
+                <i class="uil uil-user"></i>
+
+            </div>
+
+            <div class="input-info" >
+                <!-- email -->
+                {{ form_row(registrationForm.email) }}
+                <i class="uil uil-envelope icon"></i>
+
+            </div>
+
+            <div class="input-info">
+                <!-- password -->
+                {{ form_row(registrationForm.plainPassword.first) }}
+                <i class="uil uil-lock icon"></i>
+                <span id="show-password">
+                    <i class="uil uil-eye-slash showHidePw"></i>
+                </span>
+                <div class="v"></div>
+            </div>
+
+            <div class="input-info">
+                <!-- confirm password -->
+                {{ form_row(registrationForm.plainPassword.second) }}
+                <i class="uil uil-lock icon"></i>
+                <span id="show-password2">
+                    <i class="uil uil-eye-slash showHidePw"></i>
+                </span>
+                <div class="v"></div>
+            </div>
+
+            <div class="input-info">
+                <!-- date of birth -->
+                <div>
+                    {{ form_widget(registrationForm.dateOfBirth) }}
+                </div>
+
+            </div>
+
+            <div class="input-info">
+                <!-- gender -->
+                <div>
+                    {{ form_label(registrationForm.gender) }}
+                </div>
+                <div>
+                    {{ form_widget(registrationForm.gender) }}
+                </div>
+            </div>
+
+            <div class="input-info button" >
+                <button type="submit" class="s" id="signupp">SignUp</button>
+            </div>
+            {{ form_end(registrationForm) }}
+
+            <!-- login -->
+            <div class="login-signup">
+            <span class="text"
+            >Already a member?
+              <a href="{{ path('app_login') }}" class="login">Login</a>
+            </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block AddJSLinks %}
+    <script src="{{ asset('assets/JS/Signup.js') }}"></script>
+{% endblock %}
