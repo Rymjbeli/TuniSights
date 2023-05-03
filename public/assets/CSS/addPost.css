@@ -150,7 +150,7 @@ form input[type="file"]::-webkit-file-upload-button:hover {
 
 
 /* Style the form submit button */
-form button[type="submit"]{
+form button[type="submit"], .btn-danger{
   background-color: rgba(0, 97, 149, 0.651);
   color: #fff;
   padding: 0.3em 1em;
@@ -170,26 +170,6 @@ form button[type="submit"]:hover{
   border-radius: 8px;
   cursor: pointer;
 
-}
-
-/*Style the tag button*/
-form button[id="add-tag-btn"] {
-  background-color: rgba(0, 97, 149, 0.651);
-  color: #fff;
-  padding: 0.3em 1em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 0.5rem;
-}
-
-form button[id="add-tag-btn"]:hover {
-  color: rgb(0, 98, 149);
-  background-color: rgb(211, 240, 251);
-  padding: 0.3em 1em;
-  border: 1px rgb(0, 98, 149);
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 /* Style the form reset button */
@@ -234,6 +214,9 @@ form button[type="cancel"]:hover {
   cursor: pointer;
 }
 
+.btn-secondary {
+  height: 2rem;
+}
 
 /* Styling the rating stars */
 .rate p {
@@ -247,7 +230,7 @@ form button[type="cancel"]:hover {
 
 .rate:not(:checked) > input {
   position: absolute;
-  top: -9999px;
+  display: none;
 }
 
 .rate:not(:checked) > label {
