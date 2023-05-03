@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Post;
-use App\Service\UploaderService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
