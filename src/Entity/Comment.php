@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,6 +29,14 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $targetPost = null;
+
+    #[ORM\OneToMany(mappedBy: 'target', targetEntity: Reply::class, orphanRemoval: true)]
+    private Collection $replies;
+
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -77,6 +87,36 @@ class Comment
     public function setTargetPost(?Post $targetPost): self
     {
         $this->targetPost = $targetPost;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reply>
+     */
+    public function getReplies(): Collection
+    {
+        return $this->replies;
+    }
+
+    public function addReply(Reply $reply): self
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies->add($reply);
+            $reply->setTarget($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReply(Reply $reply): self
+    {
+        if ($this->replies->removeElement($reply)) {
+            // set the owning side to null (unless already changed)
+            if ($reply->getTarget() === $this) {
+                $reply->setTarget(null);
+            }
+        }
 
         return $this;
     }
