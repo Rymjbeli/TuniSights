@@ -22,7 +22,7 @@
 <body {% block BodynameClass %} {% endblock %} >
 <!-- Navbar -->
 <nav class="navbar navbar-dark navbar-expand-md fixed-top">
-    <div class="container-fluid"><a class="navbar-brand" href=""><img
+    <div class="container-fluid"><a class="navbar-brand" href="{{ path('app_index') }}"><img
                     src="{{ asset('assets/Images/logo.png' ) }}" alt=""></a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -37,10 +37,11 @@
                 {% else %}
                     <li class="nav-item nav__profile ">
                         <div class="avatar">
-                            <img class="nav-img" src="{{ asset('assets/Images/camping.png') }}">
+                            <img class="nav-img" src="{{ asset('assets/Images/' ~ app.user.image) }}">
                         </div>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li class="nav-item"><a href="">Profile</a></li>
+                            <li class="nav-item"><a
+                                        href="{# {{ path('user_profile', {'id': app.user.id}) }} #}">Profile</a></li>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item"><a href="">Settings</a></li>
                             {% endif %}
@@ -102,6 +103,7 @@
     </header>
     <!-- End Header -->
 
+
     <!-- Start Discover -->
     <section id="Discover" class="Discover">
         <div class="text-center">
@@ -124,13 +126,24 @@
                     {% for post in posts %}
                         <div class="card swiper-slide">
                             <div class="image-content">
-                                <img src="{{ asset('assets/Images/' ~ post.Image) }}" alt="" class="card-img Post">
+                                <img src="{{ asset('assets/Images/' ~ post.Image) }}" alt="" class="card-img Post" Postid="{{ post.id }}">
                             </div>
 
                             <div class="card-content">
-                                <h5 class="title">{{ post.title }}</h5>
-                                <p class="description">{{ post.description }}</p>
 
+
+                                <h5 class="title">{{ post.title }}</h5>
+                                <p class="description">{{ post.place }}:
+                                    {% for i in 1.. post.rating  %}
+                                        <i class="fas fa-star" style="display: inline-block;color: #deb217;font-size: 10px;"></i>
+                                    {% endfor %}
+                                    {% for i in post.rating..5  %}
+                                        <i class="fas fa-star" style="display: inline-block;color: 	#F0F0F0;font-size: 10px;"></i>
+                                    {% endfor %}
+                              <br>{{ post.description }}</p>
+                               {#<a href="{{ path('manage.Post',{'id': post.id}) }}">
+                                    <i class="fa-solid fa-pen-to-square" style="color: #0a53be"></i>
+                                </a> #}
                                 <div class="container">
                                     <div class="row">
                                         <a href="{{ path('show.user',{'username': post.owner.username}) }}"
@@ -141,11 +154,11 @@
                                         <div class="col col-lg-6 col-md-6">
                                             <a href="{{ path('show.user',{'username': post.owner.username}) }}"
                                                class="name">{{ post.owner.username }}</a>
-                                            <p class="date">{{  post.createdAt|date('j F Y') }}</p>
+                                            <p class="date">{{ post.createdAt|date('j F Y') }}</p>
                                         </div>
                                         <div class="col col-lg-4 col-md-3">
-                                            <i class="fa-sharp fa-solid fa-heart"></i>
-                                            <p class="like">{{ post.likes.count() }}</p>
+                                             <i class="fa-sharp fa-solid fa-heart"></i>
+                                            <p class="LikeCounter">{{ post.likes.count() }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -198,31 +211,31 @@
     <!-- End About Us -->
 
 {% endblock %}
-
-<!-- Start Footer -->
-<div class="footer">
-    <div class="container_footer">
-        <!-- <img src="../Images/logo.png" alt="Logo"/> -->
-        <p class="parag2">
-            Get In Touch With Us <br/>
-            We Are waiting For Your Message
-        </p>
-        <div class="Email-link">
-            <a class="btn rounded-pill main-btn w-100"
-               href="https://mail.google.com/mail/?view=cm&to=TuniSights@gmail.com"
-               target="_blank">TuniSights@gmail.com</a>
+{% block Footer %}
+    <!-- Start Footer -->
+    <div class="footer">
+        <div class="container_footer">
+            <!-- <img src="../Images/logo.png" alt="Logo"/> -->
+            <p class="parag2">
+                Get In Touch With Us <br/>
+                We Are waiting For Your Message
+            </p>
+            <div class="Email-link">
+                <a class="btn rounded-pill main-btn w-100"
+                   href="https://mail.google.com/mail/?view=cm&to=TuniSights@gmail.com"
+                   target="_blank">TuniSights@gmail.com</a>
+            </div>
+            <div class="social-icons">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <div id="google_translate_element"></div>
+            <p class="copyright">&copy; 2023 <span>TuniSights</span> All Right Reserved</p>
         </div>
-        <div class="social-icons">
-            <a href=""><i class="fa-brands fa-facebook"></i></a>
-            <a href=""><i class="fa-brands fa-twitter"></i></a>
-            <a href=""><i class="fa-brands fa-instagram"></i></a>
-        </div>
-        <div id="google_translate_element"></div>
-        <p class="copyright">&copy; 2023 <span>TuniSights</span> All Right Reserved</p>
     </div>
-</div>
-<!-- End Footer -->
-
+    <!-- End Footer -->
+{% endblock %}
 
 <script src="{{ asset('assets/Libs/bootstrap.min.js') }}"></script>
 <script type="text/javascript"
@@ -234,6 +247,7 @@
     <script src="{{ asset('assets/Libs/swiper-bundle.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>
     <script src="{{ asset('assets/JS/PostCard.js') }}"></script>
+    script src="{{ asset('assets/JS/Like.js') }}"></script>
 {% endblock %}
 
 </body>

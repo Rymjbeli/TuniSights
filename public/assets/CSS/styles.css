@@ -120,7 +120,7 @@ img {
     width: 40px;
 }
 
-.name, .date, .like {
+.name, .date, .LikeCounter {
     font-size: 12px;
     font-weight: 500;
     color: #707070;
@@ -128,7 +128,7 @@ img {
     margin: 5px;
 }
 
-.like {
+.LikeCounter {
     font-size: 14px;
     text-align: center;
     color: #333;
@@ -139,7 +139,7 @@ img {
     font-size: 14px;
     text-align: left;
     color: #333;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
     width: 270px;
     height: 65px;
     /* if the paragraph exceed 3 lines the overflow is hidden and replaced by elllipsis  */

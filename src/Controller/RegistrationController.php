@@ -37,6 +37,7 @@ class RegistrationController extends AbstractController
         }
 
         $user = new User();
+        $user->setImage('avatar.png');
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 

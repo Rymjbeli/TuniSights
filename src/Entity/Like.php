@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\LikeRepository;
-use App\Trait\TimeStampTrait;
+use App\Traits\TimeStampTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LikeRepository::class)]
-#[ORM\HasLifecycleCallbacks]
+#[ORM\HasLifecycleCallbacks()]
 #[ORM\Table(name: '`like`')]
 class Like
 {

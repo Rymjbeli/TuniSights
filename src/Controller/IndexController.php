@@ -12,11 +12,11 @@ use Doctrine\Persistence\ManagerRegistry;
 
 
 #[
-    Route('index'),
+    Route('/index'),
 ]
 class IndexController extends AbstractController
 {
-    #[Route('/', name: 'index')]
+    #[Route('/', name: 'app_index')]
     public function index(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(Post::class);
@@ -26,12 +26,14 @@ class IndexController extends AbstractController
 
 
     //using param convertor to automatically convert route parameter (id) to object(user)
-    #[Route('/index/user/{username}', name: 'show.user')]
+    #[Route('/user/{username}', name: 'show.user')]
     public function showUserProfil(Request $request, User $user): Response
     {
         return $this->render('profile.html.twig', [
             'user' => $user,
         ]);
     }
+
+
 
 }

@@ -18,6 +18,9 @@
     </section>
     <!-- end add post -->
 {% endblock %}
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}
 {% block AddJSLinks %}
     <script src="{{asset('assets/JS/AddPost.js')}}"></script>
 {% endblock %}
