@@ -7,7 +7,6 @@ use App\Entity\User;
 use App\Form\AddPostType;
 use App\Service\PostService;
 use App\Service\UploaderService;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,16 +18,12 @@ class PostController extends AbstractController
     #[Route('/managePost/{id?0}', name: 'manage.Post')]
     public function managePost(
         Post            $post = null,
-        EntityManagerInterface $entityManager,
+        ManagerRegistry $doctrine,
         Request         $request,
         UploaderService $uploaderService, // inject uploaderService
         PostService     $postService // inject PostService
     ): Response
     {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_index');
-        }
-        $user=$this->getUser();
         $new = false;
         //Var that define either the user is adding or editing a post
         $AddEdit = 'Add';
@@ -48,20 +43,21 @@ class PostController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('Image')->getData();
-            $post->setOwner($this->getUser());
+            $post->setOwner($doctrine->getRepository(User::class)->find(6));
 
             // Upload and set image for the post if an image was submitted
             if ($image) {
                 $directory = $this->getParameter('post_directory');
                 $post->setImage($uploaderService->uploadFile($image, $directory));
             }
-
-            $entityManager->getRepository(Post::class)->save($post, true);
+            $manager = $doctrine->getManager();
+            $manager->persist($post);
+            $manager->flush();
 
             // Display success message using the addFlash and getMessage from PostService and redirect to the homepage
             $this->addFlash('success', $post->getTitle() . $postService->getMessage($new));
 
-            return $this->redirectToRoute('app_profile', ['Userid' => $user->getId()]);
+            return $this->redirectToRoute('index');
         } else {
             return $this->render('addPost.html.twig', [
                 'form' => $form->createView(), 'AddEdit' => $AddEdit
@@ -73,18 +69,10 @@ class PostController extends AbstractController
     #[Route('/deletePost/{id?0}', name: 'delete.Post')]
     public function deletePost(Post $post, ManagerRegistry $doctrine)
     {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_index');
-        }
-        $user=$this->getUser();
         $manager = $doctrine->getManager();
         $manager->remove($post);
         $manager->flush();
-
         $this->addFlash('success', $post->getTitle() . ' has been deleted successfully.');
-        return $this->redirectToRoute('app_profile', ['Userid' => $user->getId()]);
+        return $this->redirectToRoute('index');
     }
-
-
-
 }

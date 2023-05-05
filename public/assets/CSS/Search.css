@@ -1,0 +1,492 @@
+* {
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+
+}
+
+/* @font-face {
+  font-family: 'Nunito';
+  src:
+       url('Nunito/Nunito-VariableFont_wght.ttf') format('woff');
+} */
+
+body {
+    margin: 0;
+    /*   font-family: 'Times new roman', sans-serif;
+     */  font-size: 16px;
+    line-height: 1.5;
+    padding: 0;
+    /*background-image: */
+    background-image: url("../Images/rasRmal.jpg");
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 0.66);
+    background-blend-mode: overlay;
+}
+
+/* Header Styles */
+header {
+    height: 40vh;
+    background-image: url("../Images/rasRmal1.jpg");
+    background-size: cover;
+    /*wider box shadow*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 1px 2px rgba(241, 239, 239, 0.06);
+    /*justify-content: space-between;*/
+    background-position: top;
+    padding: 1rem;
+    color: #ffffff;
+
+}
+
+/* header.h1 */
+h1 {
+    /*   font-family: 'Roboto Mono', monospace;
+     */  font-size: 5vh;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    color: #ffffff;
+    text-shadow: 4px 4px 4px #333333;
+    padding-left: 10vh;
+    /* adjust as needed */
+}
+
+/*search-bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 5px;
+
+}
+
+.search-bar input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-bar button[type="button"] {
+    background-color: #4a72b8;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+
+main {
+    display: flex;
+}
+
+/* filter */
+.filter {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-top: 40px;
+    margin-left: 10px;
+    width: 25vh;
+    min-width: 25vh;
+    height: 30vh;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    /* vertical content position: center */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* it comes down when we scroll with no limit*/
+    position: sticky;
+    top: 0;
+}
+
+.filter h2 {
+    margin-top: 0;
+}
+
+.filter ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.filter label {
+    display: block;
+    /*font-size: 15px;*/
+    font-size: 2.5vh;
+    margin-bottom: 15px;
+    /*text align: center*/
+    text-align: center;
+    /*   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+     */}
+
+.filter input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+
+
+
+
+/* Container Styles */
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Filters Styles */
+.filters {
+    flex-basis: 25%;
+    margin-right: 2rem;
+}
+
+.filters h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+
+}
+
+.filters ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filters li {
+    margin-bottom: 1rem;
+}
+
+.filters input[type="checkbox"] {
+    margin-right: 0.5rem
+}
+
+/* Label Styles */
+label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Select Styles */
+select {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0.5rem;
+    font-size: 2vh;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    transition: border-color 0.2s ease-in-out;
+}
+
+select:focus {
+    outline: none;
+    border-color: #4285f4;
+}
+
+/* Button Styles */
+button {
+    display: inline-block;
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    /* Updated padding */
+    font-size: 0.875rem;
+    /* Updated font-size */
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover,
+button:focus {
+    background-color: #3367d6;
+}
+
+button:active {
+    background-color: #2a56c6;
+}
+
+/*navbar*/
+
+.navbar {
+    background-color: rgba(0, 98, 149, 0.4);
+
+}
+
+.nav-item:hover .nav-link {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+/*poste*/
+
+.poste {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    padding-bottom: 50px;
+    margin: 20px;
+    margin-top: 40px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    background-color: #fff;
+    height: 70vh;
+    max-height: 120vh;
+    height: auto;
+
+
+
+}
+
+/* margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  width: 500px;
+  height: 300px;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+*/
+
+
+
+
+.description {
+
+    width: 100%;
+    flex-grow: 1;
+}
+
+.poste h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.description h4 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.description h5 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 10px;
+}
+
+.description p {
+    margin: 10px 0;
+    margin-bottom: 10px;
+    font-size: 10px;
+}
+
+
+
+/* .profileImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.profileImage img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+ */
+.poste:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.card-body {
+    text-align: left;
+
+}
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+
+
+
+.post-title {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.post-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.post-image {
+    /*left alined */
+    width: 60vh;
+    position: relative;
+    max-height:70vh ;
+    margin-right: 10px;
+    margin-left: 50px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.post-description {
+    width: 55%;
+    margin-top: 20px;
+    margin-bottom: -5px;
+}
+
+
+.post-state {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+
+.post-place {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.post-text {
+    text-align: justify;
+    font-size: 10px;
+}
+
+.profile-image {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.Profile {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.post-username {
+
+    margin-top: 20px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.post-date {
+    font-size: 12px;
+    color: #999;
+}
+
+.post-footer{
+    /*the content of the footer is horizentally alined to the center*/
+    display: flex;
+flex-direction: column;
+    margin-top: 20px;
+}
+
+.like-button img {
+
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.like-button img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.like-button img:active {
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.likes-number {
+    color: #000000;
+    margin-left: 10px;
+    margin-right: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/*card-body d-flex flex-column max-height*/
+.card-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 150px;
+}
+
+.limited-text {
+    height: 70px; /* change this value to your desired length */
+    overflow: hidden;
+    max-height: 200px;
+    transition: max-height 0.5s;
+
+
+}
+
+.post-description-text{
+    display: flex;
+    flex-direction: space-between;
+    align-items: center;
+}
+
+.post-description-text p{
+    margin: 15px;
+}
+.post-description-text button{
+    font-size: 12px;
+}
+#likesCount{
+    /*margin-right:0px;*/
+    /*text-align: left;*/
+}
+
+.like-button{
+    /*position top*/
+    /*position: relative;*/
+    /*top: -65px;*/
+    /*left: -10px;*/
+    margin: 10px;
+
+}
