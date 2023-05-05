@@ -28,6 +28,7 @@ class PostController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_index');
         }
+        $user=$this->getUser();
         $new = false;
         //Var that define either the user is adding or editing a post
         $AddEdit = 'Add';
@@ -60,7 +61,7 @@ class PostController extends AbstractController
             // Display success message using the addFlash and getMessage from PostService and redirect to the homepage
             $this->addFlash('success', $post->getTitle() . $postService->getMessage($new));
 
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_profile', ['Userid' => $user->getId()]);
         } else {
             return $this->render('addPost.html.twig', [
                 'form' => $form->createView(), 'AddEdit' => $AddEdit
@@ -75,12 +76,13 @@ class PostController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_index');
         }
+        $user=$this->getUser();
         $manager = $doctrine->getManager();
         $manager->remove($post);
         $manager->flush();
 
         $this->addFlash('success', $post->getTitle() . ' has been deleted successfully.');
-        return $this->redirectToRoute('index');
+        return $this->redirectToRoute('app_profile', ['Userid' => $user->getId()]);
     }
 
 

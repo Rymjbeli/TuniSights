@@ -1,41 +1,47 @@
-
-
-<div class="container my-5" style="border-color: black" id = "CardBody">
-  <link rel="stylesheet" href="{{ asset('assets/CSS/PostCard.css') }}">
-  <div class="card mx-auto" id = "PopupCard" style="border-radius: 20px">
-    <div class="row no-gutters">
-      <div class="col-md-8" id="ImgHolder">
-        <img src="{{ asset('assets/Images/sahara1.jpg') }}" class="card-img" alt="..." style="border-radius: 20px 0 0 20px">
-      </div>
-      <div class="col-md-4 position-relative">
-        <div class="card-body d-flex flex-column" id="RSide">
-          <div>
-            <img src="{{ post.owner.image }}" alt="Small Image" style="display: inline; border: 1px solid black;" height="35px"width="35px">
-            <p class="fw-bold" style="display: inline;margin-right: 3px">{{post.owner.username}}</p>
-          </div>
-          <p class="Bio" style="margin-top: 5px">{{ post.description }}</p>
-          <hr/>
-          <div class="comments mb-4 mt-auto" style="max-height: 200px; overflow-y: auto;">
-            <ul class="list-group list-group-flush" id="CommentSection">
-              {%for comment in post.comments %}
-              <li class="list-group-item">{{ comment.content }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-          <div>
-          <button id = "LikeBtn"  postid="{{ post.id }}" class="btn btn-sm btn-square pull-right" style="display: inline;border-radius: 0;background-repeat: no-repeat;background-position: center;background-size: 60%;">
-          </button>
-          <span style="display: inline;" class="LikeCounter">{{ post.likes.count }} likes</span>
-          </div>
-          <hr/>
-          <div class="input-group mb-1" id="commentHolder">
-            <input type="text" class="form-control" placeholder="Add a comment..." id="CommentLabel">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary CSubmit" type="button">Send</button>
+<div class="container my-5" style="border-color: black" id="CardBody">
+    <link rel="stylesheet" href="{{ asset('assets/CSS/PostCard.css') }}">
+    <div class="card mx-auto" id="PopupCard" style="border-radius: 20px">
+        <div class="row no-gutters">
+            <div class="col-md-8" id="ImgHolder">
+                <img src="{{ asset('assets/Images/' ~ post.Image) }}" class="card-img" alt="..."
+                     style="border-radius: 20px 0 0 20px">
             </div>
-          </div>
+            <div class="col-md-4 position-relative">
+                <div class="card-body d-flex flex-column" id="RSide">
+                    <div>
+                        <img src="{{ post.owner.image }}" alt="Small Image"
+                             style="display: inline; border: 1px solid black;" height="35px" width="35px">
+                        <p class="fw-bold" style="display: inline;margin-right: 3px">{{ post.owner.username }}</p>
+                        {% if post.owner == app.user %}
+                        <a href="{{ path('manage.Post',{'id': post.id}) }}">
+                            <i class="fa-solid fa-pen-to-square" style="color: rgba(0, 97, 149, 0.9); margin-left: 21.9vh; "></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <p class="Bio" style="margin-top: 5px">{{ post.description }}</p>
+                    <hr/>
+                    <div class="comments mb-4 mt-auto" style="max-height: 200px; overflow-y: auto;">
+                        <ul class="list-group list-group-flush" id="CommentSection">
+                            {% for comment in post.comments %}
+                                <li class="list-group-item">{{ comment.content }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <button id="LikeBtn" postid="{{ post.id }}" class="btn btn-sm btn-square pull-right"
+                                style="display: inline;border-radius: 0;background-repeat: no-repeat;background-position: center;background-size: 60%;">
+                        </button>
+                        <span style="display: inline;" class="LikeCounter">{{ post.likes.count }} likes</span>
+                    </div>
+                    <hr/>
+                    <div class="input-group mb-1" id="commentHolder">
+                        <input type="text" class="form-control" placeholder="Add a comment..." id="CommentLabel">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary CSubmit" type="button">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

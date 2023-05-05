@@ -19,12 +19,22 @@
     var heartFilled = "{{ asset('assets/Images/HeartF.png') }}";
     var heartEmpty =  "{{ asset('assets/Images/HeartI.png') }}";
   </script>
-<div class="CardLoader" id="enabled"></div>
+  {% if app.user==user %}
+  {% for type, messages in app.flashes %}
+    {% for message in messages %}
+      <div class="alert alert-{{ type }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+  {% endif %}
+
+  <div class="CardLoader" id="enabled"></div>
 <div class="ProfileArea">
 <div class="container col-md-5 col-lg-7">
   <div class="row">
       <div class="col-md-6 col-lg-4 mb-4">
-        <img class=" profile_picture" src="{{ user.image }}">
+        <img class=" profile_picture" src="{{ user.Image }}">
       </div>
     <div class="col-md-6 col-lg-4 mb-4"style="margin-left: 40px;padding-top: 25px">
       <h5 class="card-title">{{ user.username }}</h5>
@@ -36,7 +46,7 @@
 </div>
 <div class="container">
       <div class="row">
-        {% for post in user.posts %}
+        {% for post in posts %}
         <div class="col-md-6 col-lg-4 mb-4">
           <img class="img-fluid Post" src="{{ post.Image }}" Postid="{{ post.id }}" alt="Gallery Image" style="border-radius: 20px">
         </div>
@@ -44,6 +54,8 @@
       </div>
 </div>
 <div class="AddHolder">
-  <button class="mezyan AddHolder"  type="button">Add Post</button>
+  {% if app.user==user %}
+  <a href="{{ path('manage.Post') }}"><button class="mezyan AddHolder"  type="button">Add Post</button></a>
+  {% endif %}
 </div>
 {% endblock %}

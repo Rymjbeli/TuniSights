@@ -119,7 +119,13 @@ img {
     height: 40px;
     width: 40px;
 }
-
+.LikeBtn {
+    display: inline;
+    border-radius: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
 .name, .date, .LikeCounter {
     font-size: 12px;
     font-weight: 500;
@@ -151,10 +157,6 @@ img {
     overflow-wrap: break-word;
 }
 
-
-.fa-heart{
-    margin-left: 4vh;
-}
 
 .swiper-navBtn{
     color: var(--main-color);
@@ -281,6 +283,9 @@ img {
     margin-bottom: 24px;
 }
 
+a {
+    text-decoration: none;
+}
 /* End of About Us Section */
 
 @media screen and (max-width: 768px) {
@@ -342,14 +347,6 @@ img {
     }
 }
 
-
-.alert-success{
-    text-align: center;
-    color:white;
-    background-color: rgba(0, 98, 149, 0.6);
-    width: 40rem;
-    margin-left: 28rem
-}
 
 @media screen and (max-width: 768px) {
     .about-us-row {

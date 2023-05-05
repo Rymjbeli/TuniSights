@@ -264,7 +264,14 @@ form button[type="cancel"]:hover {
   color: #c59b08;
 }
 
-
-
-
+ div ul li {
+  list-style-type: none;
+  overflow: hidden;
+  text-align: left;
+  color: #b02a37;
+  font-size: 14px;
+}
+div ul{
+  margin-bottom: 0;
+}
 

@@ -74,7 +74,7 @@ class ApiController extends abstractController
     public function Like(Request $request, PostRepository $postRepository, UserRepository $userRepository, ManagerRegistry $registry): Response
     {
         $entityManager = $registry->getManager();
-        $userid = 1;//implement user get method
+        $userid = $this->getUser();//implement user get method
         $PostId = $request->request->get('PostId');
         if(!isset($PostId)){
             return $this->json([
@@ -87,8 +87,8 @@ class ApiController extends abstractController
                 'error' => 'Post id not found'
             ]);
         }
-        $user = $userRepository->find($userid);
-        if(!isset($user)){
+
+        if(!isset($userid)){
             return $this->json([
                 'error' => 'User not found'
             ]);
@@ -96,7 +96,7 @@ class ApiController extends abstractController
         $exists = false;
         $likes = $post->getLikes();
         foreach($likes as $like){
-            if($like->getOwner()->getId() == $userid){
+            if($like->getOwner() == $userid){
                 $entityManager->remove($like);
                 $entityManager->flush();
                 $exists = true;
@@ -104,7 +104,7 @@ class ApiController extends abstractController
         }
         if(!$exists){
         $like = new Like();
-        $like->setOwner($user);
+        $like->setOwner($userid);
         $like->setTargetPost($post);
         $entityManager->persist($like);
         $entityManager->flush();

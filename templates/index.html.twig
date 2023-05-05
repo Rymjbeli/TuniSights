@@ -19,6 +19,8 @@
     {% endblock %}
     <link rel="stylesheet" href="{{ asset('assets/CSS/Footer.css') }}">
 
+
+
 <body {% block BodynameClass %} {% endblock %} >
 <!-- Navbar -->
 <nav class="navbar navbar-dark navbar-expand-md fixed-top">
@@ -41,7 +43,7 @@
                         </div>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li class="nav-item"><a
-                                        href="{# {{ path('user_profile', {'id': app.user.id}) }} #}">Profile</a></li>
+                                        href=" {{ path('app_profile',{'Userid': app.user.id}) }} ">Profile</a></li>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item"><a href="">Settings</a></li>
                             {% endif %}
@@ -56,6 +58,7 @@
 <!--End Navbar -->
 
 {% block SectionsOfTheBody %}
+
     <div class="CardLoader" id="enabled"></div>
 
     <!-- Start Header     -->
@@ -112,13 +115,6 @@
             <hr class="HR-LINE-Discover mx-auto">
             <h1 class="section-title mx-auto">Most Liked Posts </h1>
         </div>
-        {% for type, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ type }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
         <div class="slide-container swiper">
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
@@ -134,30 +130,30 @@
 
                                 <h5 class="title">{{ post.title }}</h5>
                                 <p class="description">{{ post.place }}:
-                                    {% for i in 1.. post.rating  %}
-                                        <i class="fas fa-star" style="display: inline-block;color: #deb217;font-size: 10px;"></i>
+                                    {% for i in 1..5 %}
+                                        {% if i <= post.rating %}
+                                            <i class="fas fa-star" style="display: inline-block;color: #deb217;font-size: 10px;"></i>
+                                        {% else %}
+                                            <i class="fas fa-star" style="display: inline-block;color: #F0F0F0;font-size: 10px;"></i>
+                                        {% endif %}
                                     {% endfor %}
-                                    {% for i in post.rating..5  %}
-                                        <i class="fas fa-star" style="display: inline-block;color: 	#F0F0F0;font-size: 10px;"></i>
-                                    {% endfor %}
-                              <br>{{ post.description }}</p>
-                               {#<a href="{{ path('manage.Post',{'id': post.id}) }}">
-                                    <i class="fa-solid fa-pen-to-square" style="color: #0a53be"></i>
-                                </a> #}
+
+                                    <br>{{ post.description }}</p>
                                 <div class="container">
                                     <div class="row">
-                                        <a href="{{ path('show.user',{'username': post.owner.username}) }}"
+                                        <a href="{{ path('app_profile',{'Userid': post.owner.id}) }}"
                                            class="col col-lg-2 col-md-6">
                                             <img class="avatar-img" src="{{ asset('assets/Images/camping.png') }}"
                                                  alt="">
                                         </a>
                                         <div class="col col-lg-6 col-md-6">
-                                            <a href="{{ path('show.user',{'username': post.owner.username}) }}"
+                                            <a href="{{ path('app_profile',{'Userid': post.owner.id}) }}"
                                                class="name">{{ post.owner.username }}</a>
                                             <p class="date">{{ post.createdAt|date('j F Y') }}</p>
                                         </div>
                                         <div class="col col-lg-4 col-md-3">
-                                             <i class="fa-sharp fa-solid fa-heart"></i>
+                                            <button  postid="{{ post.id }}" class="btn btn-sm btn-square pull-right LikeBtn" style="display: inline;border-radius: 0;background-repeat: no-repeat;background-position: center;background-size: 60%;">
+                                            </button>
                                             <p class="LikeCounter">{{ post.likes.count() }}</p>
                                         </div>
                                     </div>
@@ -242,13 +238,18 @@
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<script>
+    var heartFilled = "{{ asset('assets/Images/HeartF.png') }}";
+    var heartEmpty =  "{{ asset('assets/Images/HeartI.png') }}";
+</script>
 {% block AddJSLinks %}
     <script src="{{ asset('assets/Libs/swiper-bundle.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>
     <script src="{{ asset('assets/JS/PostCard.js') }}"></script>
-    script src="{{ asset('assets/JS/Like.js') }}"></script>
+    <script src="{{asset('assets/Libs/jquery-3.6.4.min.js')}}"></script>
+    <script src="{{ asset('assets/JS/Like.js') }}"></script>
+
 {% endblock %}
+<script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>
 
 </body>
 </html>

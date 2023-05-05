@@ -26,13 +26,13 @@ class IndexController extends AbstractController
 
 
     //using param convertor to automatically convert route parameter (id) to object(user)
-    #[Route('/user/{username}', name: 'show.user')]
+  /*  #[Route('/user/{username}', name: 'show.user')]
     public function showUserProfil(Request $request, User $user): Response
     {
         return $this->render('profile.html.twig', [
             'user' => $user,
         ]);
-    }
+    }*/
 
 
 

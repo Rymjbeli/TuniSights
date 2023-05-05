@@ -35,13 +35,13 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $targetPost = null;
 
-    #[ORM\OneToMany(mappedBy: 'target', targetEntity: Reply::class, orphanRemoval: true)]
-    private Collection $replies;
+ /*#[ORM\OneToMany(mappedBy: 'target', targetEntity: Reply::class, orphanRemoval: true)]
+    private Collection $replies;*/
 
-    public function __construct()
+  /*  public function __construct()
     {
         $this->replies = new ArrayCollection();
-    }
+    }*/
 
     public function getId(): ?int
     {
@@ -96,9 +96,9 @@ class Comment
         return $this;
     }
 
-    /**
+    /*
      * @return Collection<int, Reply>
-     */
+
     public function getReplies(): Collection
     {
         return $this->replies;
@@ -124,5 +124,5 @@ class Comment
         }
 
         return $this;
-    }
+    }*/
 }
