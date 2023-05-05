@@ -14,22 +14,23 @@
 {% block SectionsOfTheBody %}
     <div class="container">
         <div class="form">
-            <a href= "{{ path('app_index') }}" class="back">&times;</a>
+            <a href="{{ path('app_index') }}" class="back">&times;</a>
             <span class="title">Login</span>
             <form method="post">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
-
                 {% if app.user %}
                     <div class="mb-3">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" style="font-size: 15px; text-decoration: none">Logout</a>
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}"
+                                                                               style="font-size: 15px; text-decoration: none">Logout</a>
                     </div>
                 {% endif %}
 
                 <div class="input-info">
                     <label for="inputEmail"></label>
-                    <input type="email" id="inputEmail" placeholder="Enter your email" value="{{ last_username }}" name="email" autocomplete="email" required autofocus />
+                    <input type="email" id="inputEmail" placeholder="Enter your email" value="{{ last_username }}"
+                           name="email" autocomplete="email" required autofocus/>
                     <!-- email icon -->
                     <i class="uil uil-envelope icon"></i>
                 </div>
@@ -67,7 +68,7 @@
                         <input type="checkbox" id="logCheck" name="_remember_me"/>
                         <label for="logCheck" class="text">Remember me</label>
                     </div>
-                    <a href="{{ path('app_login') }}" class="text">Forgot password?</a>
+                    <a href="{{ path('app_forgot_password_request') }}" class="text">Forgot password?</a>
                 </div>
 
 

@@ -61,6 +61,19 @@
             <div class="row">
                 <div class="col">
                     <div class="text-start header-elements">
+
+                                {% for message in app.flashes('success') %}
+                                    <div class="alert alert-success" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+
+                                {% for message in app.flashes('success_register') %}
+                                    <div class="alert alert-success" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+
                         <h1>Never stop <br>Exploring Tunisia</h1>
                     </div>
                 </div>

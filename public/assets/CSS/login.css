@@ -1,6 +1,6 @@
 :root {
     --color1: #3e3516;
-    --color2:rgba(0, 98, 149, 0.6);
+    --color2: rgba(0, 98, 149, 0.6);
     --color3: #d5cbb2;
     --color4: #2d3030;
     --color: rgba(230, 227, 227, 0.641);
@@ -14,12 +14,10 @@
 
 body {
     height: 100vh;
-    display: flex;
     align-items: center;
     width: 100%;
     justify-content: center;
     background-image: url("../Images/login2.jpg");
-
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -55,49 +53,52 @@ body {
     body {
         background-position-y: bottom;
     }
-   /* .navbar-nav {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: rgba(0, 98, 149, 0.5);
-        width: 100%;
-    }
 
-    .navbar-nav .nav-item {
-        display: block;
-    }
+    /* .navbar-nav {
+         position: absolute;
+         top: 100%;
+         right: 0;
+         background-color: rgba(0, 98, 149, 0.5);
+         width: 100%;
+     }
 
-    .navbar-nav .nav-link {
-        padding: 1rem;
-        color: #fff;
-        text-align: center;
-    }
+     .navbar-nav .nav-item {
+         display: block;
+     }
 
-    .nav-item:hover .nav-link {
-        transform: scale(1.1);
-        transition: transform 0.3s ease-in-out;
-    }
+     .navbar-nav .nav-link {
+         padding: 1rem;
+         color: #fff;
+         text-align: center;
+     }
 
-    .navbar-nav .nav-link:hover {
-        background-color: rgba(0, 98, 149, 0.5);
-    }
-    */
+     .nav-item:hover .nav-link {
+         transform: scale(1.1);
+         transition: transform 0.3s ease-in-out;
+     }
+
+     .navbar-nav .nav-link:hover {
+         background-color: rgba(0, 98, 149, 0.5);
+     }
+     */
 }
+
 /* end of styling the navbar */
 
 .container {
     position: relative;
-    max-width: 430px;
+    max-width: 470px;
     width: 100%;
     opacity: 0.92;
     background-color: #fff;
     border-radius: 20px;
-    margin-top: 1rem ;
+    margin-top: 1rem;
 }
 
 .form {
     border-radius: 6px;
     padding: 30px;
+    margin-top: 6rem;
 
 }
 
@@ -129,18 +130,20 @@ body {
 /* styling the input */
 .input-info {
     position: relative;
-    height: 50px;
+    display: inline-block;
+    height: fit-content;
     width: 100%;
     margin-top: 15px;
 }
+
 .input-info input {
-    position: absolute;
+    position: relative;
     height: 100%;
     width: 95%;
     border: none;
     outline: none;
     border-bottom: 2px solid var(--color1);
-    padding: 0 35px;
+    padding: 10px 35px;
     font-size: 16px;
     transition: all 0.2s ease;
     background-color: transparent;
@@ -154,8 +157,19 @@ body {
     margin-right: 5px;
 }
 
+.container li {
+    list-style-type: none;
+    overflow: hidden;
+    text-align: left;
+    color: #b02a37;
+    font-size: 14px;
+}
+.container ul{
+    margin-bottom: 0;
+}
+
 .options label {
-   /* margin-top: 25px;*/
+    /* margin-top: 25px;*/
     display: inline-block;
 }
 
@@ -167,8 +181,8 @@ body {
 /* styling the icons */
 .input-info i {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top:40%;
+    transform: translateY(-60%);
     color: var(--color1);
     font-size: 23px;
 }
@@ -181,9 +195,11 @@ body {
 .input-info i.icon {
     left: 0;
 }
+
 .input-info i.showHidePw {
     right: 5%;
 }
+
 .input-info i.showHidePw:hover {
     cursor: pointer;
 }
@@ -239,8 +255,6 @@ body {
 }
 
 /* styling the button */
-
-
 .form .button input {
     background-color: var(--color2);
     border: none;
@@ -263,9 +277,7 @@ body {
 }
 
 .form .button button {
-    /* background-color: var(--color2); */
     border: none;
-    /* color: #fff; */
     font-size: 17px;
     letter-spacing: 1px;
     border-radius: 6px;
@@ -275,41 +287,18 @@ body {
     height: 50px;
     width: 100%;
     margin-top: 15px;
-
     background-color: rgba(0, 97, 149, 0.651);
     color: #fff;
 }
 
 .button button:hover {
-    /* color: var(--color1); */
     font-size: 18px;
-    /* letter-spacing: 1.2px; */
-    /* border: solid 1px black; */
     transform: translateY(-3px);
-    /* background-color: #368bb3; */
-
     color: rgb(0, 98, 149);
     background-color: rgb(211, 240, 251);
     padding: 0.3em 1em;
     border: 1px rgb(0, 98, 149);
     border-radius: 8px;
-    /* cursor: pointer; */
-}
-
-/* styling the error message */
-.error-message {
-    position: absolute;
-    top: 140px;
-    left: 0;
-}
-
-.v {
-    margin-bottom: 20px;
-    padding-top: 50px;
-    left: 0;
-    color: var(--color2);
-    font-size: 15px;
-
 }
 
 /* end of css */
