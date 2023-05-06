@@ -355,6 +355,12 @@ button:active {
     justify-content: space-between;
     align-items: center;
 }
+.post-content1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
 .post-image {
     /*left alined */
     width: 60vh;
@@ -366,7 +372,7 @@ button:active {
     margin-top: 20px;
 }
 .post-description {
-    width: 55%;
+    width: 40%;
     margin-top: 20px;
     margin-bottom: -5px;
 }
@@ -400,10 +406,21 @@ button:active {
 }
 .Profile {
     display: flex;
-    align-items: center;
-    width: 100%;
+    width: 60%;
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
 }
+.Profilee {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    /* align-items: center; */
+    width: 80%;
+    justify-content: space-between;
+    height: 30px;
+}
+
 .post-username {
 
     margin-top: 20px;
@@ -470,7 +487,7 @@ flex-direction: column;
 
 .post-description-text{
     display: flex;
-    flex-direction: space-between;
+    flex-direction: row ;
     align-items: center;
 }
 
