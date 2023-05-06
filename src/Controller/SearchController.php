@@ -88,20 +88,29 @@ class SearchController extends AbstractController
         $posts = $repository->findAll();
         return $this->render('Search.html.twig', ['postes' => $posts]);
     }
-    #[Route('/findfiltered', name: 'app_find-filter')]
+    #[Route('/find/filter', name: 'app_find-filter')]
     public function getFiltered(Request $request, ManagerRegistry $doctrine)
     {
         $state = $request->query->get('state');
+        $category = $request->query->get('category');
         $repository = $doctrine->getRepository(Post::class);
 
-        if ($state === 'Tous') {
+        if ($state === 'Tous' && $category==='Tous') {
             $posts = $doctrine->getRepository(Post::class)
                 ->findAll();
-        } else {
+        } else if ($state === 'Tous'){
             $posts = $doctrine->getRepository(Post::class)
-                ->findByState($state);        }
+                ->findByCategory($category);
+        } else if ($category === 'Tous'){
+            $posts = $doctrine->getRepository(Post::class)
+                ->findByState($state);
+        } else{
+            $posts = $doctrine->getRepository(Post::class)
+                ->findByStateCategory($state,$category);
+        }
 
-        return $this->render('Search.html.twig', ['postes' => $posts]);
+        return $this->render('Search.html.twig', ['postes' => $posts, 'SelectedCategory' => $category, 'SelectedState' => $state]);
     }
+
 
 }
