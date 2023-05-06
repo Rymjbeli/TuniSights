@@ -42,12 +42,12 @@ function LikePost(btn){
         success: function(response) {
             if(response.error !== undefined){console.error(response.error);return false;}
             let likeCounter= $('.LikeCounter[Postid="'+btn.attr("postid")+'"]');
-            if(btn.attr("Liked")==="True"){
-                btn.css("background-image","url('/assets/Images/heartF.png')");
-                btn.attr("Liked","False");
-            }else{
+            if(btn.attr("Liked")==="true"){
                 btn.css("background-image","url('/assets/Images/heartI.png')");
-                btn.attr("Liked","True")
+                btn.attr("Liked","false");
+            }else{
+                btn.css("background-image","url('/assets/Images/heartF.png')");
+                btn.attr("Liked","true")
             }
             likeCounter.text(response.LikeCount + " Likes");
             console.log(response);
