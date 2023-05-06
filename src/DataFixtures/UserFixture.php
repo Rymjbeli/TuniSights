@@ -14,10 +14,19 @@ class UserFixture extends Fixture implements FixtureGroupInterface
 {
     public function __construct(
         private UserPasswordHasherInterface $hasher
-    ) {}
+    )
+    {
+    }
+
     public function load(ObjectManager $manager): void
     {
-//        // Create Ines admin user
+//        $users = $manager->getRepository(User::class)->findAll();
+//        foreach ($users as $user) {
+//            $manager->remove($user);
+//
+
+
+        // Create Ines admin user
 //        $ines = new User();
 //        $ines->setEmail('ines.samet@insat.ucar.tn');
 //        $ines->setPassword($this->hasher->hashPassword($ines, 'ines123'));
@@ -25,7 +34,10 @@ class UserFixture extends Fixture implements FixtureGroupInterface
 //        $ines->setUsername('Ines');
 //        $ines->setDateOfBirth(new \DateTimeImmutable('2003-02-01'));
 //        $ines->setGender('F');
+//        $ines->setImage("assets/Images/ines.jpg");
+//
 //        $manager->persist($ines);
+//
 //
 //        // Create Rym admin user
 //        $rym = new User();
@@ -35,6 +47,8 @@ class UserFixture extends Fixture implements FixtureGroupInterface
 //        $rym->setUsername('rym');
 //        $rym->setDateOfBirth(new \DateTimeImmutable('2002-06-22'));
 //        $rym->setGender('F');
+//        $rym->setImage("assets/Images/rym.jpg");
+//
 //        $manager->persist($rym);
 //
 //        // Create Sara admin user
@@ -55,6 +69,7 @@ class UserFixture extends Fixture implements FixtureGroupInterface
 //        $aziz->setUsername('aziz');
 //        $aziz->setDateOfBirth(new \DateTimeImmutable('2002-03-25'));
 //        $aziz->setGender('M');
+//        $aziz->setImage("assets/Images/aziz.jpg");
 //        $manager->persist($aziz);
 //
 //
@@ -66,25 +81,8 @@ class UserFixture extends Fixture implements FixtureGroupInterface
 //        $mohamed->setDateOfBirth(new \DateTimeImmutable('2002-04-16'));
 //        $mohamed->setGender('M');
 //        $mohamed->setUsername('mohamed');
+//        $mohamed->setImage("assets/Images/mohamed.jpg");
 //        $manager->persist($mohamed);
-//
-//        //Create 5 other users with Faker
-//        $faker = Factory::create('fr_FR');
-//            for ($i = 1; $i <= 5; $i++) {
-//                $user = new User();
-//                $user->setUsername($faker->userName);
-//                $user->setEmail($faker->email);
-//                $user->setPassword($this->hasher->hashPassword($user, 'password'));
-//                $user->setDateOfBirth($faker->dateTimeBetween('-50 years', '-18 years'));
-//                $user->setGender($faker->randomElement(['M', 'F']));
-//                $user->setBio('Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-//                Proin vitae leo quis nibh pulvinar bibendum. Etiam in justo ut nisi efficitur
-//                tincidunt. Integer euismod lobortis neque.');
-//
-//                $manager->persist($user);
-//            }
-//
-//        $manager->flush();
     }
 
     public static function getGroups(): array

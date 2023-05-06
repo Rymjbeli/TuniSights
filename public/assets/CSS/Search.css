@@ -22,7 +22,7 @@ body {
     background-position: top;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: rgba(255, 255, 255, 0.66);
+    background-color: rgba(255, 255, 255, 0.66) !important;
     background-blend-mode: overlay;
 }
 
@@ -60,10 +60,9 @@ h1 {
 
 /*search-bar */
 .search-bar {
-    display: flex;
     align-items: center;
     justify-content: center;
-    width: 1000px;
+    width: 100%;
     margin: 0 auto;
     padding-top: 5px;
 
@@ -77,14 +76,14 @@ h1 {
     border-radius: 4px 0 0 4px;
 }
 
-.search-bar button[type="button"] {
-    background-color: #4a72b8;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-}
+/*.search-bar button[type="button"] {*/
+/*    background-color: #4a72b8;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    padding: 0.5rem 1rem;*/
+/*    font-size: 1rem;*/
+/*    cursor: pointer;*/
+/*}*/
 
 
 main {
@@ -200,27 +199,24 @@ select:focus {
 
 /* Button Styles */
 button {
-    display: inline-block;
-    background-color: #4285f4;
-    color: #fff;
+    /*display: inline-block;*/
+    /*background-color: #4285f4;*/
+    /*color: #fff;*/
     border: none;
-    padding: 0.25rem 0.5rem;
-    /* Updated padding */
-    font-size: 0.875rem;
-    /* Updated font-size */
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    box-shadow: 1px 1px 0.5px 0.5px rgba(0, 97, 149, 0.5);
+
+
+    /*padding: 0.25rem 0.5rem;*/
+    /*!* Updated padding *!*/
+    /*font-size: 0.875rem;*/
+    /*!* Updated font-size *!*/
+    /*border-radius: 0.25rem;*/
+    /*cursor: pointer;*/
+    /*transition: background-color 0.2s ease-in-out;*/
 }
 
-button:hover,
-button:focus {
-    background-color: #3367d6;
-}
 
-button:active {
-    background-color: #2a56c6;
-}
+
 
 /*navbar*/
 
@@ -250,11 +246,12 @@ button:active {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
     background-color: #fff;
-    height: 70vh;
-    max-height: 120vh;
     height: auto;
     max-width: 160vh;
     margin-left: 30px;
+    max-height: 90.7vh;
+    overflow: hidden;
+    min-height: 300px;
 
 
 
@@ -283,11 +280,6 @@ button:active {
     flex-grow: 1;
 }
 
-.poste h3 {
-    margin: 0;
-    margin-bottom: 10px;
-    font-size: 24px;
-}
 
 .description h4 {
     margin: 0;
@@ -344,14 +336,12 @@ button:active {
 
 
 
-.post-title {
-    margin-bottom: 10px;
-    font-size: 24px;
-}
+
 
 .post-content {
     display: flex;
     flex-wrap: wrap;
+    overflow: hidden;
     justify-content: space-between;
     align-items: center;
 }
@@ -363,18 +353,24 @@ button:active {
 }
 .post-image {
     /*left alined */
-    width: 60vh;
+    width: 80%;
+    height: 80%;
+    max-height: 500px;
+    min-height: 230px;
     position: relative;
-    max-height:70vh ;
+    /*max-height:70vh ;*/
     margin-right: 10px;
     margin-left: 50px;
     border-radius: 10px;
     margin-top: 20px;
+    /*max-width: 80%;*/
 }
 .post-description {
-    width: 40%;
-    margin-top: 20px;
+    /*width: 40%;*/
+    /*height: 100%;*/
+    margin-top: 0;
     margin-bottom: -5px;
+    flex: 1;
 }
 
 
@@ -389,6 +385,7 @@ button:active {
 .post-place {
     font-size: 18px;
     margin-bottom: 5px;
+    max-width: 70%;
 }
 
 .post-text {
@@ -406,8 +403,11 @@ button:active {
 }
 .Profile {
     display: flex;
-    width: 60%;
+    width: auto;
+    max-width: 60%;
     margin-bottom: 15px;
+    height: auto;
+    max-height: 1300px;
     display: flex;
     flex-direction: column;
 }
@@ -489,24 +489,28 @@ flex-direction: column;
     display: flex;
     flex-direction: row ;
     align-items: center;
+    max-width: 650px;
+
 }
 
 .post-description-text p{
     margin: 15px;
 }
-.post-description-text button{
-    font-size: 12px;
-}
+
 #likesCount{
     /*margin-right:0px;*/
     /*text-align: left;*/
 }
 
-.like-button{
-    /*position top*/
-    /*position: relative;*/
-    /*top: -65px;*/
-    /*left: -10px;*/
-    margin: 10px;
+
+.post-title {
+    margin-bottom: 10px;
+    font-size: 44px;
+    font-family: "Brush Script MT";
+}
+button{
+    background-color: rgba(0, 97, 149, 0.651); !important;
+    color: #fff;!important;
+    border-radius: 10px;!important;
 
 }
