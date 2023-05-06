@@ -61,17 +61,14 @@
 
             <div class="input-info">
                 <!-- date of birth -->
-                <div>
-                    {{ form_widget(registrationForm.dateOfBirth) }}
-                </div>
+
+                    {{ form_row(registrationForm.dateOfBirth,  {'attr': {'class': 'my-date-input'}}) }}
+
                 <br>
             </div>
 
             <div class="input-info">
                 <!-- gender -->
-                <div>
-                    {{ form_label(registrationForm.gender) }}
-                </div>
                 <div>
                     {{ form_widget(registrationForm.gender) }}
                 </div>

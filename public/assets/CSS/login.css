@@ -157,6 +157,25 @@ body {
     margin-right: 5px;
 }
 
+select{
+    height: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--color1);
+    padding: 10px 35px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    background-color: transparent;
+    border-radius: 3px;
+}
+select:focus {
+    border-bottom: 2px solid var(--color2);
+}
+
+select:hover{
+    cursor: pointer;
+}
+
 .container li {
     list-style-type: none;
     overflow: hidden;

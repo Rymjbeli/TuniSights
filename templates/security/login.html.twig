@@ -17,6 +17,13 @@
             <a href="{{ path('app_index') }}" class="back">&times;</a>
             <span class="title">Login</span>
             <form method="post">
+
+                {% for message in app.flashes('warning') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}

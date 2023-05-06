@@ -13,7 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\LessThan;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 
@@ -38,13 +40,8 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('dateOfBirth', BirthdayType::class, [
                 'label' => false,
-                'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
-                'attr' => ['max' => (new \DateTime('-13 years'))->format('Y-m-d')],
-                'constraints' => [
-                    new Date(),
-                    new LessThan('-13 years')
-                ],
+                'years' => range(date('Y') - 100, date('Y') - 13),
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
