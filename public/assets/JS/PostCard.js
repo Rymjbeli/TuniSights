@@ -37,24 +37,6 @@ function LoadPost(loader, content){
             }
         });
         window.setTimeout(function(){
-            $("#CommentLabel").on('keydown',function (e){
-                if (e.keyCode === 13)
-                {CommentEvent();
-                }
-            });
-            $(".CSubmit").click(CommentEvent);
+            LoadCommentSection();
             Loadbtn($("#LikeBtn"));}, 150);
-}
-function CommentEvent(){
-    let CLabel = $("#CommentLabel");
-    let val = CLabel.val();
-    if(val===""){
-        return;
-    }
-    let i = document.createElement("li");
-    i.className = "list-group-item";
-    i.textContent = val;
-    $("#CommentSection").append(i);
-    CLabel.val("");
-    //Send comment to relevent API
 }

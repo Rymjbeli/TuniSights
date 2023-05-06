@@ -21,7 +21,7 @@
                     <p class="Bio" style="margin-top: 5px">{{ post.description }}</p>
                     <hr/>
                     <div class="comments mb-4 mt-auto" style="max-height: 200px; overflow-y: auto;">
-                        <ul class="list-group list-group-flush" id="CommentSection">
+                        <ul class="list-group list-group-flush CommentSection" postid="{{ post.id}}">
                             {% for comment in post.comments %}
                                 <li class="list-group-item">{{ comment.content }}</li>
                             {% endfor %}
@@ -35,9 +35,9 @@
                     </div>
                     <hr/>
                     <div class="input-group mb-1" id="commentHolder">
-                        <input type="text" class="form-control" placeholder="Add a comment..." id="CommentLabel">
+                        <input type="text" class="form-control CommentArea" placeholder="Add a comment..." postid="{{ post.id}}" >
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary CSubmit" type="button">Send</button>
+                            <button class="btn btn-outline-secondary Commentbtn" type="button" postid="{{ post.id}}">Send</button>
                         </div>
                     </div>
                 </div>

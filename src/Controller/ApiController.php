@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Comment;
 use App\Entity\Like;
 use App\Entity\Post;
+use App\Entity\Reply;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -21,15 +23,49 @@ class ApiController extends abstractController
     public ManagerRegistry $registry;
     public function __construct(ManagerRegistry $managerRegistry)
     {
-
+        $this->registry = $managerRegistry;
     }
     #[Route('/AddComment',name: 'CommentApi', methods: ['POST'])]
-    public function AddPost(Request $request){
-        $PostId = $request->request->get('Post_Id');
-        $UserId = 1;//implement get user
-        $Content = $request->request->get('Content');
+    public function AddPost(Request $request,PostRepository $postRepository):Response{
+        $PostId = $request->get('Post_id');
+        $user = $this->getUser();
+        $Content = $request->get('Content');
+        if(!isset($user)){
+            return new Response('you have to login to use this method', Response::HTTP_METHOD_NOT_ALLOWED);
+        }
+        if(!isset($PostId) || !isset($Content)){
+            return new Response('no parameters provided', Response::HTTP_METHOD_NOT_ALLOWED);
+        }
+        $post = $postRepository->find($PostId);
+        if(!isset($post)){
+            return new Response('Post doesnt exits', Response::HTTP_BAD_REQUEST);
+        }
+        //this will be used if reply system is implemented
+        /*
         $Target = $request->request->get('Target');
-
+        if(isset($Target)){
+            $commentrepo = $this->registry->getRepository(Comment::class);
+            $comment = $commentrepo->find($Target);
+            if(!isset($comment)){
+                return new Response('Target doesnt exits', Response::HTTP_BAD_REQUEST);
+            }
+            $reply = new Reply();
+            $reply->setOwner($User);
+            $reply->setTarget($comment);
+            $reply->setContent($Content);
+            $entityManager = $this->registry->getManager();
+            $entityManager->persist($reply);
+            $entityManager->flush();
+            return new Response('Reply added', Response::HTTP_OK);
+        }*/
+        $comment = new Comment();
+        $comment->setOwner($user);
+        $comment->setTargetPost($post);
+        $comment->setContent($Content);
+        $entityManager = $this->registry->getManager();
+        $entityManager->persist($comment);
+        $entityManager->flush();
+        return new Response('Comment added', Response::HTTP_OK);
     }
     #[Route('/FetchPost', name: 'PostApi',methods: ['POST'])]
     public function FetchPost(Request $request, PostRepository $postRepository): Response{
