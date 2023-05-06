@@ -39,6 +39,20 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByState($state = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->where('p.state = :etat')
+            ->setParameter('etat', $state);
+//            ->orderBy('p.likes', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
@@ -63,6 +77,7 @@ class PostRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
     public function findMostLikedPostsInAYear()
     {
         $qb = $this->createQueryBuilder('p');
@@ -77,6 +92,5 @@ class PostRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
 
 }

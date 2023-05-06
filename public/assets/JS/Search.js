@@ -1,3 +1,4 @@
+
 // Définir les données des postes
 
 //postes = import from the database (entity = post)
@@ -110,78 +111,82 @@
     //     likesNumber: 5050,
     // }
 
-];
 
 //-------------------------------------------FILTER AND ADD POSTES FROM SELECT-------------------------------------------
 
 //a function that adds a post from postes array to the page
 function addPost(post) {
+
     //create a div element
     const div = document.createElement('div');
     //add a class to the div element
     div.classList.add('poste');
     //create a template for the div element
     //<div class="poste">
+
     div.innerHTML = `
-        <h3 class="post-title">${post.title}</h3>
-        <div class="post-content">
-            <img src="empty_heart.png" alt="Post image" class="post-image" onerror="imageFailedToLoad()">
-<!--            <img src="${post.imageLink}" alt="Post image" class="post-image" onerror="imageFailedToLoad()">-->
-<!--            <img src="{{ asset('assets/Images/desertTatawin.jpg') }}" alt="Post image" class="post-image" onerror="imageFailedToLoad()">-->
+         <h3 class="post-title">${post.title}</h3>
+         <div class="post-content">
+            <img src="{{ asset('assets/Images/douz.jpg') }}" alt="Post image" class="post-image">
             <div class="post-description">
                 <div class="Profile">
-                    <img src="${post.profileImage}" alt="Profile image" class="profile-image">
-                    <div >
-                        <h6 class="post-username">${post.profileUserName}</h6>
-                        <p class="post-date">${post.date} at ${post.time}</p>
+                    <img src="{{ asset('assets/Images/heart.png')  }}"  class="profile-image" style="margin-bottom: -20px">
+                    <div>
+                        <h6 class="post-username">${ post.ownerUsername }</h6>
                     </div>
                 </div>
-                <h4 class = "post-place">Place: ${post.place}</h4>
-                <h5 class = "post-state">State: ${post.gouvernorat}</h5>
-                <p class="post-txt">${post.description}</p>
+
+
+                <div class="post-description-text">
+                    <p class="limited-text">${ post.description }</p>
+                        <button class="show-more" onclick="showMore()">more</button>
+                </div>
                 <div class="post-footer">
-                    <div class="like-button" onclick="addLike(${post.postId})">
-                        <img src="../Images/empty_heart.png" alt="Like icon">
+                    <div class="like-button">
+                        <img src="../public/assets/Images/empty_heart.png" alt="Like icon" >
+                        <span style="font-size: 14px">${ post.likesCount}} likes</span>
                     </div>
-                    <div class="likes-number">
-                        <span id="likesCount">${post.likesNumber}</span> likes
-                    </div> 
                     <div class="card-body d-flex flex-column">
                         <div class="input-group mt-auto">
                             <input type="text" class="form-control" placeholder="Add a comment..." id="CommentLabel">
                         </div>
-                        <div class="comments mb-4" style="max-height: 400px; overflow-y: auto;">
-                            <ul class="list-group list-group-flush" id="CommentSection">
-                            <li class="list-group-item"> j'adore </li>
-                            <li class="list-group-item"> C'est magnifique! J'aime trop </li>
-                            <li class="list-group-item"> AMAZING !! </li>
-                            
-                            </ul>
-                        </div>
+                    <div class="comments mb-4" style="max-height: 400px; overflow-y: auto;">
+                         <ul class="list-group list-group-flush" id="CommentSection">
+                            <li class="list-group-item"> j'adore</li>
+                            <li class="list-group-item"> C'est magnifique! J'aime trop</li>
+                            <li class="list-group-item"> AMAZING !!</li>
+                         </ul>
                     </div>
-                
-                 <div>
-                    
-               
-            </div>
-        </div>
-    </div>
-     
+                </div>
+            </div> 
+         </div>     
+                   
   `;
+
     //add the div element to the page
     document.querySelector('.postes').appendChild(div);
+
 }
+
+// post= {
+//     'title': 'ahla',
+//     'ownerUsername': 'wa sahla',
+//     'description': 'description',
+//     'likesCount':10
+// }
+// addPost(post);
+
 
 //a function that filters the postes array by gouvernorat
 function filterPostes(gouvernorat) {
     //create an empty array to store the filtered postes
-    const filteredPostes = [];
+    let filteredPostes=[];
     //loop through the postes array
     for (const element of postes) {
         //check if the gouvernorat of the current poste is equal to the gouvernorat passed to the function
-        if (element.gouvernorat === gouvernorat) {
+        if (element.state() == gouvernorat) {
             //if it is, add the poste to the filteredPostes array
-            filteredPostes.push(element);
+            filteredPostes.push(element)
         }
     }
     //return the filteredPostes array
@@ -189,11 +194,16 @@ function filterPostes(gouvernorat) {
 }
 
 // a function that adds all the postes to the page
-function addAllPostes(postes) {
+function addAllPostes() {
+    alert(`${postes[0].title} ?`);
+
     //loop through the postes array
-    for (const element of postes) {
+    for ( element of postes) {
+        alert("hello");
+
         //add each poste to the page
         addPost(element);
+
     }
 }
 
@@ -237,6 +247,7 @@ function isPostOnPage(post) {
 
 //a function that filters the postes by gouvernorat from the select element and adds them to the page
 function filterAndAddPostesFromSelect() {
+
     //get the value of the selected option from the select element
     let selectElement = document.getElementById("gouvernorat-select");
     let selectedValue = selectElement.options[selectElement.selectedIndex].value;
@@ -251,7 +262,6 @@ function filterAndAddPostesFromSelect() {
 }
 
 //initialement, on affiche tous les postes
-addAllPostes(postes);
 //------------------------------------------------------------------------------------------------------------------------
 
 
@@ -347,27 +357,27 @@ function refreshLikes() {
 let likesNumber = [0, 0, 0, 0, 0, 0, 0, 0];
 
 function addLike(Id) {
-    if (likesNumber[Id] === 0) {
-        likesNumber++;
-        /*         let old_number = document.getElementById("likesCount").innerHTML;
-                document.getElementById("likesCount").innerHTML = +old_number + 1; */
-        postes[Id].likes = postes[Id].likes + 1;
-
-    } else if (likesNumber[Id] === 1) {
-        likesNumber--;
-        let old_number = document.getElementById("likesCount").innerHTML;
-        document.getElementById("likesCount").innerHTML = +old_number - 1;
-    }
-    var $likeIcon = document.querySelector('.like-button img');
-
-    // Check the current src attribute value
-    if ($likeIcon.src.endsWith('empty_heart.png')) {
-        // Update the src attribute to the new heart image
-        $likeIcon.src = '../Images/heart.png';
-    } else {
-        // Update the src attribute to the original heart image
-        $likeIcon.src = '../Images/empty_heart.png';
-    }
+    // if (likesNumber[Id] === 0) {
+    //     likesNumber++;
+    //     /*         let old_number = document.getElementById("likesCount").innerHTML;
+    //             document.getElementById("likesCount").innerHTML = +old_number + 1; */
+    //     postes[Id].likes = postes[Id].likes + 1;
+    //
+    // } else if (likesNumber[Id] === 1) {
+    //     likesNumber--;
+    //     let old_number = document.getElementById("likesCount").innerHTML;
+    //     document.getElementById("likesCount").innerHTML = +old_number - 1;
+    // }
+    // var $likeIcon = document.querySelector('.like-button img');
+    //
+    // // Check the current src attribute value
+    // if ($likeIcon.src.endsWith('empty_heart.png')) {
+    //     // Update the src attribute to the new heart image
+    //     $likeIcon.src = '../Images/heart.png';
+    // } else {
+    //     // Update the src attribute to the original heart image
+    //     $likeIcon.src = '../Images/empty_heart.png';
+    // }
 }
 
 
@@ -416,17 +426,17 @@ document.getElementById('CommentLabel').addEventListener('keyup', function (even
         document.getElementById('CSubmit').click();}
     });
      */
-
-$("#CommentLabel").on("keydown", function (e) {
-    if (e.keyCode === 13) {
-        alert("Enter key pressed");
-        // Enter key pressed
-        let searchTerm = $(this).val();
-        // Do something with the search term
-        alert("Search term entered: " + searchTerm);
-    }
-});
-
+//
+// $("#CommentLabel").on("keydown", function (e) {
+//     if (e.keyCode === 13) {
+//         alert("Enter key pressed");
+//         // Enter key pressed
+//         let searchTerm = $(this).val();
+//         // Do something with the search term
+//         alert("Search term entered: " + searchTerm);
+//     }
+// });
+//
 
 //-------------------------------------------------post description show more
 
@@ -479,5 +489,16 @@ function showMore() {
     }
 }
 
+// var postsData = document.getElementById('posts-data');
+// var postes = JSON.parse(postsData.getAttribute('data-posts'));
+//
+// console.log(postsData);
+// console.log(postsData.getAttribute('data-posts'));
 
-
+// document.addEventListener('DOMContentLoaded', function() {
+//     var postsData = document.getElementById('posts-data');
+//     var postes = JSON.parse(postsData.getAttribute('data-posts'));
+//     window.onload = function() {
+//         console.log(postsData.getAttribute('data-posts'));
+//     }
+// });

@@ -15,51 +15,59 @@
 
     <header>
         <!-- search bar -->
-        <h1 id="search">" Bon Voyage "</h1>
+        <h1 id="search" style="font-style: italic">Bon Voyage !</h1>
         <div class="search-bar">
             <input id="search-input" type="text" placeholder="what do you feel like at this moment ?">
             <button type="button" onclick="filterAndAddPostesBySearchText()">Search</button>
         </div>
     </header>
     <main>
+        <div style="  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;    flex-direction: column;
+   position: fixed;
+">
+            <!-- filter -->
+                <!-- posts number -->
+                <div class="filter" style="min-width: 25vh; height: 4vh; text-align: center ;margin-top: -50px; font-size: 15px" >
+                    {{ postes|length }} posts
+                </div>
+            <div class="filter" style=" margin-top: 10px;">
 
-        <!-- filter -->
-        <div class="filter">
-            <!-- posts number -->
-            <div class="posts-number">
-                <p id="posts-number"></p>
+                <!-- filter by state -->
+                <form method="GET" action="{{ path('app_find-filter') }}">
+                    <label for="gouvernorat-select">Filter by State</label>
+                    <select id="gouvernorat-select" name="state">
+                        <option value="Tous">All</option>
+                        <option value="Ariana">Ariana</option>
+                        <option value="Béja">Béja</option>
+                        <option value="Ben Arous">Ben Arous</option>
+                        <option value="Bizerte">Bizerte</option>
+                        <option value="Gabès">Gabès</option>
+                        <option value="Jendouba">Jendouba</option>
+                        <option value="Kairouan">Kairouan</option>
+                        <option value="Kasserine">Kasserine</option>
+                        <option value="Kebili">Kebili</option>
+                        <option value="Kef">Kef</option>
+                        <option value="Mahdia">Mahdia</option>
+                        <option value="Manouba">Manouba</option>
+                        <option value="Medenine">Medenine</option>
+                        <option value="Monastir">Monastir</option>
+                        <option value="Nabeul">Nabeul</option>
+                        <option value="Sfax">Sfax</option>
+                        <option value="Siliana">Siliana</option>
+                        <option value="Sidi Bouzid">Sidi Bouzid</option>
+                        <option value="Sousse">Sousse</option>
+                        <option value="Tataouine">Tataouine</option>
+                        <option value="Tozeur">Tozeur</option>
+                        <option value="Tunis">Tunis</option>
+                        <option value="Zaghouan">Zaghouan</option>
+                    </select>
+                    <button onclick="filterAndAddPostesFromSelect()">Filter</button>
+                </form>
             </div>
 
-            <!-- filter by state -->
-            <label for="gouvernorat-select">Filter by State</label>
-            <select id="gouvernorat-select">
-                <option value="Tous">All</option>
-                <option value="Ariana">Ariana</option>
-                <option value="Béja">Béja</option>
-                <option value="Ben Arous">Ben Arous</option>
-                <option value="Bizerte">Bizerte</option>
-                <option value="Gabès">Gabès</option>
-                <option value="Jendouba">Jendouba</option>
-                <option value="Kairouan">Kairouan</option>
-                <option value="Kasserine">Kasserine</option>
-                <option value="Kebili">Kebili</option>
-                <option value="Kef">Kef</option>
-                <option value="Mahdia">Mahdia</option>
-                <option value="Manouba">Manouba</option>
-                <option value="Medenine">Medenine</option>
-                <option value="Monastir">Monastir</option>
-                <option value="Nabeul">Nabeul</option>
-                <option value="Sfax">Sfax</option>
-                <option value="Siliana">Siliana</option>
-                <option value="Sidi Bouzid">Sidi Bouzid</option>
-                <option value="Sousse">Sousse</option>
-                <option value="Tataouine">Tataouine</option>
-                <option value="Tozeur">Tozeur</option>
-                <option value="Tunis">Tunis</option>
-                <option value="Zaghouan">Zaghouan</option>
-
-            </select>
-            <button onclick="filterAndAddPostesFromSelect()">Filter</button>
         </div>
 
         <!-- results -->
@@ -69,18 +77,22 @@
                     <div class="poste">
                         <h3 class="post-title">{{ post.title }}</h3>
                         <div class="post-content">
-                            <img src="{{ post.imageLink }}" alt="Post image" class="post-image">
+                            {#                            <img src="{{ post.Image}}" alt="Post image" class="post-image"> #}
+                            <img src="{{ asset('assets/Images/douz.jpg') }}" alt="Post image" class="post-image">
+
                             <div class="post-description">
                                 <div class="Profile">
-                                    <img src="{{ post.profileImage }}" alt="{{ post.profileUserName }}"
-                                         class="profile-image">
+                                    {#                                    <img src="{{ post.profileImage }}" alt="{{ post.profileUserName }}" #}
+                                    {#                                         class="profile-image"> #}
+                                    <img src="{{ asset('assets/Images/heart.png') }}" alt="{{ post.owner.username }}"
+                                         class="profile-image" style="margin-bottom: -20px">
                                     <div>
-                                        <h6 class="post-username">{{ post.profileUserName }}</h6>
-                                        <p class="post-date">{{ post.date }} at {{ post.time }}</p>
+                                        <h6 class="post-username">{{ post.owner.username }}</h6>
+                                        {#                                        <p class="post-date">{{  post.createdAt|date('j F Y') }}</p> #}
                                     </div>
                                 </div>
                                 <h4 class="post-place">Place: {{ post.place }}</h4>
-                                <h5 class="post-state">State: {{ post.gouvernorat }}</h5>
+                                <h5 class="post-state">State: {{ post.city }}</h5>
                                 <div class="post-description-text">
                                     <p class="limited-text">{{ post.description }}</p>
                                     <button class="show-more" onclick="showMore()">more</button>
@@ -88,8 +100,8 @@
                                 <div class="post-footer">
                                     <div class="like-button">
                                         <img src="{{ asset('assets/Images/empty_heart.png') }}" alt="Like icon"
-                                             onclick="addLike({{ post.postId }})">
-                                        <span style="font-size: 14px">{{ post.likesNumber }} likes</span>
+                                             onclick="addLike({{ post.Id }})">
+                                        <span style="font-size: 14px">{{ post.likes.count() }} likes</span>
                                     </div>
                                     <div class="card-body d-flex flex-column">
                                         <div class="input-group mt-auto">
@@ -127,9 +139,10 @@
 {% block AddJSLinks %}
     <script src="{{ asset('assets/JS/Search.js') }}"></script>
     <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
-    <script>
-
-    </script>
+    {#    <script id="posts-data" type="application/json" data-posts="{{ postes|json_encode|e('html_attr') }}"></script> #}
+    {#    <script> #}
+    {#        console.log({{ postes[0].title }}); #}
+    {#    </script> #}
 
 {% endblock %}
 
