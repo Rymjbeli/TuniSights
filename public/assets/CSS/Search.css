@@ -99,7 +99,7 @@ main {
     margin-left: 10px;
     width: 25vh;
     min-width: 25vh;
-    height: 27vh;
+    height: 38vh ;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     /* vertical content position: center */
@@ -254,7 +254,7 @@ button:active {
     max-height: 120vh;
     height: auto;
     max-width: 160vh;
-    margin-left: 30vh;
+    margin-left: 30px;
 
 
 

@@ -52,6 +52,35 @@ class PostRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findByCategory($category = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->where('p.category = :cat')
+            ->setParameter('cat', $category);
+//            ->orderBy('p.likes', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByStateCategory($state = null, $category = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->where('p.category = :cat')
+            ->setParameter('cat', $category)
+//            ->orderBy('p.likes', 'DESC');
+            ->andWhere('p.state = :etat')
+            ->setParameter('etat', $state);
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 
 //    /**
 //     * @return Post[] Returns an array of Post objects

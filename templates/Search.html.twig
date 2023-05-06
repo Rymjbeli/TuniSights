@@ -17,7 +17,7 @@
         <!-- search bar -->
         <h1 id="search" style="font-style: italic">Bon Voyage !</h1>
         <div class="search-bar">
-            <input id="search-input" type="text" placeholder="what do you feel like at this moment ?">
+            <input id="search-input" type="text" placeholder="what do you feel like seeing at this moment ?">
             <button type="button" onclick="filterAndAddPostesBySearchText()">Search</button>
         </div>
     </header>
@@ -26,21 +26,23 @@
   justify-content: center;
   align-items: center;
   height: 50vh;    flex-direction: column;
-   position: fixed;
+   position: sticky;
+  top: 170px; margin-top: 40px;
 ">
             <!-- filter -->
-                <!-- posts number -->
-                <div class="filter" style="min-width: 25vh; height: 4vh; text-align: center ;margin-top: -50px; font-size: 15px" >
-                    {{ postes|length }} posts
-                </div>
-            <div class="filter" style=" margin-top: 10px;">
+            <!-- posts number -->
+            <div class="filter"
+                 style="min-width: 25vh; height: 4vh; text-align: center ;margin-top: -50px; font-size: 15px">
+                {{ postes|length }} post(s)
+            </div>
 
-                <!-- filter by state -->
+            <!-- filter by state -->
+            <div class="filter" style=" margin-top: 10px;">
                 <form method="GET" action="{{ path('app_find-filter') }}">
-                    <label for="gouvernorat-select">Filter by State</label>
-                    <select id="gouvernorat-select" name="state">
+                    <label for="state-select">Filter by State</label>
+                    <select id="state-select" name="state">
                         <option value="Tous">All</option>
-                        <option value="Ariana">Ariana</option>
+                        <option value="Ariana" {% if SelectedState == 'Ariana' %}selected{% endif %}>Ariana</option>
                         <option value="Béja">Béja</option>
                         <option value="Ben Arous">Ben Arous</option>
                         <option value="Bizerte">Bizerte</option>
@@ -64,14 +66,26 @@
                         <option value="Tunis">Tunis</option>
                         <option value="Zaghouan">Zaghouan</option>
                     </select>
-                    <button onclick="filterAndAddPostesFromSelect()">Filter</button>
+                    <label for="category-select">Filter by Category</label>
+                    <select id="category-select" name="category">
+                        <option value="Tous">All</option>
+                        <option value="beach">Beach</option>
+                        <option value="cafe">Cafe</option>
+                        <option value="natural-view">Natural view</option>
+                        <option value="mountain">Mountain</option>
+                        <option value="monument">monument</option>
+
+                        <option value="city">City</option>
+                        <option value="park">Park</option>
+                        <option value="historic-site">Historic site</option>
+                    </select>
+                    <button>Filter</button>
                 </form>
             </div>
-
         </div>
 
         <!-- results -->
-        <section class="resultats">
+        <section class="resultats" style="min-height: 80vh">
             <div class="postes">
                 {% for post in postes %}
                     <div class="poste">
@@ -139,10 +153,6 @@
 {% block AddJSLinks %}
     <script src="{{ asset('assets/JS/Search.js') }}"></script>
     <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
-    {#    <script id="posts-data" type="application/json" data-posts="{{ postes|json_encode|e('html_attr') }}"></script> #}
-    {#    <script> #}
-    {#        console.log({{ postes[0].title }}); #}
-    {#    </script> #}
 
 {% endblock %}
 
