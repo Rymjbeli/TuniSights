@@ -45,7 +45,7 @@ class ApiController extends abstractController
     }
     #[Route ('/CheckLike', name: 'CheckLikeApi',methods: ['GET'])]
     public function CheckLike(Request $request, PostRepository $postRepository): Response{
-        $userid = 1;//implement user get method
+        $user = $this->getUser();
         $PostId = $request->get('PostId');
         if(!isset($PostId)){
             return $this->json([
@@ -60,7 +60,7 @@ class ApiController extends abstractController
         }
         $likes = $post->getLikes();
         foreach($likes as $like){
-            if($like->getOwner()->getId() == $userid){
+            if($like->getOwner() === $user){
                 return $this->json([
                     'Liked' => true
                 ]);

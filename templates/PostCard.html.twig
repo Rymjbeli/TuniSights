@@ -31,7 +31,7 @@
                         <button id="LikeBtn" postid="{{ post.id }}" class="btn btn-sm btn-square pull-right"
                                 style="display: inline;border-radius: 0;background-repeat: no-repeat;background-position: center;background-size: 60%;">
                         </button>
-                        <span style="display: inline;" class="LikeCounter">{{ post.likes.count }} likes</span>
+                        <span style="display: inline;" postid="{{ post.id }}" class="LikeCounter">{{ post.likes.count }} likes</span>
                     </div>
                     <hr/>
                     <div class="input-group mb-1" id="commentHolder">

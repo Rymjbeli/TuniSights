@@ -35,6 +35,14 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $targetPost = null;
 
+    #[ORM\OneToMany(mappedBy: 'target', targetEntity: Reply::class, orphanRemoval: true)]
+    private Collection $replies;
+
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
+
  /*#[ORM\OneToMany(mappedBy: 'target', targetEntity: Reply::class, orphanRemoval: true)]
     private Collection $replies;*/
 
@@ -125,4 +133,34 @@ class Comment
 
         return $this;
     }*/
+
+    /**
+     * @return Collection<int, Reply>
+     */
+    public function getReplies(): Collection
+    {
+        return $this->replies;
+    }
+
+    public function addReply(Reply $reply): self
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies->add($reply);
+            $reply->setTarget($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReply(Reply $reply): self
+    {
+        if ($this->replies->removeElement($reply)) {
+            // set the owning side to null (unless already changed)
+            if ($reply->getTarget() === $this) {
+                $reply->setTarget(null);
+            }
+        }
+
+        return $this;
+    }
 }
