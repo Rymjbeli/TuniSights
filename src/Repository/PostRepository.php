@@ -122,4 +122,24 @@ class PostRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+
+    public function findBySearch($input = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->select('p')
+            ->join('p.owner', 'o')
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->like('LOWER(p.description)', ':input'),
+                    $qb->expr()->like('LOWER(o.username)', ':input')
+                )
+            )
+            ->setParameter('input', '%'.strtolower($input).'%');
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

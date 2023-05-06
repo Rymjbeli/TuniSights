@@ -7,6 +7,7 @@
 {% block AddCSSLinks %}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link rel="stylesheet" href="{{ asset('assets/CSS/Search.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/Libs/bootstrap.min.css') }}"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
 {% endblock %}
 
@@ -16,9 +17,12 @@
     <header>
         <!-- search bar -->
         <h1 id="search" style="font-style: italic">Bon Voyage !</h1>
-        <div class="search-bar">
-            <input id="search-input" type="text" placeholder="what do you feel like seeing at this moment ?">
-            <button type="button" onclick="filterAndAddPostesBySearchText()">Search</button>
+        <div class="search-bar" style="width: 100%">
+            <form id="search_bar_form" style="display: flex; margin-left: 5%; margin-right: 5%; width: 90%" method="GET" action="{{ path('app_find_search') }}">
+                <input id="search-input" style="width: 85%" name="search_input" type="text" value="{% if TypedText is defined and TypedText!="" %}{{ TypedText|lower }}"{% else %}"
+                {% endif %} placeholder=" what do you feel like seeing at this moment ?">
+                <button id="search-button" style="height: 45px; width: 15%" onclick="methode()">Search</button>
+            </form>
         </div>
     </header>
     <main>
@@ -38,48 +42,147 @@
 
             <!-- filter by state -->
             <div class="filter" style=" margin-top: 10px;">
-                <form method="GET" action="{{ path('app_find-filter') }}">
+                <form method="GET" action="{{ path('app_find_filter') }}">
                     <label for="state-select">Filter by State</label>
                     <select id="state-select" name="state">
                         <option value="Tous">All</option>
-                        <option value="Ariana" {% if SelectedState == 'Ariana' %}selected{% endif %}>Ariana</option>
-                        <option value="Béja">Béja</option>
-                        <option value="Ben Arous">Ben Arous</option>
-                        <option value="Bizerte">Bizerte</option>
-                        <option value="Gabès">Gabès</option>
-                        <option value="Jendouba">Jendouba</option>
-                        <option value="Kairouan">Kairouan</option>
-                        <option value="Kasserine">Kasserine</option>
-                        <option value="Kebili">Kebili</option>
-                        <option value="Kef">Kef</option>
-                        <option value="Mahdia">Mahdia</option>
-                        <option value="Manouba">Manouba</option>
-                        <option value="Medenine">Medenine</option>
-                        <option value="Monastir">Monastir</option>
-                        <option value="Nabeul">Nabeul</option>
-                        <option value="Sfax">Sfax</option>
-                        <option value="Siliana">Siliana</option>
-                        <option value="Sidi Bouzid">Sidi Bouzid</option>
-                        <option value="Sousse">Sousse</option>
-                        <option value="Tataouine">Tataouine</option>
-                        <option value="Tozeur">Tozeur</option>
-                        <option value="Tunis">Tunis</option>
-                        <option value="Zaghouan">Zaghouan</option>
+                        <option value="Ariana"
+                                {% if SelectedState is defined and SelectedState== 'Ariana' %}selected{% endif %}>Ariana
+                        </option>
+                        <option value="Béja"
+                                {% if  SelectedState is defined and SelectedState == 'Béja' %}selected{% endif %}>Béja
+                        </option>
+                        <option value="Ben Arous"
+                                {% if  SelectedState is defined and SelectedState == 'Ben Arous' %}selected{% endif %}>
+                            Ben Arous
+                        </option>
+                        <option value="Ariana"
+                                {% if SelectedState is defined and SelectedState == 'Ariana' %}selected{% endif %}>
+                            Ariana
+                        </option>
+                        <option value="Béja"
+                                {% if  SelectedState is defined and SelectedState == 'Béja' %}selected{% endif %}>Béja
+                        </option>
+                        <option value="Ben Arous"
+                                {% if  SelectedState is defined and SelectedState == 'Ben Arous' %}selected{% endif %}>
+                            Ben Arous
+                        </option>
+                        <option value="Bizerte"
+                                {% if  SelectedState is defined and SelectedState == 'Bizerte' %}selected{% endif %}>
+                            Bizerte
+                        </option>
+                        <option value="Gabès"
+                                {% if  SelectedState is defined and SelectedState == 'Gabès' %}selected{% endif %}>Gabès
+                        </option>
+                        <option value="Jendouba"
+                                {% if  SelectedState is defined and SelectedState == 'Jendouba' %}selected{% endif %}>
+                            Jendouba
+                        </option>
+                        <option value="Kairouan"
+                                {% if  SelectedState is defined and SelectedState == 'Kairouan' %}selected{% endif %}>
+                            Kairouan
+                        </option>
+                        <option value="Kasserine"
+                                {% if  SelectedState is defined and SelectedState == 'Kasserine' %}selected{% endif %}>
+                            Kasserine
+                        </option>
+                        <option value="Kebili"
+                                {% if  SelectedState is defined and SelectedState == 'Kebili' %}selected{% endif %}>
+                            Kebili
+                        </option>
+                        <option value="Kef"
+                                {% if  SelectedState is defined and SelectedState == 'Kef' %}selected{% endif %}>Kef
+                        </option>
+                        <option value="Mahdia"
+                                {% if  SelectedState is defined and SelectedState == 'Mahdia' %}selected{% endif %}>
+                            Mahdia
+                        </option>
+                        <option value="Manouba"
+                                {% if  SelectedState is defined and SelectedState == 'Manouba' %}selected{% endif %}>
+                            Manouba
+                        </option>
+                        <option value="Medenine"
+                                {% if  SelectedState is defined and SelectedState == 'Medenine' %}selected{% endif %}>
+                            Medenine
+                        </option>
+                        <option value="Monastir"
+                                {% if  SelectedState is defined and SelectedState == 'Monastir' %}selected{% endif %}>
+                            Monastir
+                        </option>
+                        <option value="Nabeul"
+                                {% if  SelectedState is defined and SelectedState == 'Nabeul' %}selected{% endif %}>
+                            Nabeul
+                        </option>
+                        <option value="Sfax"
+                                {% if  SelectedState is defined and SelectedState == 'Sfax' %}selected{% endif %}>Sfax
+                        </option>
+                        <option value="Siliana"
+                                {% if  SelectedState is defined and SelectedState == 'Siliana' %}selected{% endif %}>
+                            Siliana
+                        </option>
+                        <option value="Sidi Bouzid"
+                                {% if  SelectedState is defined and SelectedState == 'Sidi Bouzid' %}selected{% endif %}>
+                            Sidi Bouzid
+                        </option>
+                        <option value="Sousse"
+                                {% if  SelectedState is defined and SelectedState == 'Sousse' %}selected{% endif %}>
+                            Sousse
+                        </option>
+                        <option value="Tataouine"
+                                {% if  SelectedState is defined and SelectedState == 'Tataouine' %}selected{% endif %}>
+                            Tataouine
+                        </option>
+                        <option value="Tozeur"
+                                {% if  SelectedState is defined and SelectedState == 'Tozeur' %}selected{% endif %}>
+                            Tozeur
+                        </option>
+                        <option value="Tunis"
+                                {% if  SelectedState is defined and SelectedState == 'Tunis' %}selected{% endif %}>
+                            Tunis
+                        </option>
+                        <option value="Zaghouan"
+                                {% if  SelectedState is defined and SelectedState == 'Zaghouan' %}selected{% endif %}>
+                            Zaghouan
+                        </option>
                     </select>
+                    <br>
                     <label for="category-select">Filter by Category</label>
                     <select id="category-select" name="category">
                         <option value="Tous">All</option>
-                        <option value="beach">Beach</option>
-                        <option value="cafe">Cafe</option>
-                        <option value="natural-view">Natural view</option>
-                        <option value="mountain">Mountain</option>
-                        <option value="monument">monument</option>
-
-                        <option value="city">City</option>
-                        <option value="park">Park</option>
-                        <option value="historic-site">Historic site</option>
+                        <option value="beach"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'beach' %}selected{% endif %}>
+                            Beach
+                        </option>
+                        <option value="cafe"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'cafe' %}selected{% endif %}>
+                            Cafe
+                        </option>
+                        <option value="natural-view"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'natural-view' %}selected{% endif %}>
+                            Natural view
+                        </option>
+                        <option value="mountain"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'mountain' %}selected{% endif %}>
+                            Mountain
+                        </option>
+                        <option value="monument"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'monument' %}selected{% endif %}>
+                            monument
+                        </option>
+                        <option value="city"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'city' %}selected{% endif %}>
+                            City
+                        </option>
+                        <option value="park"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'park' %}selected{% endif %}>
+                            Park
+                        </option>
+                        <option value="historic-site"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'historic-site' %}selected{% endif %}>
+                            Historic site
+                        </option>
                     </select>
-                    <button>Filter</button>
+                    <button style="height: 30px; width: 80px; margin: 20%; margin-top: 5%">Filter</button>
                 </form>
             </div>
         </div>
@@ -95,34 +198,41 @@
                                 <div class="Profile">
                                     <div class="Profilee">
                                         {# <img src="{{ post.profileImage }}" alt="{{ post.profileUserName }}" class="profile-image"> #}
-                                        <img src="{{ asset('assets/Images/heart.png') }}"
-                                             alt="{{ post.owner.username }}" class="profile-image"
-                                             style="margin-top: 15px;">
+                                        <img src="{{ asset(post.owner.image) }}"
+                                             alt="{{ post.owner.username }}" class="profile-image" style="margin-top: 15px;">
                                         <h6 class="post-username">{{ post.owner.username }}</h6>
                                         {# <p class="post-date">{{  post.createdAt|date('j F Y') }}</p> #}
                                     </div>
-                                    {#                            <img src="{{ post.Image}}" alt="Post image" class="post-image"> #}
-                                    <img src="{{ asset('assets/Images/douz.jpg') }}" alt="Post image"
-                                         class="post-image">
+                                                                <img src="{{ asset(post.Image)}}" alt="Post image" class="post-image">
+{#                                    <img src="{{ asset('assets/Images/djerba2.jpg') }}" alt="Post image" class="post-image">#}
+                                    <p style="color: gray; font-style: italic; font-size: 12px; margin-left: 10%; margin-top: 5%">{{ post.location }}</p>
                                 </div>
                                 <div class="post-description">
-                                    {#                                <div class="Profile"> #}
-                                    {#                                    #}{#                                    <img src="{{ post.profileImage }}" alt="{{ post.profileUserName }}" #}
-                                    {#                                    #}{#                                         class="profile-image"> #}
-                                    {#                                    <img src="{{ asset('assets/Images/heart.png') }}" alt="{{ post.owner.username }}" #}
-                                    {#                                         class="profile-image" style="margin-bottom: -20px"> #}
-                                    {#                                    <div> #}
-                                    {#                                        <h6 class="post-username">{{ post.owner.username }}</h6> #}
-                                    {#                                        #}{#                                        <p class="post-date">{{  post.createdAt|date('j F Y') }}</p> #}
-                                    {#                                    </div> #}
+                                    <h5 class="post-state">State: {{ post.State }}</h5>
+                                    <div style="display: flex; flex-direction: row; width: 100%; align-content: space-between">
+                                        <h4 class="post-place" style="max-width: 70%">{{ post.place }}</h4>
+                                        <div style="margin-left: 20px">
+                                            {% for i in 1..5 %}
+                                            {% if i <= post.rating %}
+                                                <i class="fas fa-star"
+                                                   style="display: inline-block;color: #deb217;font-size: 10px;"></i>
+                                            {% else %}
+                                                <i class="fas fa-star"
+                                                   style="display: inline-block;color: #F0F0F0;font-size: 10px;"></i>
+                                            {% endif %}
+                                            {% endfor %}</p>
+                                        </div>
+                                    </div>
+                                    <h6 style="margin-top: -10px">city: {{ post.city }}</h6>
 
-                                    <h4 class="post-place">Place: {{ post.place }}</h4>
-                                    <h5 class="post-state">State: {{ post.city }}</h5>
                                     <div class="post-description-text">
                                         <p class="limited-text">{{ post.description }}</p>
-                                        <button class="show-more" onclick="showMore()">more</button>
+                                        <button autofocus class="show-more" onclick="showMore()"
+                                                style="background-color: rgba(0, 97, 149, 0.651);
+                                                color: #fff; font-size: 12px">more
+                                        </button>
                                     </div>
-                                    <div class="post-footer">
+                                    <div class="post-footer" style="margin-bottom: 0">
                                         <div class="like-button">
                                             <img src="{{ asset('assets/Images/empty_heart.png') }}" alt="Like icon"
                                                  onclick="addLike({{ post.Id }})">
@@ -164,7 +274,6 @@
 
 {% block AddJSLinks %}
     <script src="{{ asset('assets/JS/Search.js') }}"></script>
-    <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
 
 {% endblock %}
 

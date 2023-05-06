@@ -4,21 +4,18 @@
 //postes = import from the database (entity = post)
 
 
-// const postes = [
-    // {
-    //     postId: 1,
-    //     profileUserName: "Mohamed",
-    //     profileImage: "../Images/user.png",
-    //     date: "2020-12-12",
-    //     time: "12:00",
-    //     gouvernorat: 'Tataouine',
-    //     place: 'Le désert de Tataouine',
-    //     title: 'Aventures dans le désert de Tataouine',
-    //     description: 'Le désert de Tataouine est l\'un des endroits les plus fascinants de la Tunisie. Avec ses vastes étendues de sable doré, ses dunes majestueuses et ses paysages à couper le souffle, le désert de Tataouine est une destination incontournable pour tous les amateurs d\'aventure. J\'ai eu la chance de passer quelques jours dans le désert de Tataouine, et j\'ai vécu des moments inoubliables, entre les balades en chameau, les nuits à la belle étoile et les rencontres avec les nomades du désert. Si vous cherchez une expérience authentique et unique en Tunisie, le désert de Tataouine est l\'endroit parfait pour vous.',
-    //     // imageLink: "{{ asset('assets/Images/desertTatawin.jpg') }}" ,
-    //     imageLink: "/images/desertTatawin.jpg",
-    //     likesNumber: 10,
-    // },
+ const postes = [
+    {
+        title: 'Cathédrale Saint Vincent de Paul',
+        dateTime: "2020-12-12",
+        state: 'Tunis',
+        category: 'monument',
+        place: 'Cathédrale Saint Vincent de Paul',
+        location:'53 Rue Mokhtar Attia, Tunis',
+        description: 'La cathédrale Saint Vincent de Paul est un joyau architectural au cœur de Tunis. Cette magnifique église de style néo-byzantin est un lieu de culte important pour la communauté catholique de Tunisie et attire de nombreux visiteurs pour sa beauté exceptionnelle. J\'ai eu la chance de la visiter récemment et j\'ai été émerveillée par les magnifiques vitraux, les mosaïques colorées et les fresques impressionnantes. J\'ai également pu en apprendre davantage sur l\'histoire de la cathédrale et de la communauté catholique en Tunisie. Si vous êtes à Tunis, ne manquez pas de visiter cette merveille architecturale et spirituelle. Vous pourrez peut-être assister à une messe ou simplement vous imprégner de la sérénité et de la beauté de ce lieu de culte. À la sortie de la cathédrale, vous pourrez apercevoir des vendeurs ambulants proposant des objets artisanaux et peut-être même un musicien jouant de la flûte. Et si vous avez de la chance, vous pourriez voir un petit groupe de pigeons perchés sur la statue de Saint Vincent de Paul, ou un chat errant dans l\'allée.C\'est un endroit magique qui mérite vraiment une visite !',
+        imageLink: "/images/desertTatawin.jpg",
+        likesNumber: 10,
+    }]
     // {
     //     postId: 2,
     //     profileUserName: "Ines",
@@ -168,13 +165,6 @@ function addPost(post) {
 
 }
 
-// post= {
-//     'title': 'ahla',
-//     'ownerUsername': 'wa sahla',
-//     'description': 'description',
-//     'likesCount':10
-// }
-// addPost(post);
 
 
 //a function that filters the postes array by gouvernorat
@@ -195,11 +185,10 @@ function filterPostes(gouvernorat) {
 
 // a function that adds all the postes to the page
 function addAllPostes() {
-    alert(`${postes[0].title} ?`);
 
     //loop through the postes array
     for ( element of postes) {
-        alert("hello");
+        // alert("hello");
 
         //add each poste to the page
         addPost(element);
@@ -488,17 +477,3 @@ function showMore() {
 
     }
 }
-
-// var postsData = document.getElementById('posts-data');
-// var postes = JSON.parse(postsData.getAttribute('data-posts'));
-//
-// console.log(postsData);
-// console.log(postsData.getAttribute('data-posts'));
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     var postsData = document.getElementById('posts-data');
-//     var postes = JSON.parse(postsData.getAttribute('data-posts'));
-//     window.onload = function() {
-//         console.log(postsData.getAttribute('data-posts'));
-//     }
-// });

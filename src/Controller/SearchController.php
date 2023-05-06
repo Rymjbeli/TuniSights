@@ -88,7 +88,7 @@ class SearchController extends AbstractController
         $posts = $repository->findAll();
         return $this->render('Search.html.twig', ['postes' => $posts]);
     }
-    #[Route('/find/filter', name: 'app_find-filter')]
+    #[Route('/find/filter', name: 'app_find_filter')]
     public function getFiltered(Request $request, ManagerRegistry $doctrine)
     {
         $state = $request->query->get('state');
@@ -110,6 +110,21 @@ class SearchController extends AbstractController
         }
 
         return $this->render('Search.html.twig', ['postes' => $posts, 'SelectedCategory' => $category, 'SelectedState' => $state]);
+    }
+
+    #[Route('/find/search', name: 'app_find_search')]
+    public function getSearched(Request $request, ManagerRegistry $doctrine)
+    {
+        $input = $request->query->get('search_input');
+        $repository = $doctrine->getRepository(Post::class);
+
+        if ($input === '' ) {
+            $posts = $doctrine->getRepository(Post::class)->findAll();
+        } else{
+            $posts = $doctrine->getRepository(Post::class)->findBySearch($input);
+        }
+
+        return $this->render('Search.html.twig', ['postes' => $posts, 'TypedText' => $input]);
     }
 
 

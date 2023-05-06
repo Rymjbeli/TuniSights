@@ -3,25 +3,21 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
-use App\Traits\TimeStampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use phpDocumentor\Reflection\Types\Integer;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
-#[ORM\HasLifecycleCallbacks()]
-
 class Post
 {
-    use TimeStampTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100,nullable: true)]
+    #[ORM\Column(length: 100)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -30,7 +26,7 @@ class Post
     #[ORM\Column(length: 50)]
     private ?string $category = null;
 
-    #[ORM\Column(length: 100,nullable: true)]
+    #[ORM\Column(length: 100)]
     private ?string $place = null;
 
     #[ORM\Column(length: 50)]
@@ -161,7 +157,7 @@ class Post
 
     public function setRating(float $rating): self
     {
-        $this->rating = (int) $rating;
+        $this->rating = $rating;
 
         return $this;
     }
@@ -249,5 +245,4 @@ class Post
 
         return $this;
     }
-
 }
