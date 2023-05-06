@@ -39,6 +39,20 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByState($state = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->where('p.state = :etat')
+            ->setParameter('etat', $state);
+//            ->orderBy('p.likes', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
@@ -63,4 +77,20 @@ class PostRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findMostLikedPostsInAYear()
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->leftJoin('p.likes', 'l')
+            ->leftJoin('p.owner', 'u')
+            ->where('p.createdAt >= :lastYear')
+            ->setParameter('lastYear', new \DateTime('-1 year'))
+            ->groupBy('p.id')
+            ->orderBy('COUNT(l.id)', 'DESC')
+            ->setMaxResults(15);
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

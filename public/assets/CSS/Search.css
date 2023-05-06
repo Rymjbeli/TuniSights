@@ -95,11 +95,11 @@ main {
 .filter {
     background-color: #ffffff;
     padding: 10px;
-    margin-top: 40px;
+    margin-top: 15px;
     margin-left: 10px;
     width: 25vh;
     min-width: 25vh;
-    height: 30vh;
+    height: 27vh;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     /* vertical content position: center */
@@ -107,7 +107,6 @@ main {
     flex-direction: column;
     justify-content: center;
     /* it comes down when we scroll with no limit*/
-    position: sticky;
     top: 0;
 }
 
@@ -254,6 +253,8 @@ button:active {
     height: 70vh;
     max-height: 120vh;
     height: auto;
+    max-width: 160vh;
+    margin-left: 30vh;
 
 
 
@@ -373,8 +374,9 @@ button:active {
 
 .post-state {
     margin-bottom: 5px;
-    font-size: 16px;
+    font-size: 12px;
     font-style: italic;
+    color: gray;
 }
 
 
@@ -394,6 +396,7 @@ button:active {
     object-fit: cover;
     border-radius: 50%;
     margin-right: 20px;
+    margin-bottom: -20px;
 }
 .Profile {
     display: flex;
