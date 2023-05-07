@@ -7,8 +7,10 @@ use App\Entity\Post;
 use App\Entity\Reply;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +40,8 @@ class ApiController extends abstractController
             return new Response('Post doesnt exits', Response::HTTP_BAD_REQUEST);
         }
         $comments = $post->getComments();
-        $commentlist = $comments->slice($start*10,($start+1)*10);
+        $comments = new ArrayCollection(array_reverse($comments->toArray()));
+        $commentlist = $comments->slice($start*10,10);
         $commentData = array_map(function($comment ) {
             return [
                 'content' => $comment->getContent(),
@@ -91,7 +94,11 @@ class ApiController extends abstractController
         $entityManager = $this->registry->getManager();
         $entityManager->persist($comment);
         $entityManager->flush();
-        return new Response('Comment added', Response::HTTP_OK);
+        return $this->json([
+            'username' => $comment->getOwner()->getUsername(),
+            'content' => $comment->getContent(),
+            'date' => $comment->getCreatedAt()->format('Y-m-d')
+        ]);
     }
     #[Route('/FetchPost', name: 'PostApi',methods: ['POST'])]
     public function FetchPost(Request $request, PostRepository $postRepository): Response{
