@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Like;
 use App\Entity\Post;
-use App\Events\AddLikeEvent;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -53,11 +51,9 @@ class ApiController extends abstractController
         }
         return $this->render('PostCard.html.twig', ['post' => $post]);
     }
-
-    #[Route ('/CheckLike', name: 'CheckLikeApi', methods: ['GET'])]
-    public function CheckLike(Request $request, PostRepository $postRepository): Response
-    {
-        $userid = 1;//implement user get method
+    #[Route ('/CheckLike', name: 'CheckLikeApi',methods: ['GET'])]
+    public function CheckLike(Request $request, PostRepository $postRepository): Response{
+        $user = $this->getUser();
         $PostId = $request->get('PostId');
         if (!isset($PostId)) {
             return $this->json([
@@ -71,8 +67,8 @@ class ApiController extends abstractController
             ]);
         }
         $likes = $post->getLikes();
-        foreach ($likes as $like) {
-            if ($like->getOwner()->getId() == $userid) {
+        foreach($likes as $like){
+            if($like->getOwner() === $user){
                 return $this->json([
                     'Liked' => true
                 ]);

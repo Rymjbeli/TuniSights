@@ -16,9 +16,9 @@ function Loadbtn(btn){
             console.log(response);
             if(response.error !== undefined){console.error(response.error);return;}
             if(response.Liked){
-                btn.css("background-image","url("+heartFilled+")");
+                btn.css("background-image","url('/assets/Images/heartF.png')");
             }else{
-                btn.css("background-image","url("+heartEmpty+")");
+                btn.css("background-image","url('/assets/Images/heartI.png')");
             }
             btn.attr("Liked",response.Liked);
             btn.click(function() {
@@ -41,13 +41,13 @@ function LikePost(btn){
         },
         success: function(response) {
             if(response.error !== undefined){console.error(response.error);return false;}
-            let likeCounter= $('.LikeCounter');
-            if(btn.attr("Liked")){
-                btn.css("background-image","url("+heartEmpty+")");
-                btn.attr("Liked","False");
+            let likeCounter= $('.LikeCounter[Postid="'+btn.attr("postid")+'"]');
+            if(btn.attr("Liked")==="true"){
+                btn.css("background-image","url('/assets/Images/heartI.png')");
+                btn.attr("Liked","false");
             }else{
-                btn.css("background-image","url("+heartFilled+")");
-                btn.attr("Liked","True")
+                btn.css("background-image","url('/assets/Images/heartF.png')");
+                btn.attr("Liked","true")
             }
             likeCounter.text(response.LikeCount + " Likes");
             console.log(response);
