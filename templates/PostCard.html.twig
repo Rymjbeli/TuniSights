@@ -10,7 +10,7 @@
                 <div class="card-body d-flex flex-column" id="RSide">
                     <div>
                         <img src="{{ asset('assets/Images/' ~ post.owner.image) }}" alt="Small Image"
-                             style="display: inline; border: 1px solid black;" height="35px" width="35px">
+                             style="display: inline; border: 1px solid black;border-radius: 50% " height="35px" width="35px">
                         <p class="fw-bold" style="display: inline;margin-right: 3px">{{ post.owner.username }}</p>
                         {% if post.owner == app.user %}
                         <a href="{{ path('manage.Post',{'id': post.id}) }}">

@@ -20,6 +20,7 @@ function CommentEvent(commentarea){
             let commentsection = $('.CommentSection[postid="'+ commentarea.attr('postid') +'"]');
             let li = CreateCommentElement(response);
             commentsection.find('.LoadMarker').before(li);
+            li.show();
             console.log(response);
         },
         error: function(xhr, status, error) {
@@ -75,7 +76,7 @@ function Loadcomments(commentsection){
                 commentsection.find('.LoadMarker').before(li);
             }
             if(response.length<10){
-                commentsection.find('.LoadMarker').remove();
+                commentsection.find('.LoadMarker').hide();
             }else{
                 commentsection.find('.LoadMarker').show();
 

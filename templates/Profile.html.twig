@@ -38,7 +38,9 @@
     <div class="col-md-6 col-lg-4 mb-4"style="margin-left: 40px;padding-top: 25px">
       <h5 class="card-title">{{ user.username }}</h5>
       <p class="card-text">{{  user.bio }}</p>
+        {% if app.user==user %}
       <button class="btn btn-primary mezyan" id="Editbtn">Edit</button>
+        {% endif %}
     </div>
   </div>
 </div>
