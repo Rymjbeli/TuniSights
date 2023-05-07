@@ -9,6 +9,7 @@ use App\Service\PostService;
 use App\Service\UploaderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,19 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/managePost/{id?0}', name: 'manage.Post')]
+    #[
+        Route('/managePost/{id?0}', name: 'manage.Post'),
+        IsGranted("ROLE_USER")
+    ]
     public function managePost(
-        Post            $post = null,
+        Post                   $post = null,
         EntityManagerInterface $entityManager,
-        Request         $request,
-        UploaderService $uploaderService, // inject uploaderService
-        PostService     $postService // inject PostService
+        Request                $request,
+        UploaderService        $uploaderService, // inject uploaderService
+        PostService            $postService // inject PostService
     ): Response
     {
-        if (!$this->getUser()) {
+        /*if (!$this->getUser()) {
             return $this->redirectToRoute('app_index');
-        }
-        $user=$this->getUser();
+        }*/
+        $user = $this->getUser();
         $new = false;
         //Var that define either the user is adding or editing a post
         $AddEdit = 'Add';
@@ -70,13 +74,16 @@ class PostController extends AbstractController
         }
     }
 
-    #[Route('/deletePost/{id?0}', name: 'delete.Post')]
+    #[
+        Route('/deletePost/{id?0}', name: 'delete.Post'),
+        IsGranted("ROLE_USER")
+    ]
     public function deletePost(Post $post, ManagerRegistry $doctrine)
     {
-        if (!$this->getUser()) {
+        /*if (!$this->getUser()) {
             return $this->redirectToRoute('app_index');
-        }
-        $user=$this->getUser();
+        }*/
+        $user = $this->getUser();
         $manager = $doctrine->getManager();
         $manager->remove($post);
         $manager->flush();
@@ -84,7 +91,6 @@ class PostController extends AbstractController
         $this->addFlash('success', $post->getTitle() . ' has been deleted successfully.');
         return $this->redirectToRoute('app_profile', ['Userid' => $user->getId()]);
     }
-
 
 
 }

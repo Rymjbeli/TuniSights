@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Notification;
 use App\Entity\Post;
 use App\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +19,20 @@ use Doctrine\Persistence\ManagerRegistry;
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine,$notifications = []): Response
     {
         $repository = $doctrine->getRepository(Post::class);
+        $notifrepository = $doctrine->getRepository(Notification::class);
+
         $posts = $repository->findMostLikedPostsInAYear();
-        return $this->render('index.html.twig', ['posts' => $posts]);
+        if($this->getUser()){
+            $notifications= $notifrepository->findNotificationsByUserId($this->getUser());
+        }
+
+        return $this->render('index.html.twig', [
+            'posts' => $posts,
+            'notifications' => $notifications
+        ]);
     }
 
 

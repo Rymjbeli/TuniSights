@@ -71,14 +71,6 @@ a {
     height: auto;
 }
 
-.alert-success{
-    text-align: center;
-    color:white;
-    background-color: red;
-    width: 40rem;
-    margin-left: 28rem
-}
-
 @media screen and (min-width: 992px) {
     .card {
         margin-bottom: 0;
