@@ -48,12 +48,25 @@ class NotificationRepository extends ServiceEntityRepository
         $qb->select('n')
             ->leftJoin('n.targetPost', 'p')
             ->where('p.owner = :user')
-            ->setParameter('user', $user)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('user', $user);
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findUnreadNotifications(User $user)
+    {
+        $qb = $this->createQueryBuilder('n');
+
+        $qb->select('n')
+            ->leftJoin('n.targetPost', 'p')
+            ->where('p.owner = :user')
+            ->andWhere('n.isRead = false')
+            ->setParameter('user', $user);
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 
 //    /**
 //     * @return Notification[] Returns an array of Notification objects

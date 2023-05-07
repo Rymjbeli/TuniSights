@@ -76,10 +76,12 @@ class Notification
         return $this->isRead;
     }
 
-    public function setIsRead(bool $isRead): self
+    public function setIsRead(bool $isRead): void
     {
         $this->isRead = $isRead;
-
-        return $this;
+        if ($isRead === false) {
+            // Update the corresponding NotificationState entity
+            $this->getTargetPost()->getOwner()->setHasUnreadNotifications(true);
+        }
     }
 }

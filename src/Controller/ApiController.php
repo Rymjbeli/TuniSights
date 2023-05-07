@@ -10,11 +10,9 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use function Sodium\add;
@@ -86,7 +84,7 @@ class ApiController extends abstractController
     }
 
     #[Route('/Like', name: 'LikeApi', methods: ['POST', 'GET'])]
-    public function Like(Request $request, PostRepository $postRepository, UserRepository $userRepository, ManagerRegistry $registry,SessionInterface $session): Response
+    public function Like(Request $request, PostRepository $postRepository, UserRepository $userRepository, ManagerRegistry $registry): Response
     {
         $entityManager = $registry->getManager();
         $userid = $this->getUser();//implement user get method
@@ -125,7 +123,9 @@ class ApiController extends abstractController
             $entityManager->persist($like);
             $entityManager->flush();
             $likes->add($like);
-            $this->notificationController->sendNotification('like', $post,$userid,$entityManager,$session);
+            if($userid !== $post->getOwner()){
+                $this->notificationController->sendNotification('like', $post,$userid,$entityManager);
+            }
 
         }
         return $this->json([

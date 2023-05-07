@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     box.style.opacity = "0";
                     down = false;
                     document.removeEventListener("click", arguments.callee); // remove the event listener after closing the box
+                    document.getElementById('countNotif').textContent = 0;
                 }
             });
         }
@@ -103,8 +104,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function removeNotificationDot() {
     const notificationDot = document.getElementById('notification-dot');
-    if (notificationDot) {
+
         notificationDot.style.display = 'none';
+        console.log("Form submitted"); // Add this line
         document.getElementById('remove-notification-form').submit();
-    }
+
 }

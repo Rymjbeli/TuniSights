@@ -38,16 +38,16 @@
                 {% else %}
                     <li class="nav-item">
                         <div class="nav-link active" id="">
-                            {% if app.session.get('new_notification') %}
-                                <div class="notification-dot" id="notification-dot" ></div>
-
+                            {% if hasUnreadNotifications %}
+                                <div class="notification-dot" id="notification-dot"></div>
                             {% endif %}
+
                             <div class="nav-link active" id="bell" onclick="removeNotificationDot()">
 
                                 <i class="fa-sharp fa-solid fa-bell"></i>
                             </div>
 
-                            <form id="remove-notification-form" action="{{ path('remove_notification_session') }}" method="post" style="display: none;">
+                            <form id="remove-notification-form" action="{{ path('remove_notification') }}" method="post" style="display: none;">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token('remove_notification') }}">
                             </form>
@@ -56,9 +56,9 @@
 
                         </div>
                         <div class="notifications" id="box">
-                            <h2>Notifications - <span>{{ notifications|length }}</span></h2>
+                            <h2>Notifications - <span id="countNotif">{{ unreadNotifications|length }}</span></h2>
                             {% for notification in notifications|reverse %}
-                                <div class="notifications-item"
+                                <a class="notifications-item"
                                      href=" {{ path('notification_show') }} "><img
                                             src="{{ asset('assets/Images/' ~  notification.owner.image  ) }}" alt="img">
                                     <div class="text">
@@ -71,7 +71,7 @@
                                         your post
                                         <p>{{ notification.createdAt|date('j F Y') }} </p>
                                     </div>
-                                </div>
+                                </a>
                             {% endfor %}
 
                         </div>

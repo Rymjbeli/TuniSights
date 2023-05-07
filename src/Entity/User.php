@@ -64,6 +64,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private bool $isVerified = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $hasUnreadNotifications = null;
+
+
     public function __construct()
     {
         $this->passwordResetTokens = new ArrayCollection();
@@ -272,4 +276,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->id;
+    }
+
+    public function getHasUnreadNotifications(): ?bool
+    {
+        return $this->hasUnreadNotifications;
+    }
+
+    public function setHasUnreadNotifications(?bool $hasUnreadNotifications): self
+    {
+        $this->hasUnreadNotifications = $hasUnreadNotifications;
+
+        return $this;
+    }
+
+
+
 }

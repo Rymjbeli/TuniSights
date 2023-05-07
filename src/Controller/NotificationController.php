@@ -45,12 +45,12 @@ class NotificationController extends AbstractController
         $entityManager->flush();
 
         // Redirect to the profile page
-            return $this->redirectToRoute('app_profile',['Userid'=> $this->getUser()->getId()]);
+        return $this->redirectToRoute('app_profile',['Userid'=> $this->getUser()->getId()]);
     }
 
     #[Route('/notifications/{type}/{targetPostId}/{ownerId}/', name: 'notification_send')]
 
-    public function sendNotification(string $type, Post $targetPostId, User $ownerId,EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function sendNotification(string $type, Post $targetPostId, User $ownerId,EntityManagerInterface $entityManager): Response
     {
         // Create a new notification entity
         $notification = new Notification();
@@ -62,20 +62,21 @@ class NotificationController extends AbstractController
 
         // Save the notification
         $entityManager->getRepository(Notification::class)->save($notification, true);
-        $session->set('new_notification', true);
 
-
-        return $this->redirectToRoute('app_profile',['Userid'=> $this->getUser()->getId()]);
+        return $this->redirectToRoute('app_index');
 
     }
 
-    // Add the route for removing the session variable
-    #[Route('/remove-notification-session', name: 'remove_notification_session')]
-    public function removeNotificationSession(SessionInterface $session): Response
+    // Add the route for removing the notification
+    #[Route('/remove-notification', name: 'remove_notification')]
+    public function removeNotification(ManagerRegistry $doctrine): Response
     {
-        $session->remove('new_notification');
-        return new Response(null, Response::HTTP_NO_CONTENT);
+        $user = $this->getUser();
+        $user->setHasUnreadNotifications(false);
+        $doctrine->getManager()->flush();
 
+
+        return new Response(null, Response::HTTP_NO_CONTENT);
     }
 
 }
