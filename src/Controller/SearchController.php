@@ -7,8 +7,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Asset\Package;
-use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -85,7 +83,7 @@ class SearchController extends AbstractController
     public function getAll(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(Post::class);
-        $posts = $repository->findAll();
+        $posts = $repository->findBy([], ['rating' => 'DESC']);
         return $this->render('Search.html.twig', ['postes' => $posts]);
     }
     #[Route('/find/filter', name: 'app_find_filter')]
@@ -93,11 +91,9 @@ class SearchController extends AbstractController
     {
         $state = $request->query->get('state');
         $category = $request->query->get('category');
-        $repository = $doctrine->getRepository(Post::class);
-
         if ($state === 'Tous' && $category==='Tous') {
             $posts = $doctrine->getRepository(Post::class)
-                ->findAll();
+                ->findBy([], ['rating' => 'DESC']);
         } else if ($state === 'Tous'){
             $posts = $doctrine->getRepository(Post::class)
                 ->findByCategory($category);
@@ -116,10 +112,9 @@ class SearchController extends AbstractController
     public function getSearched(Request $request, ManagerRegistry $doctrine)
     {
         $input = $request->query->get('search_input');
-        $repository = $doctrine->getRepository(Post::class);
 
         if ($input === '' ) {
-            $posts = $doctrine->getRepository(Post::class)->findAll();
+            $posts = $doctrine->getRepository(Post::class)->findBy([], ['rating' => 'DESC']);
         } else{
             $posts = $doctrine->getRepository(Post::class)->findBySearch($input);
         }

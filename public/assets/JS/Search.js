@@ -127,7 +127,7 @@ function addPost(post) {
             <img src="{{ asset('assets/Images/douz.jpg') }}" alt="Post image" class="post-image">
             <div class="post-description">
                 <div class="Profile">
-                    <img src="{{ asset('assets/Images/heart.png')  }}"  class="profile-image" style="margin-bottom: -20px">
+                    <img src="{{ asset('assets/Images/heart.png')  }}"  alt="profile-image" class="profile-image" style="margin-bottom: -20px">
                     <div>
                         <h6 class="post-username">${ post.ownerUsername }</h6>
                     </div>
@@ -167,34 +167,6 @@ function addPost(post) {
 
 
 
-//a function that filters the postes array by gouvernorat
-function filterPostes(gouvernorat) {
-    //create an empty array to store the filtered postes
-    let filteredPostes=[];
-    //loop through the postes array
-    for (const element of postes) {
-        //check if the gouvernorat of the current poste is equal to the gouvernorat passed to the function
-        if (element.state() == gouvernorat) {
-            //if it is, add the poste to the filteredPostes array
-            filteredPostes.push(element)
-        }
-    }
-    //return the filteredPostes array
-    return filteredPostes;
-}
-
-// a function that adds all the postes to the page
-function addAllPostes() {
-
-    //loop through the postes array
-    for ( element of postes) {
-        // alert("hello");
-
-        //add each poste to the page
-        addPost(element);
-
-    }
-}
 
 //a function that clears the postes from the page
 function clearPostes() {
@@ -207,50 +179,7 @@ function clearPostes() {
     }
 }
 
-//a function that filters the postes by gouvernorat and adds them to the page
-function filterAndAddPostes(gouvernorat) {
-    //clear the postes from the page
-    clearPostes();
-    //filter the postes by gouvernorat
-    const filteredPostes = filterPostes(gouvernorat);
-    //add the filtered postes to the page
-    addAllPostes(filteredPostes);
-}
 
-//check if a post is already on the page
-function isPostOnPage(post) {
-    //select all the postes on the page
-    const postes = document.querySelectorAll('.poste');
-    //loop through the postes array
-    for (const element of postes) {
-        //check if the description of the current poste is equal to the description of the poste passed to the function
-        if (element.querySelector('.details h3').innerText === post.description) {
-            //if it is, return true
-            return true;
-        }
-    }
-    //if the description of the poste passed to the function is not found on the page, return false
-    return false;
-}
-
-
-//a function that filters the postes by gouvernorat from the select element and adds them to the page
-function filterAndAddPostesFromSelect() {
-
-    //get the value of the selected option from the select element
-    let selectElement = document.getElementById("gouvernorat-select");
-    let selectedValue = selectElement.options[selectElement.selectedIndex].value;
-    //filter the postes by gouvernorat and add them to the page
-    if (selectedValue == "Tous") {
-        clearPostes();
-        addAllPostes(postes);
-    } else {
-        filterAndAddPostes(selectedValue);
-    }
-
-}
-
-//initialement, on affiche tous les postes
 //------------------------------------------------------------------------------------------------------------------------
 
 
@@ -274,76 +203,8 @@ document.getElementById('search-input').addEventListener('keyup', function (even
     }
 });
 
-//a function that filters the postes by search text
-function filterPostesBySearchText(searchText) {
-    //create an empty array to store the filtered postes
-    const filteredPostes = [];
-    //loop through the postes array
-
-    for (const element of postes) {
-        //check if the description of the current poste contains the search text
-        if (element.description.toLowerCase().includes(searchText.toLowerCase())) {
-            //if it does, add the poste to the filteredPostes array
-            filteredPostes.push(element);
-        }
-
-    }
-    //return the filteredPostes array
-    return filteredPostes;
-}
 
 
-//a function that filters the postes by search text and adds them to the page
-function filterAndAddPostesBySearchText() {
-    //clear the postes from the page
-    clearPostes();
-    //get the search text
-    const searchText = getSearchText();
-    if (searchText == "") {
-        addAllPostes(postes);
-    }
-    //filter the postes by search text
-    const filteredPostes = filterPostesBySearchText(searchText);
-    //add the filtered postes to the page if they don't already exist in the page
-    for (const element of filteredPostes) {
-        addPost(element);
-
-    }
-}
-
-//function to calculate the number of posts in the page
-function countPostes() {
-    //select all the postes on the page
-    const postes = document.querySelectorAll('.poste');
-    //return the number of postes
-    return postes.length;
-}
-
-//function to show the number of posts in the page
-function showPostesNumber() {
-    //get the number of postes
-    const postesNumber = countPostes();
-    //show the number of postes
-    const element = document.getElementById('posts-number');
-    element.innterHTML = postesNumber.toString();
-}
-
-// a function that adds text into a p element
-function addTextToElement(element, text) {
-    //add the text to the element
-    element.innerHTML = text;
-}
-
-
-function raiseWarning() {
-    alert("Please select a gouvernorat");
-}
-
-//a function that refreshes the number of likes of all the posts
-function refreshLikes() {
-}
-
-let likesNumber = [0, 0, 0, 0, 0, 0, 0, 0];
 
 function addLike(Id) {
     // if (likesNumber[Id] === 0) {
@@ -436,7 +297,7 @@ document.getElementById('CommentLabel').addEventListener('keyup', function (even
 //     text.style.maxHeight = null;
 //     button.innerHTML = "Show less";
 // } else {
-//     text.style.maxHeight = "20px"; // change this value to your desired length
+//     text.style.maxHeight = "20px";
 //     button.innerHTML = "Show more";
 // }
 //     }
@@ -454,17 +315,13 @@ function showMore() {
         for (let i = 0; i < button.length; i++) {
             button[i].innerHTML = "less";
         }
-        // for (let i = 0; i < description.length; i++) {
-        //     description[i].style.position = "relative";
-        //
-        // }
         for (let i = 0; i < comments.length; i++) {
             // comments[i].style.display="none";
             comments[i].style.opacity="0";
         }
     } else {
         for (let i = 0; i < text.length; i++) {
-            text[i].style.height = "70px"; // change this value to your desired length
+            text[i].style.height = "150px";
             text[i].style.overflow = "hidden";
         }
         for (let i = 0; i < button.length; i++) {
@@ -477,3 +334,37 @@ function showMore() {
 
     }
 }
+//
+// $(document).ready(function() {
+//     // Show or hide the back-to-top button
+//     $(window).scroll(function() {
+//         if ($(this).scrollTop() > 10000) {
+//             $('.back-to-top').addClass('show');
+//         } else {
+//             $('.back-to-top').removeClass('show');
+//         }
+//     });
+//
+//     // Scroll to top when back-to-top button is clicked
+//     $('.back-to-top').click(function(event) {
+//         event.preventDefault();
+//         $('html, body').animate({scrollTop: 0}, 1000);
+//     });
+// });
+
+$(document).ready(function () {
+    $(window).scroll(function () {
+        if ($(this).scrollTop() == 5000) {
+            $('#back-to-top').fadeIn();
+        } else {
+            $('#back-to-top').fadeOut();
+        }
+    });
+
+    $('#back-to-top').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 400);
+        return false;
+    });
+});

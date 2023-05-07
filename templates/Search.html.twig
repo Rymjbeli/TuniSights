@@ -18,10 +18,12 @@
         <!-- search bar -->
         <h1 id="search" style="font-style: italic">Bon Voyage !</h1>
         <div class="search-bar" style="width: 100%">
-            <form id="search_bar_form" style="display: flex; margin-left: 5%; margin-right: 5%; width: 90%" method="GET" action="{{ path('app_find_search') }}">
-                <input id="search-input" style="width: 85%" name="search_input" type="text" value="{% if TypedText is defined and TypedText!="" %}{{ TypedText|lower }}"{% else %}"
+            <form id="search_bar_form" style="display: flex; margin-left: 5%; margin-right: 5%; width: 90%" method="GET"
+                  action="{{ path('app_find_search') }}">
+                <input id="search-input" style="width: 85%" name="search_input" type="text"
+                       value="{% if TypedText is defined and TypedText!="" %}{{ TypedText|lower }}"{% else %}"
                 {% endif %} placeholder=" what do you feel like seeing at this moment ?">
-                <button id="search-button" style="height: 45px; width: 15%" onclick="methode()">Search</button>
+                <button id="search-button" style="height: 45px; width: 10%">Search</button>
             </form>
         </div>
     </header>
@@ -153,36 +155,41 @@
                                 {% if  SelectedCategory is defined and SelectedCategory == 'beach' %}selected{% endif %}>
                             Beach
                         </option>
-                        <option value="cafe"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'cafe' %}selected{% endif %}>
-                            Cafe
+                        <option value="museum"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'museum' %}selected{% endif %}>
+                            Museum
                         </option>
-                        <option value="natural-view"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'natural-view' %}selected{% endif %}>
-                            Natural view
-                        </option>
-                        <option value="mountain"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'mountain' %}selected{% endif %}>
-                            Mountain
+                        <option value="historical"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'historical' %}selected{% endif %}>
+                            Historical
                         </option>
                         <option value="monument"
                                 {% if  SelectedCategory is defined and SelectedCategory == 'monument' %}selected{% endif %}>
-                            monument
+                            Monument
                         </option>
                         <option value="city"
                                 {% if  SelectedCategory is defined and SelectedCategory == 'city' %}selected{% endif %}>
                             City
                         </option>
-                        <option value="park"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'park' %}selected{% endif %}>
-                            Park
+                        <option value="culture"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'culture' %}selected{% endif %}>
+                            Culture
                         </option>
-                        <option value="historic-site"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'historic-site' %}selected{% endif %}>
-                            Historic site
+                        <option value="outdoor"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'outdoor' %}selected{% endif %}>
+                            Outdoor
                         </option>
+                        <option value="desert"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'desert' %}selected{% endif %}>
+                            Desert
+                        </option>
+                        <option value="other"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'other' %}selected{% endif %}>
+                            Other
+                        </option>
+
                     </select>
-                    <button style="height: 30px; width: 80px; margin: 20%; margin-top: 5%">Filter</button>
+                    <button style="height: 30px; width: 80px; margin: 5% 20% 20% 5%; ">Filter</button>
                 </form>
             </div>
         </div>
@@ -199,12 +206,13 @@
                                     <div class="Profilee">
                                         {# <img src="{{ post.profileImage }}" alt="{{ post.profileUserName }}" class="profile-image"> #}
                                         <img src="{{ asset(post.owner.image) }}"
-                                             alt="{{ post.owner.username }}" class="profile-image" style="margin-top: 15px;">
+                                             alt="{{ post.owner.username }}" class="profile-image"
+                                             style="margin-top: 15px;">
                                         <h6 class="post-username">{{ post.owner.username }}</h6>
                                         {# <p class="post-date">{{  post.createdAt|date('j F Y') }}</p> #}
                                     </div>
-                                                                <img src="{{ asset(post.Image)}}" alt="Post image" class="post-image">
-{#                                    <img src="{{ asset('assets/Images/djerba2.jpg') }}" alt="Post image" class="post-image">#}
+                                    <img src="{{ asset(post.Image) }}" alt="Post image" class="post-image">
+                                    {#                                    <img src="{{ asset('assets/Images/djerba2.jpg') }}" alt="Post image" class="post-image"> #}
                                     <p style="color: gray; font-style: italic; font-size: 12px; margin-left: 10%; margin-top: 5%">{{ post.location }}</p>
                                 </div>
                                 <div class="post-description">
@@ -213,18 +221,17 @@
                                         <h4 class="post-place" style="max-width: 70%">{{ post.place }}</h4>
                                         <div style="margin-left: 20px">
                                             {% for i in 1..5 %}
-                                            {% if i <= post.rating %}
-                                                <i class="fas fa-star"
-                                                   style="display: inline-block;color: #deb217;font-size: 10px;"></i>
-                                            {% else %}
-                                                <i class="fas fa-star"
-                                                   style="display: inline-block;color: #F0F0F0;font-size: 10px;"></i>
-                                            {% endif %}
-                                            {% endfor %}</p>
+                                                {% if i <= post.rating %}
+                                                    <i class="fas fa-star"
+                                                       style="display: inline-block;color: #deb217;font-size: 10px;"></i>
+                                                {% else %}
+                                                    <i class="fas fa-star"
+                                                       style="display: inline-block;color: #F0F0F0;font-size: 10px;"></i>
+                                                {% endif %}
+                                            {% endfor %}
                                         </div>
                                     </div>
-                                    <h6 style="margin-top: -10px">city: {{ post.city }}</h6>
-
+                                    <h6 style="margin-top: 0; font-size: 13px">city: {{ post.city }}</h6>
                                     <div class="post-description-text">
                                         <p class="limited-text">{{ post.description }}</p>
                                         <button autofocus class="show-more" onclick="showMore()"
@@ -238,7 +245,7 @@
                                                  onclick="addLike({{ post.Id }})">
                                             <span style="font-size: 14px">{{ post.likes.count() }} likes</span>
                                         </div>
-                                        <div class="card-body d-flex flex-column">
+                                        <div class="card-body d-flex flex-column" style="padding-top: 10px">
                                             <div class="input-group mt-auto">
                                                 <input type="text" class="form-control" placeholder="Add a comment..."
                                                        id="CommentLabel">
@@ -267,6 +274,18 @@
         </section>
 
     </main>
+    <a href="#" class="btn btn-info back-to-top" role="button" style="    width: 35px;
+    border-radius: 500%;
+    padding: 5px;
+    background-color: rgba(0, 97, 149, 0.651);
+    border: none;
+    opacity: 0.3;">
+        <i class=" fa fa-arrow-up" style="    color: lightgray;
+    opacity: 1;
+"></i>
+    </a>
+
+
 
 
 {% endblock %}
@@ -274,6 +293,9 @@
 
 {% block AddJSLinks %}
     <script src="{{ asset('assets/JS/Search.js') }}"></script>
+    <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
+    <script src="{{ asset('assets/Libs/bootstrap.min.js') }}"></script>
+
 
 {% endblock %}
 
