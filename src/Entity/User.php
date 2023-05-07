@@ -254,6 +254,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->image;
     }
 
+    public function getImageUrl(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+
+        if (strpos($this->image, '/') !== false) {
+            return $this->image;
+        }
+
+        return sprintf('/uploads/image/%s', $this->image);
+    }
+
     public function setImage(string $image): self
     {
         $this->image = $image;
