@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use App\Service\NavBarService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,15 +24,22 @@ class ProfileController extends AbstractController
     ): Response
     {
         $repository = $doctrine->getRepository(Post::class);
-
+        $posts = $repository->findMostLikedPostsInAYear();
         $Userid = $request->get("Userid");
+        $user = $this->getUser();
+        if(!isset($user)){
+            return new RedirectResponse($this->generateUrl('app_login'));
+        }
         if(!isset($Userid)){
-            return $this->render('index.html.twig');
+            $posts = $user->getPosts();
+            return $this->render('Profile.html.twig',['user' => $user,'posts' => $posts]);
         }
         $user = $userRepository->find($Userid);
         if(!isset($user)){
-            return $this->render('index.html.twig');
+            return new RedirectResponse($this->generateUrl('app_index'));
         }
+        $posts = $user->getPosts();
+        return $this->render('Profile.html.twig',['user' => $user,'posts' => $posts]);
 
         [
             $notifications,

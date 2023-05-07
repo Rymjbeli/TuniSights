@@ -2,16 +2,19 @@ $(document).ready(function(){
     $('img.Post').on('click', function() {
         const loader = $('.CardLoader:first');
         loader.hide();
+        let postid = $(this).attr('postid');
         if(loader.attr('id') === 'enabled'){
             $.ajax({
                 url: 'http://127.0.0.1:8000/api/FetchPost',
                 type: 'POST',
-                data: { Post_id: $(this).attr('postid') },
+                data: { Post_id: postid },
                 xhrFields: {
                     withCredentials: true
                 },
                 success: function(response) {
                     LoadPost(loader, response.toString());
+                    Loadcomments($('.CommentSection[postid="'+ postid  +'"]'),0);
+                    console.log('.CommentSection[postid="'+ postid  +'"]')
                 },
                 error: function(xhr, status, error) {
                     console.error("Error: ", error.toString());
@@ -37,24 +40,6 @@ function LoadPost(loader, content){
             }
         });
         window.setTimeout(function(){
-            $("#CommentLabel").on('keydown',function (e){
-                if (e.keyCode === 13)
-                {CommentEvent();
-                }
-            });
-            $(".CSubmit").click(CommentEvent);
+            LoadCommentSection();
             Loadbtn($("#LikeBtn"));}, 150);
-}
-function CommentEvent(){
-    let CLabel = $("#CommentLabel");
-    let val = CLabel.val();
-    if(val===""){
-        return;
-    }
-    let i = document.createElement("li");
-    i.className = "list-group-item";
-    i.textContent = val;
-    $("#CommentSection").append(i);
-    CLabel.val("");
-    //Send comment to relevent API
 }

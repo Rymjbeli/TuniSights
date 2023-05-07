@@ -1,7 +1,7 @@
 html, body {
     margin: 100px auto;
     margin-bottom: 1vh;
-    background-image: url("../Images/search/sky.jpg");
+    background-image: url("../Images/sky.jpg");
     background-size: cover;
     background-position: top;
     /* move the image down*/
@@ -11,10 +11,15 @@ html, body {
     background-color: rgba(255, 255, 255, 0.66);
     background-blend-mode: overlay;
 }
-.Post{
-    height: 500px;
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.Post {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    width: 450px;
     border-radius: 20px;
     margin-bottom: 20px;
 }
