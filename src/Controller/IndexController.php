@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Notification;
 use App\Entity\Post;
 use App\Entity\User;
+use App\Service\NavBarService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,27 +21,20 @@ use Doctrine\Persistence\ManagerRegistry;
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(
+        ManagerRegistry $doctrine,
+        NavBarService $navBarService
+    ): Response
     {
-        $repository = $doctrine->getRepository(Post::class);
-        $notifrepository = $doctrine->getRepository(Notification::class);
-
-        $posts = $repository->findMostLikedPostsInAYear();
-
         $user = $this->getUser();
-        if ($user !== null) {
-            $notifications = $notifrepository->findNotificationsByUserId($user);
-            $unreadNotifications=$notifrepository->findUnreadNotifications($user);
-            if ($user->gethasUnreadNotifications()) {
-                $hasUnreadNotifications = true;
-                $doctrine->getManager()->flush();
-            } else {
-                $hasUnreadNotifications = false;
-            }
-        } else {
-            $notifications = [];
-            $hasUnreadNotifications = false;
-        }
+        [
+            $notifications,
+            $unreadNotifications,
+            $hasUnreadNotifications,
+            $posts
+
+        ] = $navBarService->navBarVariables($doctrine, $user);
+
 
         return $this->render('index.html.twig', [
             'unreadNotifications' => $unreadNotifications,

@@ -19,7 +19,6 @@ use function Sodium\add;
 class ApiController extends abstractController
 {
     public ManagerRegistry $registry;
-
     public function __construct(
         ManagerRegistry        $managerRegistry,
         private NotificationController $notificationController
@@ -80,7 +79,12 @@ class ApiController extends abstractController
     }
 
     #[Route('/Like', name: 'LikeApi', methods: ['POST', 'GET'])]
-    public function Like(Request $request, PostRepository $postRepository, UserRepository $userRepository, ManagerRegistry $registry): Response
+    public function Like(
+        Request $request,
+        PostRepository $postRepository,
+        UserRepository $userRepository,
+        ManagerRegistry $registry)
+    : Response
     {
         $entityManager = $registry->getManager();
         $userid = $this->getUser();//implement user get method
@@ -122,7 +126,6 @@ class ApiController extends abstractController
             if($userid !== $post->getOwner()){
                 $this->notificationController->sendNotification('like', $post,$userid,$entityManager);
             }
-
         }
         return $this->json([
             'message' => 'success',

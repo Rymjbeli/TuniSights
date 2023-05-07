@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
     <!-- Page Tile => changeable -->
-    <title> {% block Title %} Tunisights {% endblock %}</title>
+    <title> {% block Title %}  {% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('assets/Libs/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="{{ asset('assets/Libs/swiper-bundle.min.css') }}">
@@ -15,7 +15,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
     {% block AddCSSLinks %}
-        <link rel="stylesheet" href="{{ asset('assets/CSS/styles.css') }}">
     {% endblock %}
     <link rel="stylesheet" href="{{ asset('assets/CSS/Footer.css') }}">
 
@@ -47,11 +46,11 @@
                                 <i class="fa-sharp fa-solid fa-bell"></i>
                             </div>
 
-                            <form id="remove-notification-form" action="{{ path('remove_notification') }}" method="post"
-                                  style="display: none;">
+                            <form id="remove-notification-form" action="{{ path('remove_notification') }}" method="post" style="display: none;">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token('remove_notification') }}">
                             </form>
+
 
 
                         </div>
@@ -76,6 +75,10 @@
 
                         </div>
                     </li>
+
+
+
+
 
                     <li class="nav-item nav__profile ">
                         <div class="avatar">
@@ -295,7 +298,7 @@
 
 {% endblock %}
 <script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>
-<script src="{{ asset('assets/JS/NavBar.js') }}"></script>
+
 
 
 </body>

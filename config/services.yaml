@@ -6,6 +6,8 @@
 parameters:
     post_directory: '%kernel.project_dir%/public/assets/Images'
 services:
+    App\Controller\ProfileController:
+        autowire: true
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
