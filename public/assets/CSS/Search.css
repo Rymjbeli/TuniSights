@@ -1,22 +1,13 @@
 * {
     box-sizing: border-box;
     font-family: "Nunito", sans-serif;
-
 }
-
-/* @font-face {
-  font-family: 'Nunito';
-  src:
-       url('Nunito/Nunito-VariableFont_wght.ttf') format('woff');
-} */
 
 body {
     margin: 0;
-    /*   font-family: 'Times new roman', sans-serif;
-     */  font-size: 16px;
+    font-size: 16px;
     line-height: 1.5;
     padding: 0;
-    /*background-image: */
     background-image: url("../Images/rasRmal.jpg");
     background-size: cover;
     background-position: top;
@@ -31,14 +22,12 @@ header {
     height: 40vh;
     background-image: url("../Images/rasRmal1.jpg");
     background-size: cover;
-    /*wider box shadow*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     box-shadow: 0 1px 2px rgba(241, 239, 239, 0.06);
-    /*justify-content: space-between;*/
     background-position: top;
     padding: 1rem;
     color: #ffffff;
@@ -47,15 +36,14 @@ header {
 
 /* header.h1 */
 h1 {
-    /*   font-family: 'Roboto Mono', monospace;
-     */  font-size: 5vh;
+    font-size: 5vh;
+    font-family: Nunito, sans-serif;
     font-weight: bold;
     letter-spacing: 1px;
     line-height: 1.2;
     color: #ffffff;
     text-shadow: 4px 4px 4px #333333;
     padding-left: 10vh;
-    /* adjust as needed */
 }
 
 /*search-bar */
@@ -76,15 +64,6 @@ h1 {
     border-radius: 4px 0 0 4px;
 }
 
-/*.search-bar button[type="button"] {*/
-/*    background-color: #4a72b8;*/
-/*    color: #fff;*/
-/*    border: none;*/
-/*    padding: 0.5rem 1rem;*/
-/*    font-size: 1rem;*/
-/*    cursor: pointer;*/
-/*}*/
-
 
 main {
     display: flex;
@@ -98,14 +77,12 @@ main {
     margin-left: 10px;
     width: 25vh;
     min-width: 25vh;
-    height: 38vh ;
+    height: 45vh;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    /* vertical content position: center */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* it comes down when we scroll with no limit*/
     top: 0;
 }
 
@@ -121,29 +98,13 @@ main {
 
 .filter label {
     display: block;
-    /*font-size: 15px;*/
     font-size: 2.5vh;
     margin-bottom: 15px;
-    /*text align: center*/
     text-align: center;
-    /*   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
-     */}
+}
 
 .filter input[type="checkbox"] {
     margin-right: 5px;
-}
-
-
-
-
-
-/* Container Styles */
-.container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
 }
 
 /* Filters Styles */
@@ -155,7 +116,6 @@ main {
 .filters h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-
 }
 
 .filters ul {
@@ -197,39 +157,6 @@ select:focus {
     border-color: #4285f4;
 }
 
-/* Button Styles */
-button {
-    /*display: inline-block;*/
-    /*background-color: #4285f4;*/
-    /*color: #fff;*/
-    border: none;
-    box-shadow: 1px 1px 0.5px 0.5px rgba(0, 97, 149, 0.5);
-
-
-    /*padding: 0.25rem 0.5rem;*/
-    /*!* Updated padding *!*/
-    /*font-size: 0.875rem;*/
-    /*!* Updated font-size *!*/
-    /*border-radius: 0.25rem;*/
-    /*cursor: pointer;*/
-    /*transition: background-color 0.2s ease-in-out;*/
-}
-
-
-
-
-/*navbar*/
-
-.navbar {
-    background-color: rgba(0, 98, 149, 0.4);
-
-}
-
-.nav-item:hover .nav-link {
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
-}
-
 /*poste*/
 
 .poste {
@@ -237,105 +164,27 @@ button {
     flex-direction: column;
     align-items: center;
     border: 1px solid #ccc;
-    padding: 20px;
-    padding-bottom: 50px;
-    margin: 20px;
-    margin-top: 40px;
-    margin-bottom: 0px;
+    padding: 20px 20px 50px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
     background-color: #fff;
     height: auto;
     max-width: 160vh;
-    margin-left: 30px;
+    margin: 40px 20px 0 30px;
     max-height: 90.7vh;
     overflow: hidden;
     min-height: 300px;
-
-
-
 }
 
-/* margin-bottom: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
-  width: 500px;
-  height: 300px;
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  align-items: center;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-*/
-
-
-
-
-.description {
-
-    width: 100%;
-    flex-grow: 1;
-}
-
-
-.description h4 {
-    margin: 0;
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.description h5 {
-    margin: 0;
-    margin-bottom: 10px;
-    font-size: 10px;
-}
-
-.description p {
-    margin: 10px 0;
-    margin-bottom: 10px;
-    font-size: 10px;
-}
-
-
-
-/* .profileImage {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-.profileImage img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
- */
 .poste:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
-
-
 
 .card-body {
     text-align: left;
-
 }
-
-.card-title {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.card-text {
-    margin-bottom: 10px;
-}
-
-
-
 
 
 .post-content {
@@ -345,12 +194,14 @@ button {
     justify-content: space-between;
     align-items: center;
 }
+
 .post-content1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
+
 .post-image {
     /*left alined */
     width: 80%;
@@ -358,21 +209,18 @@ button {
     max-height: 500px;
     min-height: 230px;
     position: relative;
-    /*max-height:70vh ;*/
     margin-right: 10px;
     margin-left: 50px;
     border-radius: 10px;
     margin-top: 20px;
-    /*max-width: 80%;*/
 }
+
 .post-description {
-    /*width: 40%;*/
-    /*height: 100%;*/
     margin-top: 0;
     margin-bottom: -5px;
     flex: 1;
+    margin-left: 20px;
 }
-
 
 .post-state {
     margin-bottom: 5px;
@@ -381,16 +229,10 @@ button {
     color: gray;
 }
 
-
 .post-place {
     font-size: 18px;
     margin-bottom: 5px;
     max-width: 70%;
-}
-
-.post-text {
-    text-align: justify;
-    font-size: 10px;
 }
 
 .profile-image {
@@ -401,6 +243,7 @@ button {
     margin-right: 20px;
     margin-bottom: -20px;
 }
+
 .Profile {
     display: flex;
     width: auto;
@@ -408,42 +251,33 @@ button {
     margin-bottom: 15px;
     height: auto;
     max-height: 1300px;
-    display: flex;
     flex-direction: column;
 }
+
 .Profilee {
     display: flex;
     flex-direction: row;
     margin-left: 50px;
-    /* align-items: center; */
     width: 80%;
     justify-content: space-between;
     height: 30px;
 }
 
 .post-username {
-
     margin-top: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     font-size: 14px;
     font-weight: bold;
     flex: 1;
 }
 
-.post-date {
-    font-size: 12px;
-    color: #999;
-}
-
-.post-footer{
-    /*the content of the footer is horizentally alined to the center*/
+.post-footer {
     display: flex;
-flex-direction: column;
+    flex-direction: column;
     margin-top: 20px;
 }
 
 .like-button img {
-
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -459,17 +293,6 @@ flex-direction: column;
     transition: transform 0.3s ease-in-out;
 }
 
-
-.likes-number {
-    color: #000000;
-    margin-left: 10px;
-    margin-right: 50px;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
-/*card-body d-flex flex-column max-height*/
 .card-body {
     display: flex;
     flex-direction: column;
@@ -477,40 +300,54 @@ flex-direction: column;
 }
 
 .limited-text {
-    height: 70px; /* change this value to your desired length */
+    height: 150px;
     overflow: hidden;
     max-height: 200px;
     transition: max-height 0.5s;
-
-
 }
 
-.post-description-text{
+.post-description-text {
     display: flex;
-    flex-direction: row ;
+    flex-direction: row;
     align-items: center;
     max-width: 650px;
-
 }
 
-.post-description-text p{
+.post-description-text p {
     margin: 15px;
 }
-
-#likesCount{
-    /*margin-right:0px;*/
-    /*text-align: left;*/
-}
-
 
 .post-title {
     margin-bottom: 10px;
     font-size: 44px;
-    font-family: "Brush Script MT";
+    text-align: center;
+    font-family: Brush Script MT, sans-serif;
 }
-button{
-    background-color: rgba(0, 97, 149, 0.651); !important;
-    color: #fff;!important;
-    border-radius: 10px;!important;
 
+button {
+    background-color: rgba(0, 97, 149, 0.651);
+!important;
+    color: #fff;
+!important;
+    border-radius: 10px;
+!important;
+    border: none;
+    box-shadow: 1px 1px 1px 1px rgba(0, 97, 149, 0.5);
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    z-index: 9999;
+    right: 20px;
+    display: none;
+}
+
+/* Add arrow icon */
+.back-to-top i {
+    font-size: 24px;
+}
+
+select option:hover {
+    background-color: azure !important;
 }

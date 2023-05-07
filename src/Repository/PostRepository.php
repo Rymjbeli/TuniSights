@@ -46,8 +46,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p');
         $qb->select('p')
             ->where('p.state = :etat')
-            ->setParameter('etat', $state);
-//            ->orderBy('p.likes', 'DESC');
+            ->setParameter('etat', $state)
+            ->orderBy('p.rating', 'DESC');
 
         return $qb->getQuery()->getResult();
     }
@@ -59,8 +59,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p');
         $qb->select('p')
             ->where('p.category = :cat')
-            ->setParameter('cat', $category);
-//            ->orderBy('p.likes', 'DESC');
+            ->setParameter('cat', $category)
+            ->orderBy('p.rating', 'DESC');
 
         return $qb->getQuery()->getResult();
     }
@@ -73,7 +73,7 @@ class PostRepository extends ServiceEntityRepository
         $qb->select('p')
             ->where('p.category = :cat')
             ->setParameter('cat', $category)
-//            ->orderBy('p.likes', 'DESC');
+            ->orderBy('p.rating', 'DESC')
             ->andWhere('p.state = :etat')
             ->setParameter('etat', $state);
 
@@ -137,9 +137,40 @@ class PostRepository extends ServiceEntityRepository
                     $qb->expr()->like('LOWER(o.username)', ':input')
                 )
             )
-            ->setParameter('input', '%'.strtolower($input).'%');
+            ->setParameter('input', '%'.strtolower($input).'%')
+            ->orderBy('p.rating', 'DESC');
+
 
         return $qb->getQuery()->getResult();
     }
+    public function findPosts($state = null, $category = null, $input = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->select('p')
+            ->leftJoin('p.owner', 'o');
+
+        if ($state !== null) {
+            $queryBuilder->andWhere('p.state = :state')
+                ->setParameter('state', $state);
+        }
+
+        if ($category !== null) {
+            $queryBuilder->andWhere('p.category = :category')
+                ->setParameter('category', $category);
+        }
+
+        if ($input !== null) {
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->like('LOWER(p.description)', ':input'),
+                    $queryBuilder->expr()->like('LOWER(o.username)', ':input')
+                )
+            )
+                ->setParameter('input', '%'.strtolower($input).'%');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 
 }
