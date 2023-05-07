@@ -25,8 +25,34 @@ class ApiController extends abstractController
     {
         $this->registry = $managerRegistry;
     }
-    #[Route('/AddComment',name: 'CommentApi', methods: ['POST'])]
-    public function AddPost(Request $request,PostRepository $postRepository):Response{
+    #[Route('/LoadComment',name: 'LoadCommentApi', methods: ['POST','GET'])]
+    public function LoadComment(Request $request, PostRepository $postRepository,SerializerInterface $serializer):Response{
+        $PostId = $request->get('Post_id');
+        $start = $request->get('start');
+
+        if(!isset($PostId)||!isset($start)){
+            return new Response('no parameters provided', Response::HTTP_METHOD_NOT_ALLOWED);
+        }
+        $post = $postRepository->find($PostId);
+        if(!isset($post)){
+            return new Response('Post doesnt exits', Response::HTTP_BAD_REQUEST);
+        }
+        $comments = $post->getComments();
+        $commentlist = $comments->slice($start*10,($start+1)*10);
+        $commentData = array_map(function($comment ) {
+            return [
+                'content' => $comment->getContent(),
+                'username' => $comment->getOwner()->getUsername(),
+                'date' => $comment->getCreatedAt()->format('Y-m-d'),
+            ];
+        }, $commentlist);
+        $response = new JsonResponse($commentData);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    #[Route('/AddComment',name: 'AddCommentApi', methods: ['POST'])]
+    public function AddComment(Request $request,PostRepository $postRepository):Response{
         $PostId = $request->get('Post_id');
         $user = $this->getUser();
         $Content = $request->get('Content');
@@ -132,7 +158,7 @@ class ApiController extends abstractController
         $exists = false;
         $likes = $post->getLikes();
         foreach($likes as $like){
-            if($like->getOwner() == $userid){
+            if($like->getOwner() === $userid){
                 $entityManager->remove($like);
                 $entityManager->flush();
                 $exists = true;

@@ -2,16 +2,19 @@ $(document).ready(function(){
     $('img.Post').on('click', function() {
         const loader = $('.CardLoader:first');
         loader.hide();
+        let postid = $(this).attr('postid');
         if(loader.attr('id') === 'enabled'){
             $.ajax({
                 url: 'http://127.0.0.1:8000/api/FetchPost',
                 type: 'POST',
-                data: { Post_id: $(this).attr('postid') },
+                data: { Post_id: postid },
                 xhrFields: {
                     withCredentials: true
                 },
                 success: function(response) {
                     LoadPost(loader, response.toString());
+                    Loadcomments($('.CommentSection[postid="'+ postid  +'"]'),0);
+                    console.log('.CommentSection[postid="'+ postid  +'"]')
                 },
                 error: function(xhr, status, error) {
                     console.error("Error: ", error.toString());

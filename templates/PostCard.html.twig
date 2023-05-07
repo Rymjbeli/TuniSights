@@ -1,7 +1,7 @@
 <div class="container my-5" style="border-color: black" id="CardBody">
     <link rel="stylesheet" href="{{ asset('assets/CSS/PostCard.css') }}">
     <div class="card mx-auto" id="PopupCard" style="border-radius: 20px">
-        <div class="row no-gutters">
+        <div class="row no-gutters cardbody">
             <div class="col-md-8" id="ImgHolder">
                 <img src="{{ asset('assets/Images/' ~ post.Image) }}" class="card-img" alt="..."
                      style="border-radius: 20px 0 0 20px">
@@ -9,7 +9,7 @@
             <div class="col-md-4 position-relative">
                 <div class="card-body d-flex flex-column" id="RSide">
                     <div>
-                        <img src="{{ post.owner.image }}" alt="Small Image"
+                        <img src="{{ asset('assets/Images/' ~ post.owner.image) }}" alt="Small Image"
                              style="display: inline; border: 1px solid black;" height="35px" width="35px">
                         <p class="fw-bold" style="display: inline;margin-right: 3px">{{ post.owner.username }}</p>
                         {% if post.owner == app.user %}
@@ -18,13 +18,11 @@
                         </a>
                         {% endif %}
                     </div>
-                    <p class="Bio" style="margin-top: 5px">{{ post.description }}</p>
+                    <p class="Bio">{{ post.description }}</p>
                     <hr/>
-                    <div class="comments mb-4 mt-auto" style="max-height: 200px; overflow-y: auto;">
+                    <div class="comments mb-4 mt-auto CommentSectionContainer">
                         <ul class="list-group list-group-flush CommentSection" postid="{{ post.id}}">
-                            {% for comment in post.comments %}
-                                <li class="list-group-item">{{ comment.content }}</li>
-                            {% endfor %}
+
                         </ul>
                     </div>
                     <div>
