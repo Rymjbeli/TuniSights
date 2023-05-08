@@ -12,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,12 +19,31 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DashboardController extends AbstractDashboardController
 {
+    public function __construct(
+        private StatController $statController
+    )
+    {}
+
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'app_adminSettings')]
     public function index(): Response
     {
-        return $this->render('admin/index.html.twig');
-
+        $newUserCount = $this->statController->newUserStat();
+        $newPostCount = $this->statController->newPostStat();
+        $userCount = $this->statController->getAllUsersCount();
+        $postCount = $this->statController->getAllPostsCount();
+        $PostsByCategoryData = $this->statController->getPostsByCategory();
+        $PostsByStateData = $this->statController->getPostsByState();
+        $UsersByAgeData = $this->statController->getUsersByAge();
+        return $this->render('admin/index.html.twig', [
+            'newUserCount' => $newUserCount,
+            'newPostCount' => $newPostCount,
+            'userCount' => $userCount,
+            'postCount' => $postCount,
+            'chartDataByCategory' => $PostsByCategoryData,
+            'chartDataByState' => $PostsByStateData,
+            'chartDataByAge' => $UsersByAgeData,
+        ]);
     }
 
     public function configureAssets(): Assets
@@ -74,4 +92,5 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToRoute('My Profile', 'fa fa-id-card', 'app_profile', ['Userid' => $user->getId()]),
             ]);
     }
+
 }

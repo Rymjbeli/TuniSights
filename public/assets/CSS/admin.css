@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
 :root {
     --header-height: 3rem;
@@ -32,12 +33,15 @@ body {
     transition: .5s;
 }
 
-.responsive-header, .sidebar {
+/*.responsive-header, */
+.sidebar {
     background-color: rgba(0, 98, 149, 0.4);
     margin-left: -16px;
     margin-right: 16px;
+    height: 160vh !important;
 }
 
+/*this*/
 .content {
     align-items: center;
     justify-content: center;
@@ -98,3 +102,45 @@ table tr:nth-child(odd) td {
     display: none;
 }
 
+.img-fluid {
+    width: 60px;
+    height: 60px;
+}
+
+
+.user-menu-wrapper .user-avatar {
+    border-radius: 50% !important;
+
+    overflow: hidden !important;
+
+}
+
+.user-menu-wrapper img.user-avatar {
+    max-width: 2.8rem !important;
+    height: 2.8rem !important;
+    border: 0.15rem solid #02669A !important;
+}
+
+.page-item.active .page-link {
+    background-color: rgba(0, 97, 149, 0.651) !important;
+    border-color: #02669A !important;
+}
+
+.action-new {
+    background-color: rgba(0, 97, 149, 0.651) !important;
+    border-color: #02669A !important;
+}
+
+#main-menu .menu .menu-item.active:not(.expanded) .menu-icon, #main-menu .menu .menu-item.active:not(.expanded) a {
+    color: #02669A !important;
+}
+
+.stat h3{
+    color: #707d95;
+    font-weight: 600;
+}
+
+.stat h2{
+    color: #00004d;
+    font-weight: 600;
+}

@@ -264,7 +264,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             return $this->image;
         }
 
-        return sprintf('/uploads/image/%s', $this->image);
+        return sprintf('assets/Images/%s', $this->image);
     }
 
     public function setImage(string $image): self
