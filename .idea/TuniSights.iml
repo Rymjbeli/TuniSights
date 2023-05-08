@@ -148,5 +148,6 @@
     <orderEntry type="library" name="select2" level="application" />
     <orderEntry type="library" name="line" level="application" />
     <orderEntry type="library" name="Chart.js" level="application" />
+    <orderEntry type="library" name="Chart.js" level="application" />
   </component>
 </module>

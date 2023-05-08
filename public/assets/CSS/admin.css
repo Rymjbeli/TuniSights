@@ -144,3 +144,7 @@ table tr:nth-child(odd) td {
     color: #00004d;
     font-weight: 600;
 }
+
+#content-resizer-handler {
+    min-height: calc(100vh - 1000px);
+}
