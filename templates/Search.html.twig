@@ -39,12 +39,12 @@
             <!-- filter -->
             <!-- posts number -->
             <div class="filter"
-                 style="min-width: 25vh; height: 4vh; text-align: center ;margin-top: -50px; font-size: 15px">
+                 style="min-width: 25vh; height: 4vh; text-align: center ;margin-top: -50px; font-size: 15px; margin-left: 30px">
                 {{ postes|length }} post(s)
             </div>
 
             <!-- filter by state -->
-            <div class="filter" style=" margin-top: 10px;">
+            <div class="filter" style=" margin-top: 10px; margin-left: 30px">
                 <form method="GET" action="{{ path('app_find_filter') }}">
                     <label for="state-select">Filter by State</label>
                     <select id="state-select" name="state">
