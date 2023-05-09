@@ -40,5 +40,5 @@ function LoadPost(loader, content){
         });
         window.setTimeout(function(){
             LoadCommentSection();
-            Loadbtn($("#LikeBtn"));}, 150);
+            Loadbtn($(".LikeBtn"));}, 150);
 }

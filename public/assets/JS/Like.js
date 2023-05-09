@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-    $("$LikeBtn").each(function (){
+    $(".LikeBtn").each(function (){
         Loadbtn($(this));
 });
 });
