@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class PostService
+class ExtraService
 {
     private $router;
 
@@ -15,9 +15,12 @@ class PostService
     {
         $this->router = $router;
     }
-    public function getMessage(bool $new): string
+    public function getMessage(bool $new = null): string
     {
-        return $new ? " is added successfully" : " is updated successfully ";
+        if(!$new){
+            return "You can not Edit this Post";
+        }
+        return $new ? " New post is added successfully" : " New post is updated successfully ";
     }
     public function addDeleteButton(FormInterface $form, Post $post): FormInterface
     {

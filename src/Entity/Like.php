@@ -25,6 +25,10 @@ class Like
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $targetPost = null;
 
+    #[ORM\OneToOne(mappedBy: 'forLike', cascade: ['persist', 'remove'])]
+    private ?Notification $notification = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,4 +57,27 @@ class Like
 
         return $this;
     }
+
+    public function getNotification(): ?Notification
+    {
+        return $this->notification;
+    }
+
+    public function setNotification(?Notification $notification): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($notification === null && $this->notification !== null) {
+            $this->notification->setForLike(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($notification !== null && $notification->getForLike() !== $this) {
+            $notification->setForLike($this);
+        }
+
+        $this->notification = $notification;
+
+        return $this;
+    }
+
 }

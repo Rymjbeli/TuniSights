@@ -30,6 +30,14 @@ class Notification
     #[ORM\Column]
     private ?bool $isRead = null;
 
+    #[ORM\OneToOne(inversedBy: 'notification', cascade: ['persist', 'remove'])]
+    private ?Like $forLike = null;
+
+    #[ORM\OneToOne(inversedBy: 'notification', cascade: ['persist', 'remove'])]
+    private ?Comment $comment = null;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -84,4 +92,29 @@ class Notification
             $this->getTargetPost()->getOwner()->setHasUnreadNotifications(true);
         }
     }
+
+    public function getForLike(): ?Like
+    {
+        return $this->forLike;
+    }
+
+    public function setForLike(?Like $forLike): self
+    {
+        $this->forLike = $forLike;
+
+        return $this;
+    }
+
+    public function getComment(): ?Comment
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Comment $comment): self
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
 }

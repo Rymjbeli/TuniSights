@@ -82,3 +82,14 @@
     position: relative;
     min-height: 300px;
 }
+
+#image {
+    border-radius: 20px 0 0 20px
+}
+#avatar {
+    display: inline;
+    border: 1px solid black;
+    border-radius: 50%;
+    height:35px;
+    width: 35px;
+}

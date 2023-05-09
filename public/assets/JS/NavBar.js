@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     box.style.opacity = "0";
                     down = false;
                     document.removeEventListener("click", arguments.callee); // remove the event listener after closing the box
-                    document.getElementById('countNotif').textContent = 0;
                 }
             });
         }

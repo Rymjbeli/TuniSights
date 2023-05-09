@@ -139,8 +139,10 @@ class AddPostType extends AbstractType
             ])
             ->add('location', null, [
                 'attr' => [
-                    'class' => 'form-control',
-                ]])
+                    'class' => 'form-control location',
+                    'placeholder' => 'You can choose the location from the map below'
+                ],
+            ])
             ->add('rating', ChoiceType::class, [
                 'choices' => [
                     '5 stars' => 5,

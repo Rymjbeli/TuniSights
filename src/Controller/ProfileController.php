@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Post;
 use App\Repository\UserRepository;
 use App\Service\NavBarService;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,35 +22,32 @@ class ProfileController extends AbstractController
         NavBarService $navBarService
     ): Response
     {
-        $repository = $doctrine->getRepository(Post::class);
-        $posts = $repository->findMostLikedPostsInAYear();
         $Userid = $request->get("Userid");
+        $Userid = $userRepository->find($Userid);
         $user = $this->getUser();
         if(!isset($user)){
             return new RedirectResponse($this->generateUrl('app_login'));
         }
         if(!isset($Userid)){
-            $posts = $user->getPosts();
+            $posts = $Userid->getPosts();
             return $this->render('Profile.html.twig',['user' => $user,'posts' => $posts]);
         }
-        $user = $userRepository->find($Userid);
-        if(!isset($user)){
+        if(!isset($Userid)){
             return new RedirectResponse($this->generateUrl('app_index'));
         }
-        $posts = $user->getPosts();
-        return $this->render('Profile.html.twig',['user' => $user,'posts' => $posts]);
+        $posts = $Userid->getPosts();
 
         [
             $notifications,
             $unreadNotifications,
             $hasUnreadNotifications,
-            $posts
 
-        ] = $navBarService->navBarVariables($doctrine, $Userid);
+
+        ] = $navBarService->navBarVariables($doctrine, $user);
 
 
         return $this->render('Profile.html.twig',[
-            'user' => $user,
+            'Userid' => $Userid,
             'posts' => $posts,
             'notifications' => $notifications,
             'hasUnreadNotifications' => $hasUnreadNotifications,

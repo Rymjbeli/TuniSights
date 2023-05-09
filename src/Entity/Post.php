@@ -57,7 +57,7 @@ class Post
     #[ORM\OneToMany(mappedBy: 'targetPost', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $Image = null;
 
     public function __construct()

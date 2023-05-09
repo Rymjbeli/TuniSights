@@ -10,6 +10,7 @@
     --main-nav-profile-bg-color: rgba(0, 95, 149, 0.4);
     --main-nav-profile-link-bg-color: rgba(105, 169, 215, 0.4);
     --main-hover-animation: pulse 1s infinite;
+    --main-boxshadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -20,8 +21,8 @@ body {
 }
 
 h1 {
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 45px;
+    font-weight: bolder;
     color: var(--main-nav-link-color);
 }
 
@@ -29,11 +30,11 @@ h1 {
     color: white;
 }
 
-img {
-    height: 400px;
+#OwnerImage {
+    height: 50px;
     object-fit: cover;
-    width: 300px;
-    border-radius: var(--main-border-radius);
+    width: 50px;
+    border-radius: 50%;
 }
 
 .swiper-slide {
@@ -41,6 +42,15 @@ img {
     border-radius: var(--main-border-radius);
     height: 350px;
     width: 250px;
+
+}
+
+.alert-success {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 98, 149, 0.6);
+    width: 40rem;
+    margin-left: 28rem
 }
 
 .main-header {
@@ -51,7 +61,7 @@ img {
 
 .main-header .container {
     margin-left: 50px;
-    margin-top: 14vh;
+    margin-top: 9vh;
 }
 
 .fa-solid.fa-angles-down {
@@ -78,19 +88,27 @@ img {
     max-width: 1120px;
     width: 200vh;
     padding: 40px 0;
+    margin-bottom: 100px;
+
+}
+
+.swiper-wrapper {
+    margin: 10px 10px;
+
 }
 
 .slide-content {
-    margin: 0 40px;
+    margin: 0 30px;
     overflow: hidden;
     border-radius: 25px;
 }
 
-.card {
+.cards {
     border-radius: 25px;
     background-color: var(--main-nav-link-color);
     height: 70vh;
-
+    box-shadow: var(--main-boxshadow);
+    max-width: 330px;
 }
 
 .image-content,
@@ -99,6 +117,7 @@ img {
     flex-direction: column;
     align-items: center;
     padding: 20px 10px;
+
 }
 
 .image-content {
@@ -115,19 +134,17 @@ img {
 
 }
 
-.avatar-img {
-    height: 40px;
-    width: 40px;
-}
 .LikeBtn {
     display: inline;
     border-radius: 0;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 60%;
+    margin-left: 10px;
 }
+
 .name, .date, .LikeCounter {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     color: #707070;
     text-align: left;
@@ -138,7 +155,13 @@ img {
     font-size: 14px;
     text-align: center;
     color: #333;
-    margin-top: 0px;
+    margin-top: 5px;
+}
+
+.LikeBtn,
+.LikeCounter {
+    display: flex;
+    align-items: center;
 }
 
 .description {
@@ -158,7 +181,7 @@ img {
 }
 
 
-.swiper-navBtn{
+.swiper-navBtn {
     color: var(--main-color);
     transition: color 0.3s ease;
 }
@@ -188,6 +211,7 @@ img {
 .swiper-pagination-bullet-active {
     background-color: #b8c1d6;
 }
+
 .div-container {
     max-width: 200px;
 }
@@ -203,7 +227,7 @@ img {
 
 .text-center {
     margin: 0;
-    margin-top: 50px;
+    margin-top: 30px!important;
 }
 
 /* End Discover */
@@ -227,8 +251,8 @@ img {
     }
 }
 
-.About-us .container .row, .text-center, .header-elements {
-    margin-top: 50px;
+.About-us .container .row, .text-center, .header-elements, .image-About {
+    margin-top:100px;
 }
 
 /* Start of About Us Section */
@@ -251,9 +275,17 @@ img {
     background-size: cover;
     background-position: top center;
     height: 59vh;
-    margin-top: 3.5vh;
+    margin-top: 0vh;
     display: flex;
     justify-content: center;
+    box-shadow: var(--main-boxshadow);
+}
+
+#thedreamer {
+    width: 300px;
+    height: 422px;
+    border-radius: var(--main-border-radius);
+    box-shadow: var(--main-boxshadow);
 }
 
 .about-us-img {
@@ -272,6 +304,8 @@ img {
     z-index: -1;
     top: -45px;
     border-radius: var(--main-border-radius);
+    box-shadow: var(--main-boxshadow);
+
 }
 
 .HR-LINE-About {
@@ -285,11 +319,7 @@ img {
 
 /* End of About Us Section */
 
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-
+@media only screen and (max-width: 768px) {
     .main-header .container {
         margin-left: 20px;
         margin-top: 8vh;
@@ -323,18 +353,7 @@ img {
         right: 50px;
         top: -35px;
     }
-}
 
-
-.alert-success{
-    text-align: center;
-    color:white;
-    background-color: rgba(0, 98, 149, 0.6);
-    width: 40rem;
-    margin-left: 28rem
-}
-
-@media screen and (max-width: 768px) {
     .about-us-row {
         margin-left: 10px;
     }
@@ -344,18 +363,123 @@ img {
     }
 
     .image-About {
-        height: 555px;
+        width: 60%;
+        height: 100%;
+        max-width: 60%;
+        flex-basis: 100%;
     }
 
     .about-us-img::before {
-        height: 300px;
-        right: -40px;
-        top: -25px;
+        height: 0px;
+        right: 0px;
+        top: 0px;
+    }
+
+    #thedreamer {
+        width: 400px;
+        height: 350px;
+        border-radius: var(--main-border-radius);
+        margin-right: 10px;
+        margin-top: 30px;
     }
 
     .HR-LINE-About {
         margin-left: 10px;
         margin-right: 10px;
     }
-
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+    #namedate{
+        margin-left: -80px;
+    }
+    .image-About {
+        width: 60%;
+        max-height: 70%;
+        max-width: 80%;
+        flex-basis: 100%;
+        margin-left: -150px;
+    }
+
+    .about-us-text {
+        margin-top: 3vh;
+    }
+
+    .about-us-img::before {
+        width: 230px;
+        height: 340px;
+        right: -40px;
+        top: -10px;
+    }
+
+    #thedreamer {
+        width: 400px;
+        height: 350px;
+        border-radius: var(--main-border-radius);
+        margin-right: 10px;
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (min-width: 996px) and (max-width: 1200px) {
+    #namedate{
+        margin-left: 0px;
+    }
+
+    .image-About {
+        width: 60%;
+        max-height: 50%;
+        max-width: 80%;
+        flex-basis: 100%;
+        margin-left: -150px;
+    }
+
+    .about-us-text {
+        margin-top: 8vh;
+    }
+
+    .about-us-img::before {
+        width: 280px;
+        height: 340px;
+        right: -40px;
+        top: -10px;
+    }
+
+    #thedreamer {
+        width: 400px;
+        height: 350px;
+        border-radius: var(--main-border-radius);
+        margin-right: 10px;
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1290px) {
+    .image-About {
+        width: 40%;
+        max-height: 30%;
+        max-width: 60%;
+        flex-basis: 100%;
+        margin-left: -120px;
+    }
+
+    .about-us-text {
+        margin-top: 8vh;
+    }
+
+    .about-us-img::before {
+        width: 290px;
+        height: 340px;
+        right: 60px;
+        top: -15px;
+    }
+
+    #thedreamer {
+        width: 300px;
+        height: 350px;
+        border-radius: var(--main-border-radius);
+        margin-left: -40px;
+        margin-top: 30px;
+    }
+}
+

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Entity\Like;
 use App\Entity\Notification;
 use App\Entity\Post;
 use App\Entity\User;
@@ -11,17 +13,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
-
-
 
 
 class NotificationController extends AbstractController
 {
     #[Route('/notification', name: 'app_notification')]
-    public function index(RouterInterface $router,ManagerRegistry $doctrine): Response
+    public function index(RouterInterface $router, ManagerRegistry $doctrine): Response
     {
         // Get the notifications for the logged in user
         $user = $this->getUser();
@@ -37,26 +36,36 @@ class NotificationController extends AbstractController
         return new RedirectResponse($url);
     }
 
-    #[Route('/notification', name: 'notification_show')]
-    public function show(Notification $notification, EntityManagerInterface $entityManager): Response
+    #[Route('/notification/{id}', name: 'notification_show')]
+    public function show( EntityManagerInterface $entityManager,Notification $notification): Response
     {
         // Mark the notification as read
         $notification->setIsRead(true);
         $entityManager->flush();
-
+        $user = $this->getUser();
         // Redirect to the profile page
-        return $this->redirectToRoute('app_profile',['Userid'=> $this->getUser()->getId()]);
+        return $this->redirectToRoute('app_profile', ['Userid' => $user->getId()]);
     }
 
     #[Route('/notifications/{type}/{targetPostId}/{ownerId}/', name: 'notification_send')]
-
-    public function sendNotification(string $type, Post $targetPostId, User $ownerId,EntityManagerInterface $entityManager): Response
+    public function sendNotification(
+        string $type,
+        Post $targetPostId,
+        User $ownerId,
+        EntityManagerInterface $entityManager,
+        Like $like = null,
+    ): Response
     {
         // Create a new notification entity
         $notification = new Notification();
         $notification->setType($type);
         $notification->setTargetPost($targetPostId);
         $notification->setOwner($ownerId);
+        if($type == 'like'){
+            $notification->setForLike($like);
+            $like->setNotification($notification);
+        }
+
         $notification->setIsRead(false);
 
 
@@ -74,7 +83,6 @@ class NotificationController extends AbstractController
         $user = $this->getUser();
         $user->setHasUnreadNotifications(false);
         $doctrine->getManager()->flush();
-
 
         return new Response(null, Response::HTTP_NO_CONTENT);
     }

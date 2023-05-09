@@ -23,18 +23,25 @@ class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(
         ManagerRegistry $doctrine,
-        NavBarService $navBarService
+        NavBarService   $navBarService
     ): Response
     {
+        $repository = $doctrine->getRepository(Post::class);
+        $posts = $repository->findMostLikedPostsInAYear();
+
         $user = $this->getUser();
-        [
-            $notifications,
-            $unreadNotifications,
-            $hasUnreadNotifications,
-            $posts
+        if ($user) {
+            [
+                $notifications,
+                $unreadNotifications,
+                $hasUnreadNotifications,
 
-        ] = $navBarService->navBarVariables($doctrine, $user);
-
+            ] = $navBarService->navBarVariables($doctrine, $user);
+        } else {
+            $notifications = null;
+            $unreadNotifications = null;
+            $hasUnreadNotifications = null;
+        }
 
         return $this->render('index.html.twig', [
             'unreadNotifications' => $unreadNotifications,

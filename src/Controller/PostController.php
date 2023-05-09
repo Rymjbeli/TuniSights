@@ -5,7 +5,8 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\AddPostType;
-use App\Service\PostService;
+use App\Service\NavBarService;
+use App\Service\ExtraService;
 use App\Service\UploaderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -25,15 +26,23 @@ class PostController extends AbstractController
         Post                   $post = null,
         EntityManagerInterface $entityManager,
         Request                $request,
+        ManagerRegistry        $doctrine,
         UploaderService        $uploaderService, // inject uploaderService
-        PostService            $postService // inject PostService
+        ExtraService            $extraService, // inject ExtraService
+        NavBarService          $navBarService  // inject navBarService
     ): Response
     {
-        /*if (!$this->getUser()) {
-            return $this->redirectToRoute('app_index');
-        }*/
         $user = $this->getUser();
+
+        [
+            $notifications,
+            $unreadNotifications,
+            $hasUnreadNotifications,
+
+        ] = $navBarService->navBarVariables($doctrine, $user);
+
         $new = false;
+
         //Var that define either the user is adding or editing a post
         $AddEdit = 'Add';
 
@@ -41,34 +50,61 @@ class PostController extends AbstractController
             $new = true;
             $post = new Post();
         } else {
+            if($post->getOwner() !=$user ){
+                $this->addFlash('danger',$extraService->getMessage());
+                return $this->redirectToRoute('app_index', [
+                    'Userid' => $user->getId(),
+                    'unreadNotifications' => $unreadNotifications,
+                    'notifications' => $notifications,
+                    'hasUnreadNotifications' => $hasUnreadNotifications,
+                ]);
+
+            }
             $AddEdit = 'Edit';
         }
 
         $form = $this->createForm(AddPostType::class, $post);
 
-        //add delete button if the user is editing an existing post, using addDeleteButton method from PostService
-        $form = $postService->addDeleteButton($form, $post);
+        //add delete button if the user is editing an existing post, using addDeleteButton method from ExtraService
+        $form = $extraService->addDeleteButton($form, $post);
+
+        //if the user is editing, the image field is removed
+        if (!$new) {
+            $form->remove('Image');
+        }
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('Image')->getData();
-            $post->setOwner($this->getUser());
 
-            // Upload and set image for the post if an image was submitted
-            if ($image) {
-                $directory = $this->getParameter('post_directory');
-                $post->setImage($uploaderService->uploadFile($image, $directory));
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setOwner($this->getUser());
+            if ($new) {
+                $image = $form->get('Image')->getData();
+                // Upload and set image for the post if an image was submitted
+                if ($image) {
+                    $directory = $this->getParameter('post_directory');
+                    $post->setImage($uploaderService->uploadFile($image, $directory));
+                }
             }
 
             $entityManager->getRepository(Post::class)->save($post, true);
 
-            // Display success message using the addFlash and getMessage from PostService and redirect to the homepage
-            $this->addFlash('success', $post->getTitle() . $postService->getMessage($new));
+            // Display success message using the addFlash and getMessage from ExtraService and redirect to the homepage
+            $this->addFlash('success', $post->getTitle() . $extraService->getMessage($new));
 
-            return $this->redirectToRoute('app_profile', ['Userid' => $user->getId()]);
+            return $this->redirectToRoute('app_profile', [
+                'Userid' => $user->getId(),
+                'unreadNotifications' => $unreadNotifications,
+                'notifications' => $notifications,
+                'hasUnreadNotifications' => $hasUnreadNotifications,
+            ]);
         } else {
             return $this->render('addPost.html.twig', [
-                'form' => $form->createView(), 'AddEdit' => $AddEdit
+                'unreadNotifications' => $unreadNotifications,
+                'notifications' => $notifications,
+                'hasUnreadNotifications' => $hasUnreadNotifications,
+                'form' => $form->createView(),
+                'AddEdit' => $AddEdit,
+
             ]);
 
         }

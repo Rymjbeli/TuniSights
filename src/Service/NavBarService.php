@@ -15,10 +15,8 @@ class NavBarService
     {
         $userRepository=$doctrine->getRepository(User::class);
         $user =$userRepository->find($userId);
-        $repository = $doctrine->getRepository(Post::class);
         $notifrepository = $doctrine->getRepository(Notification::class);
 
-        $posts = $repository->findMostLikedPostsInAYear();
 
         if ($user !== null) {
             $notifications = $notifrepository->findNotificationsByUserId($user);
@@ -37,7 +35,6 @@ class NavBarService
             $notifications,
             $unreadNotifications,
             $hasUnreadNotifications,
-            $posts
         ];
     }
 

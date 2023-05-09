@@ -19,10 +19,10 @@
     var heartFilled = "{{ asset('assets/Images/HeartF.png') }}";
     var heartEmpty =  "{{ asset('assets/Images/HeartI.png') }}";
   </script>
-  {% if app.user==user %}
+  {% if app.user==Userid %}
   {% for type, messages in app.flashes %}
     {% for message in messages %}
-      <div class="alert alert-{{ type }}" style="text-align: center;color:white;background-color: rgba(0, 98, 149, 0.4);width: 40rem;margin-left: 28rem">
+      <div class="alert alert-{{ type }}" style="text-align: center;color:white;background-color: rgba(0, 98, 149, 0.4);width: 40rem;margin-left: 28rem;margin-top: 10vh;margin-bottom: -10vh;">
         {{ message }}
       </div>
     {% endfor %}
@@ -30,22 +30,22 @@
   {% endif %}
 
   <div class="CardLoader" id="enabled"></div>
-<div class="ProfileArea">
-<div class="container col-md-5 col-lg-7">
-  <div class="row">
-      <div class="col-md-6 col-lg-4 mb-4">
-        <img class=" profile_picture" src="{{ asset('assets/Images/' ~ user.image) }}">
+  <div class="ProfileArea">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <img class="profile_picture" src="{{ asset('assets/Images/' ~ Userid.image) }}">
+        </div>
+        <div class="col-md-9" id="text">
+          <h5 class="card-title">{{ Userid.username }}</h5>
+          <p class="card-text">{{  Userid.bio }}</p>
+          {% if app.user == Userid %}
+            <button class="butn " id="Editbtn">Edit</button>
+          {% endif %}
+        </div>
       </div>
-    <div class="col-md-6 col-lg-4 mb-4"style="margin-left: 40px;padding-top: 25px">
-      <h5 class="card-title">{{ user.username }}</h5>
-      <p class="card-text">{{  user.bio }}</p>
-        {% if app.user==user %}
-      <button class="btn btn-primary mezyan" id="Editbtn">Edit</button>
-        {% endif %}
     </div>
   </div>
-</div>
-</div>
 <div class="container">
       <div class="row">
         {% for post in posts %}
@@ -56,8 +56,8 @@
       </div>
 </div>
 <div class="AddHolder">
-  {% if app.user==user %}
-  <a href="{{ path('manage.Post') }}"><button class="mezyan AddHolder"  type="button">Add Post</button></a>
+  {% if app.user==Userid %}
+  <a href="{{ path('manage.Post') }}"><button class="mezyan AddHolder" type="button">Add Post</button></a>
   {% endif %}
 </div>
 {% endblock %}

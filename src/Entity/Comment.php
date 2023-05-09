@@ -35,6 +35,7 @@ class Comment
     #[ORM\OneToMany(mappedBy: 'target', targetEntity: Reply::class, orphanRemoval: true)]
     private Collection $replies;
 
+
     public function __construct()
     {
         $this->replies = new ArrayCollection();

@@ -1,29 +1,34 @@
-html, body {
-    margin: 100px auto;
-    margin-bottom: 1vh;
-    background-image: url("../Images/sky.jpg");
-    background-size: cover;
-    background-position: top;
-    /* move the image down*/
-    background-position-y: -150vh;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-color: rgba(255, 255, 255, 0.66);
-    background-blend-mode: overlay;
+* {
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+    scroll-behavior: smooth;
 }
+
+
+
+body {
+
+    background-color: #eef5f9 !important;
+}
+
 .image-container {
     display: flex;
     flex-wrap: wrap;
 }
+
 .Post {
     flex: 1 1 auto;
-    width: 100%;
-    height: 100%;
+    max-width: 400px !important;
+    max-height: 300px !important;
+    min-width: 400px !important;
+    min-height: 300px !important;
     object-fit: cover;
     border-radius: 20px;
     margin-bottom: 20px;
+    margin-left: 10px;
 }
-.mezyan {
+
+.mezyan, .butn {
     background-color: rgba(0, 97, 149, 0.651);
     color: #fff;
     padding: 0.3em 1em;
@@ -33,7 +38,7 @@ html, body {
     margin-top: 0.5rem;
 }
 
-.mezyan:hover {
+.mezyan:hover , .butn:hover {
     color: rgb(0, 98, 149);
     background-color: rgb(211, 240, 251);
     padding: 0.3em 1em;
@@ -42,35 +47,56 @@ html, body {
     cursor: pointer;
 }
 
-.container{
+.container {
     margin-top: 25px;
 }
-.AddHolder{
+
+.AddHolder {
     position: sticky;
     bottom: 10px;
     left: 50%;
 }
-.ProfileArea{
-    background-color:rgba(40, 147, 189, 0.2);
-    margin-left: 20vh;
-    margin-right: 20vh;
+
+.ProfileArea {
+    background-color: rgba(40, 147, 189, 0.2);
     border-radius: 25px;
-    margin-bottom: 20vh;
+    margin: 1vh 15vh 20vh;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    width: 120vh;
+    transform: translate(20%, 50%);
 }
-.profile_picture{
-    width: 15rem;
-    height: 15rem;
+
+#text {
+    padding-left: 30px;
+}
+
+.profile_picture {
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
     margin-top: 25px;
+    margin-left: 25px;
+
+    border: 4px solid rgba(0, 98, 149, 0.7);
+    padding: 4px;
+    box-sizing: border-box;
 }
+
 .card {
     width: 250px;
     margin: 0 auto;
     margin-bottom: 25px;
 }
+
 a {
     text-decoration: none;
 }
+
+
+.card-title {
+    margin-top: 15px;
+}
+
 .card-img-top {
     width: 100%;
     height: auto;
@@ -80,17 +106,53 @@ a {
     .card {
         margin-bottom: 0;
     }
+
 }
 
-@media screen and (min-width: 992px) {
+@media only  screen and  (min-width: 992px) and (max-width: 1200px) {
     footer .container {
         max-width: 1200px;
         padding-left: 0;
         padding-right: 0;
     }
+
+    .Post {
+        max-width: 310px !important;
+        max-height: 250px !important;
+        margin-left: 5px;
+    }
+
+    .ProfileArea {
+        margin: 4vh -18vh 20vh;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        width: 120vh;
+        transform: translate(20%, 50%);
+
+    }
 }
 
-@media screen and (max-width: 991px) {
+@media only  screen and  (min-width: 1200px) and (max-width: 1290px) {
+    footer .container {
+        max-width: 1200px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .Post {
+        max-width: 350px !important;
+        max-height: 250px !important;
+        margin-left: 5px;
+    }
+
+    .ProfileArea {
+        margin: 4vh -5vh 20vh;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        width: 120vh;
+        transform: translate(20%, 50%);
+    }
+}
+
+@media screen and (max-width: 992px) {
     footer .btn {
         width: 100%;
     }
@@ -98,9 +160,36 @@ a {
     .card {
         width: 100%;
     }
+
+    .Post {
+        max-width: 350px !important;
+        max-height: 300px !important;
+        margin-left: 5px;
+    }
+
+    .ProfileArea {
+        margin: 4vh -10vh 20vh;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        width: 100vh;
+        transform: translate(20%, 50%);
+    }
 }
+
 @media (max-width: 767px) {
     body {
         background-position-y: bottom;
+    }
+
+    .Post {
+        min-width: 500px !important;
+        height: 400px !important;
+        margin-left: 5px;
+    }
+
+    .ProfileArea {
+        margin: 4vh 0vh 20vh;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        width: 65vh;
+        transform: translate(20%, 50%);
     }
 }

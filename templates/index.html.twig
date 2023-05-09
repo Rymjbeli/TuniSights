@@ -17,10 +17,8 @@
     {% block AddCSSLinks %}
         <link rel="stylesheet" href="{{ asset('assets/CSS/styles.css') }}">
     {% endblock %}
-    <link rel="stylesheet" href="{{ asset('assets/CSS/Footer.css') }}">
 
-
-<body {% block BodynameClass %} {% endblock %} >
+<body {% block BodynameClass %} {% endblock %}  >
 <!-- Navbar -->
 <nav class="navbar navbar-dark navbar-expand-md fixed-top">
     <div class="container-fluid"><a class="navbar-brand" href="{{ path('app_index') }}"><img
@@ -58,17 +56,19 @@
                         <div class="notifications" id="box">
                             <h2>Notifications - <span id="countNotif">{{ unreadNotifications|length }}</span></h2>
                             {% for notification in notifications|reverse %}
-                                <a class="notifications-item"
-                                   href=" {{ path('notification_show') }} "><img
+                                <a class="notifications-item{% if not notification.isRead %} notifications-item-unread{% endif %}"
+                                   href=" {{ path('notification_show', {'id': notification.id}) }} "><img
                                             src="{{ asset('assets/Images/' ~  notification.owner.image  ) }}" alt="img">
                                     <div class="text">
                                         <h4>{{ notification.owner.username }}</h4>
-                                        {% if notification.type == 'comment' %}
-                                            commented on
-                                        {% else %}
-                                            liked
-                                        {% endif %}
-                                        your post
+
+                                        <p>{% if notification.type == 'like' %}
+                                                liked
+                                            {% else %}
+                                                commented on
+                                            {% endif %}
+                                            your post, {{ notification.targetPost.title }}
+                                        </p>
                                         <p>{{ notification.createdAt|date('j F Y') }} </p>
                                     </div>
                                 </a>
@@ -107,6 +107,13 @@
             <div class="row">
                 <div class="col">
                     <div class="text-start header-elements">
+                        {% for type, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ type }}" style="text-align: center;color:white;background-color: rgba(0, 98, 149, 0.4);width: 40rem;margin-left: 28rem;margin-top: 20vh;margin-bottom: -10vh;">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
                         <h1>Never stop <br>Exploring Tunisia</h1>
                     </div>
                 </div>
@@ -125,7 +132,7 @@
                         <div class="swiper-slide"><img src="{{ asset('assets/Images/chalel.png') }}" alt=""></div>
                         <div class="swiper-slide"><img src="{{ asset('assets/Images/neigeaindrahem.png') }}" alt="">
                         </div>
-                        <div class="swiper-slide"><img src="{{ asset('assets/Images/sahra.png') }}" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/Images/jemaa.png') }}" alt=""></div>
                         <div class="swiper-slide"><img src="{{ asset('assets/Images/bargou.png') }}" alt=""></div>
                         <div class="swiper-slide"><img src="{{ asset('assets/Images/Tozeur.png') }}" alt=""></div>
                         <div class="swiper-slide"><img src="{{ asset('assets/Images/Kerkennah.png') }}" alt=""></div>
@@ -149,7 +156,7 @@
 
     <!-- Start Discover -->
     <section id="Discover" class="Discover">
-        <div class="text-center">
+        <div class="text-center ">
             <h1 class="section-title mx-auto">Discover</h1>
 
             <hr class="HR-LINE-Discover mx-auto">
@@ -160,7 +167,7 @@
                 <div class="card-wrapper swiper-wrapper">
 
                     {% for post in posts %}
-                        <div class="card swiper-slide">
+                        <div class="cards swiper-slide">
                             <div class="image-content">
                                 <img src="{{ asset('assets/Images/' ~ post.Image) }}" alt="" class="card-img Post"
                                      Postid="{{ post.id }}">
@@ -186,10 +193,11 @@
                                     <div class="row">
                                         <a href="{{ path('app_profile',{'Userid': post.owner.id}) }}"
                                            class="col col-lg-2 col-md-6">
-                                            <img class="avatar-img" src="{{ asset('assets/Images/camping.png') }}"
+                                            <img id="OwnerImage" class="avatar-img"
+                                                 src="{{ asset('assets/Images/' ~ post.owner.image) }}"
                                                  alt="">
                                         </a>
-                                        <div class="col col-lg-6 col-md-6">
+                                        <div class="col col-lg-6 col-md-6" id="namedate">
                                             <a href="{{ path('app_profile',{'Userid': post.owner.id}) }}"
                                                class="name">{{ post.owner.username }}</a>
                                             <p class="date">{{ post.createdAt|date('j F Y') }}</p>
@@ -199,7 +207,8 @@
                                                     class="btn btn-sm btn-square pull-right LikeBtn"
                                                     style="display: inline;border-radius: 0;background-repeat: no-repeat;background-position: center;background-size: 60%;">
                                             </button>
-                                            <p class="LikeCounter" postid="{{ post.id }}">{{ post.likes.count() }}</p>
+                                            <p class="LikeCounter" postid="{{ post.id }}">{{ post.likes.count() }}
+                                                Likes</p>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +253,8 @@
                 </div>
                 <div class="col">
                     <div class="text-center about-us-img">
-                        <img class="img-fluid img-hover-pulse" src="{{ asset('assets/Images/camping.png') }} "></div>
+                        <img id="thedreamer" class="img-fluid img-hover-pulse"
+                             src="{{ asset('assets/Images/camping.png') }} "></div>
                 </div>
             </div>
         </div>
@@ -277,7 +287,6 @@
     </div>
     <!-- End Footer -->
 {% endblock %}
-
 <script src="{{ asset('assets/Libs/bootstrap.min.js') }}"></script>
 <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -292,6 +301,9 @@
     <script src="{{ asset('assets/JS/PostCard.js') }}"></script>
     <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
     <script src="{{ asset('assets/JS/Like.js') }}"></script>
+    <script src="{{ asset('assets/JS/Comment.js') }}"></script>
+
+
 
 {% endblock %}
 <script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>

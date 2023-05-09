@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Notification;
+use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\User;
@@ -65,6 +66,7 @@ class NotificationRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
 
 
 

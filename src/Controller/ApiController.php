@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Like;
+use App\Entity\Notification;
 use App\Entity\Post;
 use App\Entity\Reply;
 use App\Repository\PostRepository;
@@ -105,6 +106,9 @@ class ApiController extends abstractController
         $entityManager = $this->registry->getManager();
         $entityManager->persist($comment);
         $entityManager->flush();
+        if($user !== $post->getOwner()){
+            $this->notificationController->sendNotification('comment', $post,$user,$entityManager);
+        }
         return $this->json([
             'username' => $comment->getOwner()->getUsername(),
             'content' => $comment->getContent(),
@@ -155,8 +159,8 @@ class ApiController extends abstractController
     public function Like(
         Request $request,
         PostRepository $postRepository,
-        UserRepository $userRepository,
-        ManagerRegistry $registry)
+        ManagerRegistry $registry,
+    )
     : Response
     {
         $entityManager = $registry->getManager();
@@ -183,22 +187,27 @@ class ApiController extends abstractController
         $likes = $post->getLikes();
         foreach($likes as $like){
             if($like->getOwner() === $userid){
+                if($post->getOwner()!=$userid){
+                    $notification = $like->getNotification();
+                    $entityManager->remove($notification);
+                    $entityManager->flush();
+                }
                 $entityManager->remove($like);
                 $entityManager->flush();
                 $exists = true;
-
             }
         }
         if (!$exists) {
             $like = new Like();
             $like->setOwner($userid);
             $like->setTargetPost($post);
+
+            if($userid !== $post->getOwner()){
+                $this->notificationController->sendNotification('like', $post,$userid,$entityManager,$like);
+            }
             $entityManager->persist($like);
             $entityManager->flush();
             $likes->add($like);
-            if($userid !== $post->getOwner()){
-                $this->notificationController->sendNotification('like', $post,$userid,$entityManager);
-            }
         }
         return $this->json([
             'message' => 'success',
