@@ -35,13 +35,13 @@ function LikePost(btn){
         url: "/api/Like",
         type: "POST",
         dataType: "json",
-        data: { PostId: btn.attr("PostID")},
+        data: { PostId: btn.attr("postid")},
         xhrFields: {
             withCredentials: true
         },
         success: function(response) {
             if(response.error !== undefined){console.error(response.error);return false;}
-            let likeCounter= $('.LikeCounter[Postid="'+btn.attr("postid")+'"]');
+            let likeCounter= $('.LikeCounter[postid="'+btn.attr("postid")+'"]');
             if(btn.attr("Liked")==="true"){
                 btn.css("background-image","url('/assets/Images/heartI.png')");
                 btn.attr("Liked","false");

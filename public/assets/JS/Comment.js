@@ -92,6 +92,7 @@ function LoadCommentSection(){
     $(".CommentArea").each(function (){
         let commentarea = $(this);
         let commentsection = $('.CommentSection[postid="'+$(this).attr('postid')+'"]');
+        Loadcomments(commentsection);
         commentsection.find('.LoadMarker').click(function (){
             Loadcomments(commentsection);
             $(this).hide();

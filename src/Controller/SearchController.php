@@ -122,5 +122,4 @@ class SearchController extends AbstractController
         return $this->render('Search.html.twig', ['postes' => $posts, 'TypedText' => $input]);
     }
 
-
 }

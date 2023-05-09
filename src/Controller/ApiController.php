@@ -156,7 +156,6 @@ class ApiController extends abstractController
                 'error' => 'Post id not found'
             ]);
         }
-
         if(!isset($userid)){
             return $this->json([
                 'error' => 'User not found'
