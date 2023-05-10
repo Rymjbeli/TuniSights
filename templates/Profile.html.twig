@@ -9,7 +9,6 @@
 
 {% block AddJSLinks %}
   <script src="{{asset('assets/Libs/jquery-3.6.4.min.js')}}"></script>
-  <script src="{{asset('assets/JS/Profile.js')}}"></script>
   <script src="{{asset('assets/JS/PostCard.js')}}"></script>
   <script src="{{asset('assets/JS/Like.js')}}"></script>
   <script src="{{asset('assets/JS/Comment.js')}}"></script>
@@ -40,7 +39,7 @@
           <h5 class="card-title">{{ Userid.username }}</h5>
           <p class="card-text">{{  Userid.bio }}</p>
           {% if app.user == Userid %}
-            <button class="butn " id="Editbtn">Edit</button>
+          <a href="{{ path('app_edit_profile') }}"><button class="butn " id="Editbtn">Edit</button></a>
           {% endif %}
         </div>
       </div>

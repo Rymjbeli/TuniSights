@@ -14,22 +14,27 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
         private StatController $statController
     )
-    {}
+    {
+    }
 
-    #[IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'app_adminSettings')]
     public function index(): Response
     {
-        $newUserCount = $this->statController->newUserStat();
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->render('admin_access_denied.html.twig');
+        }
+
+            $newUserCount = $this->statController->newUserStat();
         $newPostCount = $this->statController->newPostStat();
         $userCount = $this->statController->getAllUsersCount();
         $postCount = $this->statController->getAllPostsCount();
@@ -65,12 +70,24 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Posts', 'fas fa-trash', Post::class);
-        yield MenuItem::linkToCrud('Comments','fas fa-comment',Comment::class );
+        yield MenuItem::linkToCrud('Comments', 'fas fa-comment', Comment::class);
     }
 
 
     public function configureActions(): Actions
     {
+        $actions = parent::configureActions();
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $actions->disable(Action::INDEX);
+            $actions->disable(Action::NEW);
+            $actions->disable(Action::EDIT);
+            $actions->disable(Action::DELETE);
+            $actions->disable(Action::DETAIL);
+
+            throw new AccessDeniedHttpException('Vous n\'êtes pas autorisé à accéder à cette page');
+        }
+
+
         return parent::configureActions()
             ->remove(Crud::PAGE_INDEX, Action::EDIT)
             ->remove(Crud::PAGE_DETAIL, Action::EDIT)

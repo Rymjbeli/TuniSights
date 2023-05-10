@@ -17,13 +17,14 @@ use Symfony\Component\Form\Extension\Core\Type\{ChoiceType, PasswordType, Repeat
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use Symfony\Component\Form\{FormBuilderInterface, FormEvents};
-use http\Client\Request;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
-
+#[
+    IsGranted("ROLE_ADMIN")
+]
 class UserCrudController extends AbstractCrudController
 {
     public function __construct(

@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 class StatController extends AbstractController
 {
@@ -15,7 +17,6 @@ class StatController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/admin', name: 'app_adminStat')]
     public function newUserStat(): int
     {
         $startDate = new \DateTime('-2 day');
