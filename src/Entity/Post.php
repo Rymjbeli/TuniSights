@@ -8,11 +8,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\HasLifecycleCallbacks()]
-
+#[Vich\Uploadable]
 class Post
 {
     use TimeStampTrait;
@@ -55,9 +57,11 @@ class Post
     #[ORM\OneToMany(mappedBy: 'targetPost', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255,type: 'string',nullable: true)]
     private ?string $Image = null;
 
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'Image')]
+    private ?File $ImageFile = null;
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -250,4 +254,17 @@ class Post
         return $this;
     }
 
+    public function getImageFile(): ?File
+    {
+        return $this->ImageFile;
+    }
+
+    public function setImageFile(?File $ImageFile = null): self
+    {
+        $this->ImageFile = $ImageFile;
+        if ($ImageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
 }

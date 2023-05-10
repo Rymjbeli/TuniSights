@@ -198,4 +198,11 @@ a{
         overflow-y: scroll;
     }
 }
+.dropdown-menu .dropdown-user-details {
+    align-items: flex-start;
+    display: flex;
+    padding: 0 10px;
+    color: white;
+    font-style: italic;
+}
 /* End of Navbar */

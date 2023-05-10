@@ -1,0 +1,50 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block main %}
+    <link rel="stylesheet" href="{{ asset('assets/CSS/admin/index.css') }}">
+    <div class="container stat">
+        <div class="row">
+            <div class="col">
+
+                <h3><i class="fa fa-user-plus"></i> New Users</h3>
+                <h2>{{ newUserCount }}</h2>
+            </div>
+            <div class="col">
+                <h3><i class="fa fa-bolt"></i> New Posts</h3>
+                <h2>{{ newPostCount }}</h2>
+            </div>
+            <div class="col">
+                <h3><i class="fa fa-user"></i> Total Users</h3>
+                <h2>{{ userCount }}</h2>
+            </div>
+            <div class="col">
+                <h3><i class="fa fa-newspaper-o"></i> Total Posts</h3>
+                <h2>{{ postCount }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <canvas id="chartByCategory" width="400" height="400"></canvas>
+            </div>
+            <div class="col">
+                <canvas id="chart-doughnut" width="400" height="400"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <canvas id="chart-bar" width="800" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+            crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/JS/admin/index.js') }}">
+</script>
+    <script>
+            const chartDataByCategory = {{ chartDataByCategory|json_encode|raw }};
+            const chartDataByState = {{ chartDataByState|json_encode|raw }};
+            const chartDataByAge = {{ chartDataByAge|json_encode|raw }};
+    </script>
+{% endblock %}

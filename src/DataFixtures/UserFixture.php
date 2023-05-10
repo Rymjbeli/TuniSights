@@ -17,7 +17,6 @@ class UserFixture extends Fixture implements FixtureGroupInterface
     ) {}
     public function load(ObjectManager $manager): void
     {
-        /*
         // Create Ines admin user
         $ines = new User();
         $ines->setEmail('ines.samet@insat.ucar.tn');
@@ -75,7 +74,6 @@ class UserFixture extends Fixture implements FixtureGroupInterface
         $manager->persist($mohamed);
 
         $manager->flush();
-*/
     }
     public static function getGroups(): array
     {

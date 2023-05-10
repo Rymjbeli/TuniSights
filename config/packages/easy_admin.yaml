@@ -1,0 +1,4 @@
+easy_admin:
+  entities:
+    - class: App\Entity\User
+    - class: App\Entity\Post

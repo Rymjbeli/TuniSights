@@ -1,0 +1,27 @@
+{% extends 'index.html.twig' %}
+
+{% block Title %} Edit Profile {% endblock %}
+
+{% block AddCSSLinks %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link rel="stylesheet" href="{{ asset('assets/CSS/EditProfile.css') }}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+{% endblock %}
+
+{% block SectionsOfTheBody %}
+
+    <!-- start add post -->
+    <section class="post">
+        <h1>Edit Profile</h1>
+        {{ form_start(form ) }}
+        {{ form_rest(form) }}
+        <br>
+        <button type="submit">Save Changes</button>
+        {{ form_end(form) }}
+
+    </section>
+    <!-- end add post -->
+{% endblock %}
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}
