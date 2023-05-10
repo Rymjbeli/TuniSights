@@ -7,3 +7,9 @@
              alt="{{ ea.dashboardTitle|striptags }}">
     </a>
 {% endblock header_logo %}
+
+{% block responsive_header_logo %}
+    <a class="responsive-logo" title="{{ ea.dashboardTitle|striptags }}" href="{{ path('app_index') }}">
+        <img src="assets/Images/logo.png" alt="{{ ea.dashboardTitle|striptags }}" width="210" height="70" />
+    </a>
+{% endblock responsive_header_logo %}

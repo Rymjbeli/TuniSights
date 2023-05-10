@@ -5,24 +5,23 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
+use EasyCorp\Bundle\EasyAdminBundle\Field\{ChoiceField,
+    IdField,
+    ImageField,
+    TextField,
+    AssociationField,
+    BooleanField,
+    DateField};
+use EasyCorp\Bundle\EasyAdminBundle\Config\{Actions, Action, KeyValueStore};
+use Symfony\Component\Form\Extension\Core\Type\{ChoiceType, PasswordType, RepeatedType};
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use Symfony\Component\Form\{FormBuilderInterface, FormEvents};
+use http\Client\Request;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 
 class UserCrudController extends AbstractCrudController
@@ -69,8 +68,7 @@ class UserCrudController extends AbstractCrudController
         yield AssociationField::new('posts')->hideOnForm();
         yield BooleanField::new('isVerified')
             ->setLabel('Is Verified')
-            ->setFormTypeOption('data', true)
-            ->setFormTypeOption('disabled', true);
+            ->setFormTypeOption('data', true);
         yield ChoiceField::new('gender')
             ->hideOnIndex()
             ->setChoices(['Male' => 'M', 'Female' => 'F'])
@@ -81,10 +79,9 @@ class UserCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->setChoices([$defaultRole => $defaultRole])
             ->allowMultipleChoices()
-            ->setValue([$defaultRole]) // Pass the default role as an array
+            ->setValue([$defaultRole])
             ->setRequired(true)
             ->setFormType(ChoiceType::class);
-
 
 
     }
@@ -93,7 +90,7 @@ class UserCrudController extends AbstractCrudController
     {
         return parent::configureCrud($crud)
             ->setEntityLabelInSingular('Admin')
-            ->setPageTitle(Crud::PAGE_INDEX,'Users');
+            ->setPageTitle(Crud::PAGE_INDEX, 'Users');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -141,4 +138,5 @@ class UserCrudController extends AbstractCrudController
         };
 
     }
+
 }
