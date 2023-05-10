@@ -22,20 +22,21 @@
             {% for flash_error in app.flashes('verify_email_error') %}
                 <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
             {% endfor %}
+
             {{ form_start(registrationForm) }}
 
             <div class="input-info">
                 <!-- userName -->
                 {{ form_row(registrationForm.username) }}
                 <i class="uil uil-user"></i>
-
+                <br>
             </div>
 
             <div class="input-info" >
                 <!-- email -->
                 {{ form_row(registrationForm.email) }}
                 <i class="uil uil-envelope icon"></i>
-
+                <br>
             </div>
 
             <div class="input-info">
@@ -45,7 +46,7 @@
                 <span id="show-password">
                     <i class="uil uil-eye-slash showHidePw"></i>
                 </span>
-                <div class="v"></div>
+                <br>
             </div>
 
             <div class="input-info">
@@ -55,30 +56,27 @@
                 <span id="show-password2">
                     <i class="uil uil-eye-slash showHidePw"></i>
                 </span>
-                <div class="v"></div>
+                <br>
             </div>
 
             <div class="input-info">
                 <!-- date of birth -->
-                <div>
-                    {{ form_widget(registrationForm.dateOfBirth) }}
-                </div>
 
+                    {{ form_row(registrationForm.dateOfBirth,  {'attr': {'class': 'my-date-input'}}) }}
+
+                <br>
             </div>
 
             <div class="input-info">
                 <!-- gender -->
                 <div>
-                    {{ form_label(registrationForm.gender) }}
-                </div>
-                <div>
                     {{ form_widget(registrationForm.gender) }}
                 </div>
             </div>
-
             <div class="input-info button" >
                 <button type="submit" class="s" id="signupp">SignUp</button>
             </div>
+            <br>
             {{ form_end(registrationForm) }}
 
             <!-- login -->

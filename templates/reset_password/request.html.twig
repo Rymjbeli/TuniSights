@@ -1,0 +1,44 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block AddCSSLinks %}
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+    <link
+            rel="stylesheet"
+            href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+{% endblock %}
+
+{% block SectionsOfTheBody %}
+<div class="container">
+    <div class="form">
+        <a href= "{{ path('app_login') }}" class="back">&times;</a>
+        <span class="title">Reset your password</span>
+
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    {{ form_start(requestForm) }}
+
+        <div class="input-info" >
+            <!-- email -->
+            {{ form_row(requestForm.email) }}
+            <i class="uil uil-envelope icon"></i>
+
+        </div>
+        <div>
+            <small>
+                Enter your email address and we will send you a
+                link to reset your password.
+            </small>
+        </div>
+
+        <div class="input-info button" >
+            <button  class="s" id="signupp">Send password reset email</button>
+        </div>
+    {{ form_end(requestForm) }}
+    </div>
+</div>
+{% endblock %}

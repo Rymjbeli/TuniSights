@@ -1,0 +1,47 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block AddCSSLinks %}
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+    <link
+            rel="stylesheet"
+            href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+{% endblock %}
+
+{% block SectionsOfTheBody %}
+    <div class="container">
+        <div class="form">
+            <a href= "{{ path('app_login') }}" class="back">&times;</a>
+            <span class="title">Reset your password</span>
+            {{ form_start(resetForm) }}
+            <div class="input-info">
+                <!-- password -->
+                {{ form_row(resetForm.plainPassword.first) }}
+                <i class="uil uil-lock icon"></i>
+                <span id="show-password">
+                    <i class="uil uil-eye-slash showHidePw"></i>
+                </span>
+                <br>
+            </div>
+
+            <div class="input-info">
+                <!-- confirm password -->
+                {{ form_row(resetForm.plainPassword.second) }}
+                <i class="uil uil-lock icon"></i>
+                <span id="show-password2">
+                    <i class="uil uil-eye-slash showHidePw"></i>
+                </span>
+                <br>
+            </div>
+
+            <div class="input-info button">
+                <button class="s" id="signupp">Reset password</button>
+            </div>
+
+            {{ form_end(resetForm) }}
+        </div>
+    </div>
+{% endblock %}
