@@ -15,12 +15,25 @@ class ExtraService
     {
         $this->router = $router;
     }
-    public function getMessage(bool $new = null): string
+    public function getMessage(int $msgType): string
     {
-        if(!$new){
-            return "You can not Edit this Post";
+        switch ($msgType) {
+            case 1:
+                $message = "New post is added successfully.";
+                break;
+            case 2:
+                $message = "Your post is updated successfully.";
+                break;
+            case 3:
+                $message = "You can not Edit this Post";
+                break;
+            case 4:
+                $message = "Your post has been deleted successfully.";
+                break;
+            default:
+                $message = "Invalid value for variable";
         }
-        return $new ? " New post is added successfully" : " New post is updated successfully ";
+        return $message;
     }
     public function addDeleteButton(FormInterface $form, Post $post): FormInterface
     {

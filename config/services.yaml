@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     post_directory: '%kernel.project_dir%/public/assets/Images'
+    timezone: 'Africa/Tunis'
+
 services:
     App\Controller\ProfileController:
         autowire: true

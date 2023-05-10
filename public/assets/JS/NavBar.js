@@ -1,41 +1,46 @@
+    // Define function to toggle the box
+    function toggleBox() {
+        var down = false;
+        var bell = document.getElementById("bell");
+        var box = document.getElementById("box");
 
-document.addEventListener("DOMContentLoaded", function() {
+        bell.addEventListener("click", function (e) {
+            e.stopPropagation(); // prevent click event from bubbling up to document object
+            // check current state of the box
+            if (down) {
+                closeBox();
+            } else {
+                openBox();
+            }
+        });
 
-    var down = false;
-    var bell = document.getElementById("bell");
-    var box = document.getElementById("box");
-
-    bell.addEventListener("click", function(e) {
-        e.stopPropagation(); // prevent click event from bubbling up to document object
-        var color = this.innerHTML;
-        if (down) {
-            box.style.height = "0px";
-            box.style.opacity = "0";
-            down = false;
-        } else {
+        // define function to open the box
+        function openBox() {
             box.style.height = "auto";
             box.style.opacity = "1";
             down = true;
-
-            // add event listener to document object to listen for clicks
-            document.addEventListener("click", function(e) {
-                if (!box.contains(e.target)) { // check if click event was outside the box
-                    box.style.height = "0px";
-                    box.style.opacity = "0";
-                    down = false;
-                    document.removeEventListener("click", arguments.callee); // remove the event listener after closing the box
-                }
-            });
+            document.addEventListener("click", closeBox);
         }
-    });
 
-});
+        // define function to close the box
+        function closeBox() {
+            box.style.height = "0px";
+            box.style.opacity = "0";
+            down = false;
+            document.removeEventListener("click", closeBox);
+        }
+    }
 
-function removeNotificationDot() {
-    const notificationDot = document.getElementById('notification-dot');
+    // add event listener to wait for DOM to load before calling toggleBox function
+    document.addEventListener("DOMContentLoaded", toggleBox);
 
-    notificationDot.style.display = 'none';
-    console.log("Form submitted"); // Add this line
-    document.getElementById('remove-notification-form').submit();
 
-}
+    // This function removes the notification dot and submits the hidden form in the index.html.twig
+    function removeNotificationDot() {
+        const notificationDot = document.getElementById('notification-dot');
+
+        notificationDot.style.display = 'none';
+        console.log("Form submitted"); // Add this line
+        document.getElementById('remove-notification-form').submit();
+
+    }

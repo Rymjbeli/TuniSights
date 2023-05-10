@@ -10,7 +10,7 @@
     --main-nav-profile-bg-color: rgba(0, 95, 149, 0.4);
     --main-nav-profile-link-bg-color: rgba(105, 169, 215, 0.4);
     --main-hover-animation: pulse 1s infinite;
-    --main-boxshadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    --main-boxshadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 body {
@@ -134,13 +134,16 @@ h1 {
 
 }
 
-.LikeBtn {
-    display: inline;
+.btn-square {
     border-radius: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 60%;
-    margin-left: 10px;
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0;
+}
+
+.btn-square .bi {
+    width: 1.5em;
+    height: 1.5em;
 }
 
 .name, .date, .LikeCounter {
@@ -359,13 +362,13 @@ h1 {
     }
 
     .about-us-text {
-        margin-top: 4vh;
+        margin-top: 1vh;
     }
 
     .image-About {
-        width: 60%;
+        width: 100%;
         height: 100%;
-        max-width: 60%;
+        max-width: 100%;
         flex-basis: 100%;
     }
 
@@ -376,11 +379,7 @@ h1 {
     }
 
     #thedreamer {
-        width: 400px;
-        height: 350px;
-        border-radius: var(--main-border-radius);
-        margin-right: 10px;
-        margin-top: 30px;
+      display: none;
     }
 
     .HR-LINE-About {
@@ -389,20 +388,20 @@ h1 {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1200px) {
+@media only screen and (min-width: 768px) and (max-width: 996px) {
     #namedate{
         margin-left: -80px;
     }
     .image-About {
         width: 60%;
-        max-height: 70%;
-        max-width: 80%;
+        max-height: 100%;
+        max-width: 85%;
         flex-basis: 100%;
         margin-left: -150px;
     }
 
     .about-us-text {
-        margin-top: 3vh;
+        margin-top: 1vh;
     }
 
     .about-us-img::before {

@@ -89,21 +89,11 @@ class AddPostType extends AbstractType
                     'Zaghouan' => 'Zaghouan',
 
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please select a state'
-                    ])
-                ],
                 'attr' => [
                     'class' => 'form-control select2',
                 ]
             ])
             ->add('city', null, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a city '
-                    ])
-                ],
                 'attr' => [
                     'class' => 'form-control',
                 ]
@@ -121,7 +111,7 @@ class AddPostType extends AbstractType
                 'data_class' => null,
                 'constraints' => [
                     new File([
-                        'maxSize' => '4096k',
+                        'maxSize' => '8192k',
                         'mimeTypes' => [
                             'image/gif',
                             'image/jpeg',

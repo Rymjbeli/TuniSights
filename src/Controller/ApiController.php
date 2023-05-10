@@ -3,15 +3,10 @@
 namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Like;
-use App\Entity\Notification;
-use App\Entity\Post;
 use App\Entity\Reply;
 use App\Repository\PostRepository;
-use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
-use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use function Sodium\add;
+date_default_timezone_set('Africa/Tunis');
 
 #[Route('/api')]
 class ApiController extends abstractController
@@ -33,7 +29,12 @@ class ApiController extends abstractController
         $this->registry = $managerRegistry;
     }
     #[Route('/LoadComment',name: 'LoadCommentApi', methods: ['POST','GET'])]
-    public function LoadComment(Request $request, PostRepository $postRepository,SerializerInterface $serializer):Response{
+    public function LoadComment(
+        Request $request,
+        PostRepository $postRepository,
+        SerializerInterface $serializer
+    ):Response
+    {
         $PostId = $request->get('Post_id');
         $start = $request->get('start');
 
@@ -116,7 +117,11 @@ class ApiController extends abstractController
         ]);
     }
     #[Route('/FetchPost', name: 'PostApi',methods: ['POST'])]
-    public function FetchPost(Request $request, PostRepository $postRepository): Response{
+    public function FetchPost(
+        Request $request,
+        PostRepository $postRepository
+    ): Response
+    {
         $PostId = $request->request->get('Post_id');
         if(!isset($PostId)){
             return new Response('no parameters provided', Response::HTTP_METHOD_NOT_ALLOWED);
@@ -183,10 +188,14 @@ class ApiController extends abstractController
                 'error' => 'User not found'
             ]);
         }
+
+        // Check if the current user has already liked the post
         $exists = false;
         $likes = $post->getLikes();
         foreach($likes as $like){
             if($like->getOwner() === $userid){
+                // If the current user has already liked the post, remove the like entity
+                // and the associated notification (if the post owner is not the current user)
                 if($post->getOwner()!=$userid){
                     $notification = $like->getNotification();
                     $entityManager->remove($notification);
@@ -197,11 +206,15 @@ class ApiController extends abstractController
                 $exists = true;
             }
         }
+
+        // If the current user has not yet liked the post, create a new like entity and
+        // add it to the post's list of likes
         if (!$exists) {
             $like = new Like();
             $like->setOwner($userid);
             $like->setTargetPost($post);
 
+            // If the post owner is not the current user, send a notification to the post owner
             if($userid !== $post->getOwner()){
                 $this->notificationController->sendNotification('like', $post,$userid,$entityManager,$like);
             }

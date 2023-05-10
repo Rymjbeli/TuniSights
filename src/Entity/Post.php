@@ -35,10 +35,10 @@ class Post
     #[ORM\Column(length: 100,nullable: true)]
     private ?string $place = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50,nullable: true)]
     private ?string $state = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50,nullable: true)]
     private ?string $city = null;
 
     #[ORM\Column(length: 100, nullable: true)]

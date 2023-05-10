@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-use App\Entity\User;
 use App\Form\AddPostType;
 use App\Service\NavBarService;
 use App\Service\ExtraService;
@@ -28,12 +27,13 @@ class PostController extends AbstractController
         Request                $request,
         ManagerRegistry        $doctrine,
         UploaderService        $uploaderService, // inject uploaderService
-        ExtraService            $extraService, // inject ExtraService
+        ExtraService           $extraService, // inject ExtraService
         NavBarService          $navBarService  // inject navBarService
     ): Response
     {
         $user = $this->getUser();
 
+        // Call the navBarService to get notification variables for the navbar
         [
             $notifications,
             $unreadNotifications,
@@ -41,17 +41,20 @@ class PostController extends AbstractController
 
         ] = $navBarService->navBarVariables($doctrine, $user);
 
+        //Vars that define either the user is adding or editing a post
         $new = false;
-
-        //Var that define either the user is adding or editing a post
         $AddEdit = 'Add';
 
+
+        // Check if $post exists, if not create new Post object
         if (!$post) {
             $new = true;
             $post = new Post();
         } else {
-            if($post->getOwner() !=$user ){
-                $this->addFlash('danger',$extraService->getMessage());
+            // Check if the current user owns the post being edited
+            if ($post->getOwner() != $user) {
+                // Display error message using the getMessage method from ExtraService and redirect to the homepage
+                $this->addFlash('danger', $extraService->getMessage(3));
                 return $this->redirectToRoute('app_index', [
                     'Userid' => $user->getId(),
                     'unreadNotifications' => $unreadNotifications,
@@ -65,7 +68,8 @@ class PostController extends AbstractController
 
         $form = $this->createForm(AddPostType::class, $post);
 
-        //add delete button if the user is editing an existing post, using addDeleteButton method from ExtraService
+        //add delete button if the user is editing an existing post,
+        // using addDeleteButton method from ExtraService
         $form = $extraService->addDeleteButton($form, $post);
 
         //if the user is editing, the image field is removed
@@ -89,7 +93,11 @@ class PostController extends AbstractController
             $entityManager->getRepository(Post::class)->save($post, true);
 
             // Display success message using the addFlash and getMessage from ExtraService and redirect to the homepage
-            $this->addFlash('success', $post->getTitle() . $extraService->getMessage($new));
+            if ($new) {
+                $this->addFlash('success', $extraService->getMessage(1));
+            } else {
+                $this->addFlash('success', $extraService->getMessage(2));
+            }
 
             return $this->redirectToRoute('app_profile', [
                 'Userid' => $user->getId(),
@@ -114,17 +122,18 @@ class PostController extends AbstractController
         Route('/deletePost/{id?0}', name: 'delete.Post'),
         IsGranted("ROLE_USER")
     ]
-    public function deletePost(Post $post, ManagerRegistry $doctrine)
+    public function deletePost(
+        Post            $post,
+        ManagerRegistry $doctrine,
+        ExtraService    $extraService, // inject ExtraService
+    )
     {
-        /*if (!$this->getUser()) {
-            return $this->redirectToRoute('app_index');
-        }*/
         $user = $this->getUser();
         $manager = $doctrine->getManager();
         $manager->remove($post);
         $manager->flush();
 
-        $this->addFlash('success', $post->getTitle() . ' has been deleted successfully.');
+        $this->addFlash('success', $extraService->getMessage(4));
         return $this->redirectToRoute('app_profile', ['Userid' => $user->getId()]);
     }
 

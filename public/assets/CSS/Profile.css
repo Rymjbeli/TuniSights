@@ -26,6 +26,8 @@ body {
     border-radius: 20px;
     margin-bottom: 20px;
     margin-left: 10px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+
 }
 
 .mezyan, .butn {
@@ -86,6 +88,7 @@ body {
     width: 250px;
     margin: 0 auto;
     margin-bottom: 25px;
+
 }
 
 a {
