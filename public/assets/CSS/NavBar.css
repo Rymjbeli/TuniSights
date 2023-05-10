@@ -4,7 +4,6 @@ a{
 }
 .navbar {
     background-color: rgba(0, 98, 149, 0.4);
-
 }
 
 .nav-item:hover .nav-link {
@@ -17,7 +16,6 @@ a{
     height: 2.8rem;
     border-radius: 50%;
     overflow: hidden;
-
     border: 0.15rem solid rgba(0, 98, 149, 0.7);
 }
 
