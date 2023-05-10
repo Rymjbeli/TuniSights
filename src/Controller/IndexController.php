@@ -11,9 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 date_default_timezone_set('Africa/Tunis');
 
-#[
-    Route('/index'),
-]
+
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]

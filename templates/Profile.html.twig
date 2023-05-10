@@ -50,7 +50,7 @@
       <div class="row">
         {% for post in posts %}
         <div class="col-md-6 col-lg-4 mb-4 image-container">
-          <img class="img-fluid Post" src="{{ asset('assets/Images/' ~ post.Image) }}" Postid="{{ post.id }}" alt="Gallery Image">
+          <img class="img-fluid Post" src="{{ asset('assets/Images/' ~post.Image) }}" Postid="{{ post.id }}" alt="Gallery Image">
         </div>
         {% endfor %}
       </div>

@@ -164,7 +164,6 @@ select:focus {
     flex-direction: column;
     align-items: center;
     border: 1px solid #ccc;
-    padding: 20px 20px 50px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
@@ -236,12 +235,12 @@ select:focus {
 }
 
 .profile-image {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 20px;
-    margin-bottom: -20px;
+    margin-bottom: 100px;
 }
 
 .Profile {
@@ -260,7 +259,7 @@ select:focus {
     margin-left: 50px;
     width: 80%;
     justify-content: space-between;
-    height: 30px;
+    height: 50px;
 }
 
 .post-username {
@@ -269,6 +268,9 @@ select:focus {
     font-size: 14px;
     font-weight: bold;
     flex: 1;
+    text-decoration: none;
+    color: #181818;
+
 }
 
 .post-footer {
@@ -297,6 +299,35 @@ select:focus {
     display: flex;
     flex-direction: column;
     max-height: 150px;
+}
+
+.comments-container {
+    overflow-y: scroll;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #83b0c7;
+    border-radius: 100px;
+}
+
+.custom-scrollbar {
+    width: 200px;
+    height: 50px;
+    overflow: auto;
+}
+
+.notifications::-webkit-scrollbar {
+    width: 0px;
+    background-color: transparent;
 }
 
 .limited-text {

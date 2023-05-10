@@ -197,7 +197,15 @@ h1 {
 .swiper-navBtn::after {
     font-size: 35px;
 }
+.title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* number of lines to display */
+    overflow-wrap: break-word;
 
+}
 .swiper-button-next {
     right: 0;
 }

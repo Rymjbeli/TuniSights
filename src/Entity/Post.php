@@ -245,7 +245,7 @@ class Post
 
     public function setImage(string $Image): self
     {
-        $this->Image = $Image;
+        $this->Image =$Image;
 
         return $this;
     }

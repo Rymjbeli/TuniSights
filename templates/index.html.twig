@@ -30,7 +30,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link active" href="#Discover">Discover</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#About-us">About us</a></li>
-                <li class="nav-item"><a class="nav-link active" href=""><i class="fas fa-search"></i>
+                <li class="nav-item"><a class="nav-link active" href="{{ path('app_find') }}"><i class="fas fa-search"></i>
                         Search </a></li>
                 {% if not app.user %}
                     <li class="nav-item icon">
@@ -58,7 +58,7 @@
                             <h2>Notifications - <span id="countNotif">{{ unreadNotifications|length }}</span></h2>
                             {% for notification in notifications|reverse %}
                                 <a class="notifications-item{% if not notification.isRead %} notifications-item-unread{% endif %}"
-                                   postid="{{ notification.targetpost.id }}" ><img
+                                   postid="{{ notification.targetpost.id }}" notificationId="{{ notification.id }}" ><img
                                             src="{{ asset('assets/Images/' ~  notification.owner.image  ) }}" alt="img">
                                     <div class="text">
                                         <h4>{{ notification.owner.username }}</h4>
@@ -283,7 +283,7 @@
                 <a href=""><i class="fa-brands fa-twitter"></i></a>
                 <a href=""><i class="fa-brands fa-instagram"></i></a>
             </div>
-            <div id="google_translate_element"></div>
+            <div id="google_translate_element" style="width: 190px;height: 15px; margin-left: 90vh;margin-bottom: 5vh"></div>
             <p class="copyright">&copy; 2023 <span>TuniSights</span> All Right Reserved</p>
         </div>
     </div>

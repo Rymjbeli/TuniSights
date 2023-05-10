@@ -71,7 +71,6 @@
 
 .footer .social-icons i:hover {
     color: #02669A;
-
     cursor: pointer;
     transform: scale(1.2);
     transition: transform 0.5s ease-in-out;

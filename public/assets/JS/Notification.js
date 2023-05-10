@@ -4,12 +4,13 @@ $(document).ready(function() {
         $(this).click(function (){
             let postid = $(this).attr('postid');
             $.ajax({
-                url:'/notification/'+postid,
+                url:'/notification?post='+$(this).attr('notificationId'),
                 type: 'GET',
                 xhrFields: {
                     withCredentials: true
                 },
                 success: function(response) {
+                    console.log(response);
                 },
             });
             const loader = $('.CardLoader:first');

@@ -32,7 +32,9 @@ class NavBarService
             // If the user does not exist, set notifications and unread notifications
             // to empty arrays and hasUnreadNotifications to false
             $notifications = [];
+            $unreadNotifications=[];
             $hasUnreadNotifications = false;
+
         }
         return [
             $notifications,

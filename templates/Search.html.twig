@@ -206,13 +206,15 @@
                                 <div class="Profile">
                                     <div class="Profilee">
                                         {# <img src="{{ post.profileImage }}" alt="{{ post.profileUserName }}" class="profile-image"> #}
-                                        <img src="{{ asset(post.owner.image) }}"
-                                             alt="{{ post.owner.username }}" class="profile-image"
-                                             style="margin-top: 15px;">
-                                        <h6 class="post-username">{{ post.owner.username }}</h6>
+                                        <a href="{{ path('app_profile',{'Userid': post.owner.id}) }}">
+                                            <img href="" src="{{ asset('assets/Images/' ~ post.owner.image) }}"
+                                                 alt="{{ post.owner.username }}" class="profile-image"
+                                                 style="margin-top: 15px;">
+                                        </a>
+                                        <a href="{{ path('app_profile',{'Userid': post.owner.id}) }}" class="post-username">{{ post.owner.username }}</a>
                                         {# <p class="post-date">{{  post.createdAt|date('j F Y') }}</p> #}
                                     </div>
-                                    <img src="{{ asset(post.Image) }}" alt="Post image" class="post-image">
+                                    <img src="{{ asset('assets/Images/' ~ post.Image) }}" alt="Post image" class="post-image">
                                     {#                                    <img src="{{ asset('assets/Images/djerba2.jpg') }}" alt="Post image" class="post-image"> #}
                                     <p style="color: gray; font-style: italic; font-size: 12px; margin-left: 10%; margin-top: 5%">{{ post.location }}</p>
                                 </div>
@@ -262,7 +264,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div class="comments-container" style=" overflow-y: scroll;">
+                                            <div class="comments-container custom-scrollbar" >
                                                 <div class="comments mb-4 mt-auto CommentSectionContainer">
                                                     <ul class="list-group list-group-flush CommentSection"
                                                         postid="{{ post.id }}" index="0">

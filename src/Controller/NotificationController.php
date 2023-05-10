@@ -6,9 +6,11 @@ use App\Entity\Like;
 use App\Entity\Notification;
 use App\Entity\Post;
 use App\Entity\User;
+use App\Repository\NotificationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,18 +18,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class NotificationController extends AbstractController
 {
 
-    #[Route('/notification/{id}', name: 'notification_show')]
+    #[Route('/notification', name: 'notification_show', methods: ['POST', 'GET'])]
     public function show(
         EntityManagerInterface $entityManager,
-        Notification $notification)
+        NotificationRepository $notificationRepository,
+        Request $request
+    )
     : Response
     {
-        // Mark the notification as read
+        $notificationId= $request->get('post');
+        if(!isset($notificationId))
+        {
+            return $this->json(['message' => '']);
+        }
+        $notification=$notificationRepository->find($notificationId);
+        if(!isset($notification))
+        {
+            return $this->json(['message' => 'notification NOT found']);
+        }
+//      Mark the notification as read
         $notification->setIsRead(true);
         $entityManager->flush();
         $user = $this->getUser();
         // Redirect to the profile page
-        return $this->json(['message' => 'sucess']);
+        return $this->json(['message' => 'success']);
     }
 
     #[Route('/notifications/{type}/{targetPostId}/{ownerId}/', name: 'notification_send')]
