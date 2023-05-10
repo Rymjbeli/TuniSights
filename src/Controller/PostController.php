@@ -43,6 +43,7 @@ class PostController extends AbstractController
 
         //Vars that define either the user is adding or editing a post
         $new = false;
+        //Var that define either the user is adding or editing a post
         $AddEdit = 'Add';
 
 

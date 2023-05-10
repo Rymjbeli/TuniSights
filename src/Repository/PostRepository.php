@@ -39,6 +39,49 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByState($state = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->where('p.state = :etat')
+            ->setParameter('etat', $state)
+            ->orderBy('p.rating', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByCategory($category = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->where('p.category = :cat')
+            ->setParameter('cat', $category)
+            ->orderBy('p.rating', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByStateCategory($state = null, $category = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->where('p.category = :cat')
+            ->setParameter('cat', $category)
+            ->orderBy('p.rating', 'DESC')
+            ->andWhere('p.state = :etat')
+            ->setParameter('etat', $state);
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
@@ -63,6 +106,7 @@ class PostRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
     public function findMostLikedPostsInAYear()
     {
         $qb = $this->createQueryBuilder('p');
@@ -76,6 +120,56 @@ class PostRepository extends ServiceEntityRepository
             ->setMaxResults(15);
 
         return $qb->getQuery()->getResult();
+    }
+
+
+    public function findBySearch($input = null)
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->select('p')
+            ->join('p.owner', 'o')
+            ->where(
+                $qb->expr()->orX(
+                    $qb->expr()->like('LOWER(p.description)', ':input'),
+                    $qb->expr()->like('LOWER(o.username)', ':input')
+                )
+            )
+            ->setParameter('input', '%'.strtolower($input).'%')
+            ->orderBy('p.rating', 'DESC');
+
+
+        return $qb->getQuery()->getResult();
+    }
+    public function findPosts($state = null, $category = null, $input = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->select('p')
+            ->leftJoin('p.owner', 'o');
+
+        if ($state !== null) {
+            $queryBuilder->andWhere('p.state = :state')
+                ->setParameter('state', $state);
+        }
+
+        if ($category !== null) {
+            $queryBuilder->andWhere('p.category = :category')
+                ->setParameter('category', $category);
+        }
+
+        if ($input !== null) {
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->like('LOWER(p.description)', ':input'),
+                    $queryBuilder->expr()->like('LOWER(o.username)', ':input')
+                )
+            )
+                ->setParameter('input', '%'.strtolower($input).'%');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
 

@@ -1,0 +1,316 @@
+{% extends 'index.html.twig' %}
+
+
+{% block Title %} Search Page {% endblock %}
+
+
+{% block AddCSSLinks %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link rel="stylesheet" href="{{ asset('assets/CSS/Search.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/Libs/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/CSS/PostCard.css') }}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+{% endblock %}
+
+
+{% block SectionsOfTheBody %}
+
+    <header>
+        <!-- search bar -->
+        <h1 id="search" style="font-style: italic">Bon Voyage !</h1>
+        <div class="search-bar" style="width: 100%">
+            <form id="search_bar_form" style="display: flex; margin-left: 5%; margin-right: 5%; width: 90%" method="GET"
+                  action="{{ path('app_find_search') }}">
+                <input id="search-input" style="width: 85%" name="search_input" type="text"
+                       value="{% if TypedText is defined and TypedText!="" %}{{ TypedText|lower }}"{% else %}"
+                {% endif %} placeholder=" what do you feel like seeing at this moment ?">
+                <button id="search-button" style="height: 45px; width: 10%">Search</button>
+            </form>
+        </div>
+    </header>
+    <main>
+        <div style="  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;    flex-direction: column;
+   position: sticky;
+  top: 170px; margin-top: 40px;
+">
+            <!-- filter -->
+            <!-- posts number -->
+            <div class="filter"
+                 style="min-width: 25vh; height: 4vh; text-align: center ;margin-top: -50px; font-size: 15px; margin-left: 30px">
+                {{ postes|length }} post(s)
+            </div>
+
+            <!-- filter by state -->
+            <div class="filter" style=" margin-top: 10px; margin-left: 30px">
+                <form method="GET" action="{{ path('app_find_filter') }}">
+                    <label for="state-select">Filter by State</label>
+                    <select id="state-select" name="state">
+                        <option value="Tous">All</option>
+                        <option value="Ariana"
+                                {% if SelectedState is defined and SelectedState== 'Ariana' %}selected{% endif %}>Ariana
+                        </option>
+                        <option value="Béja"
+                                {% if  SelectedState is defined and SelectedState == 'Béja' %}selected{% endif %}>Béja
+                        </option>
+                        <option value="Ben Arous"
+                                {% if  SelectedState is defined and SelectedState == 'Ben Arous' %}selected{% endif %}>
+                            Ben Arous
+                        </option>
+                        <option value="Ariana"
+                                {% if SelectedState is defined and SelectedState == 'Ariana' %}selected{% endif %}>
+                            Ariana
+                        </option>
+                        <option value="Béja"
+                                {% if  SelectedState is defined and SelectedState == 'Béja' %}selected{% endif %}>Béja
+                        </option>
+                        <option value="Ben Arous"
+                                {% if  SelectedState is defined and SelectedState == 'Ben Arous' %}selected{% endif %}>
+                            Ben Arous
+                        </option>
+                        <option value="Bizerte"
+                                {% if  SelectedState is defined and SelectedState == 'Bizerte' %}selected{% endif %}>
+                            Bizerte
+                        </option>
+                        <option value="Gabès"
+                                {% if  SelectedState is defined and SelectedState == 'Gabès' %}selected{% endif %}>Gabès
+                        </option>
+                        <option value="Jendouba"
+                                {% if  SelectedState is defined and SelectedState == 'Jendouba' %}selected{% endif %}>
+                            Jendouba
+                        </option>
+                        <option value="Kairouan"
+                                {% if  SelectedState is defined and SelectedState == 'Kairouan' %}selected{% endif %}>
+                            Kairouan
+                        </option>
+                        <option value="Kasserine"
+                                {% if  SelectedState is defined and SelectedState == 'Kasserine' %}selected{% endif %}>
+                            Kasserine
+                        </option>
+                        <option value="Kebili"
+                                {% if  SelectedState is defined and SelectedState == 'Kebili' %}selected{% endif %}>
+                            Kebili
+                        </option>
+                        <option value="Kef"
+                                {% if  SelectedState is defined and SelectedState == 'Kef' %}selected{% endif %}>Kef
+                        </option>
+                        <option value="Mahdia"
+                                {% if  SelectedState is defined and SelectedState == 'Mahdia' %}selected{% endif %}>
+                            Mahdia
+                        </option>
+                        <option value="Manouba"
+                                {% if  SelectedState is defined and SelectedState == 'Manouba' %}selected{% endif %}>
+                            Manouba
+                        </option>
+                        <option value="Medenine"
+                                {% if  SelectedState is defined and SelectedState == 'Medenine' %}selected{% endif %}>
+                            Medenine
+                        </option>
+                        <option value="Monastir"
+                                {% if  SelectedState is defined and SelectedState == 'Monastir' %}selected{% endif %}>
+                            Monastir
+                        </option>
+                        <option value="Nabeul"
+                                {% if  SelectedState is defined and SelectedState == 'Nabeul' %}selected{% endif %}>
+                            Nabeul
+                        </option>
+                        <option value="Sfax"
+                                {% if  SelectedState is defined and SelectedState == 'Sfax' %}selected{% endif %}>Sfax
+                        </option>
+                        <option value="Siliana"
+                                {% if  SelectedState is defined and SelectedState == 'Siliana' %}selected{% endif %}>
+                            Siliana
+                        </option>
+                        <option value="Sidi Bouzid"
+                                {% if  SelectedState is defined and SelectedState == 'Sidi Bouzid' %}selected{% endif %}>
+                            Sidi Bouzid
+                        </option>
+                        <option value="Sousse"
+                                {% if  SelectedState is defined and SelectedState == 'Sousse' %}selected{% endif %}>
+                            Sousse
+                        </option>
+                        <option value="Tataouine"
+                                {% if  SelectedState is defined and SelectedState == 'Tataouine' %}selected{% endif %}>
+                            Tataouine
+                        </option>
+                        <option value="Tozeur"
+                                {% if  SelectedState is defined and SelectedState == 'Tozeur' %}selected{% endif %}>
+                            Tozeur
+                        </option>
+                        <option value="Tunis"
+                                {% if  SelectedState is defined and SelectedState == 'Tunis' %}selected{% endif %}>
+                            Tunis
+                        </option>
+                        <option value="Zaghouan"
+                                {% if  SelectedState is defined and SelectedState == 'Zaghouan' %}selected{% endif %}>
+                            Zaghouan
+                        </option>
+                    </select>
+                    <br>
+                    <label for="category-select">Filter by Category</label>
+                    <select id="category-select" name="category">
+                        <option value="Tous">All</option>
+                        <option value="beach"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'beach' %}selected{% endif %}>
+                            Beach
+                        </option>
+                        <option value="museum"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'museum' %}selected{% endif %}>
+                            Museum
+                        </option>
+                        <option value="historical"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'historical' %}selected{% endif %}>
+                            Historical
+                        </option>
+                        <option value="monument"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'monument' %}selected{% endif %}>
+                            Monument
+                        </option>
+                        <option value="city"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'city' %}selected{% endif %}>
+                            City
+                        </option>
+                        <option value="culture"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'culture' %}selected{% endif %}>
+                            Culture
+                        </option>
+                        <option value="outdoor"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'outdoor' %}selected{% endif %}>
+                            Outdoor
+                        </option>
+                        <option value="desert"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'desert' %}selected{% endif %}>
+                            Desert
+                        </option>
+                        <option value="other"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'other' %}selected{% endif %}>
+                            Other
+                        </option>
+
+                    </select>
+                    <button style="height: 30px; width: 80px; margin: 5% 20% 20% 5%; ">Filter</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- results -->
+        <section class="resultats" style="min-height: 80vh">
+            <div class="postes">
+                {% for post in postes %}
+                    <div class="poste">
+                        <h3 class="post-title">{{ post.title }}</h3>
+                        <div class="post-content">
+                            <div class="post-content1">
+                                <div class="Profile">
+                                    <div class="Profilee">
+                                        {# <img src="{{ post.profileImage }}" alt="{{ post.profileUserName }}" class="profile-image"> #}
+                                        <img src="{{ asset(post.owner.image) }}"
+                                             alt="{{ post.owner.username }}" class="profile-image"
+                                             style="margin-top: 15px;">
+                                        <h6 class="post-username">{{ post.owner.username }}</h6>
+                                        {# <p class="post-date">{{  post.createdAt|date('j F Y') }}</p> #}
+                                    </div>
+                                    <img src="{{ asset(post.Image) }}" alt="Post image" class="post-image">
+                                    {#                                    <img src="{{ asset('assets/Images/djerba2.jpg') }}" alt="Post image" class="post-image"> #}
+                                    <p style="color: gray; font-style: italic; font-size: 12px; margin-left: 10%; margin-top: 5%">{{ post.location }}</p>
+                                </div>
+                                <div class="post-description">
+                                    <h5 class="post-state">State: {{ post.State }}</h5>
+                                    <div style="display: flex; flex-direction: row; width: 100%; align-content: space-between">
+                                        <h4 class="post-place" style="max-width: 70%">{{ post.place }}</h4>
+                                        <div style="margin-left: 20px">
+                                            {% for i in 1..5 %}
+                                                {% if i <= post.rating %}
+                                                    <i class="fas fa-star"
+                                                       style="display: inline-block;color: #deb217;font-size: 10px;"></i>
+                                                {% else %}
+                                                    <i class="fas fa-star"
+                                                       style="display: inline-block;color: #F0F0F0;font-size: 10px;"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <h6 style="margin-top: 0; font-size: 13px">city: {{ post.city }}</h6>
+                                    <div class="post-description-text">
+                                        <p class="limited-text">{{ post.description }}</p>
+                                        <button autofocus class="show-more" onclick="showMore()"
+                                                style="background-color: rgba(0, 97, 149, 0.651);
+                                                color: #fff; font-size: 12px">more
+                                        </button>
+                                    </div>
+                                    <div class="post-footer" style="margin-bottom: 0">
+                                        <div>
+                                            <button postid="{{ post.id }}"
+                                                    class="btn btn-sm btn-square pull-right LikeBtn"
+                                                    style="display: inline; box-shadow: none; border-radius: 0;background-repeat: no-repeat;background-position: center;background-size: 60%;">
+                                            </button>
+                                            <span style="display: inline;" postid="{{ post.id }}"
+                                                  class="LikeCounter">{{ post.likes.count }} like(s)</span>
+                                        </div>
+                                        <div class="card-body d-flex flex-column" style="padding-top: 10px">
+
+                                            <div class="input-group mt-auto" id="commentHolder"
+                                                 style="min-height: 40px">
+                                                <input type="text" class="form-control CommentArea"
+                                                       placeholder="Add a comment..." postid="{{ post.id }}">
+                                                <div class="input-group-append" style="border-color: lightgray">
+                                                    <button class="btn btn-outline-secondary Commentbtn"
+                                                            style="border-radius: 0;  background-color:rgba(0, 97, 149, 0.5); color: white"
+                                                            type="button" postid="{{ post.id }}">Send
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="comments-container" style=" overflow-y: scroll;">
+                                                <div class="comments mb-4 mt-auto CommentSectionContainer">
+                                                    <ul class="list-group list-group-flush CommentSection"
+                                                        postid="{{ post.id }}" index="0">
+                                                        <li class="fw-bold LoadMarker"
+                                                            style="font-size: 15px; color: gray"> Load comments...
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
+    <a href="#" class="btn btn-info back-to-top" role="button" style="    width: 35px;
+    border-radius: 500%;
+    padding: 5px;
+    background-color: rgba(0, 97, 149, 0.651);
+    border: none;
+    ">
+        <i class=" fa fa-arrow-up" style="    color: lightgray;
+    opacity: 1;
+"></i>
+    </a>
+
+
+
+
+{% endblock %}
+
+
+{% block AddJSLinks %}
+    <script src="{{ asset('assets/JS/Search.js') }}"></script>
+    <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
+    <script src="{{ asset('assets/Libs/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/JS/Like.js') }}"></script>
+    <script src="{{ asset('assets/JS/Comment.js') }}"></script>
+{% endblock %}
+
+

@@ -13,7 +13,6 @@ $(document).ready(function(){
                 },
                 success: function(response) {
                     LoadPost(loader, response.toString());
-                    Loadcomments($('.CommentSection[postid="'+ postid  +'"]'),0);
                     console.log('.CommentSection[postid="'+ postid  +'"]')
                 },
                 error: function(xhr, status, error) {
@@ -41,5 +40,5 @@ function LoadPost(loader, content){
         });
         window.setTimeout(function(){
             LoadCommentSection();
-            Loadbtn($("#LikeBtn"));}, 150);
+            Loadbtn($(".LikeBtn"));}, 150);
 }

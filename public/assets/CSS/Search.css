@@ -1,0 +1,350 @@
+* {
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+}
+
+body {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0;
+    background-image: url("../Images/rasRmal.jpg");
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 0.66) !important;
+    background-blend-mode: overlay;
+}
+
+/* Header Styles */
+header {
+    height: 40vh;
+    background-image: url("../Images/rasRmal1.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 1px 2px rgba(241, 239, 239, 0.06);
+    background-position: top;
+    padding: 1rem;
+    color: #ffffff;
+
+}
+
+/* header.h1 */
+h1 {
+    font-size: 5vh;
+    font-family: Nunito, sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    color: #ffffff;
+    text-shadow: 4px 4px 4px #333333;
+    padding-left: 10vh;
+}
+
+/*search-bar */
+.search-bar {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 5px;
+
+}
+
+.search-bar input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+}
+
+
+main {
+    display: flex;
+}
+
+/* filter */
+.filter {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 10px;
+    width: 25vh;
+    min-width: 25vh;
+    height: 45vh;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+}
+
+.filter h2 {
+    margin-top: 0;
+}
+
+.filter ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.filter label {
+    display: block;
+    font-size: 2.5vh;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.filter input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Filters Styles */
+.filters {
+    flex-basis: 25%;
+    margin-right: 2rem;
+}
+
+.filters h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.filters ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filters li {
+    margin-bottom: 1rem;
+}
+
+.filters input[type="checkbox"] {
+    margin-right: 0.5rem
+}
+
+/* Label Styles */
+label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Select Styles */
+select {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0.5rem;
+    font-size: 2vh;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    transition: border-color 0.2s ease-in-out;
+}
+
+select:focus {
+    outline: none;
+    border-color: #4285f4;
+}
+
+/*poste*/
+
+.poste {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 20px 20px 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    background-color: #fff;
+    height: auto;
+    max-width: 160vh;
+    margin: 40px 20px 0 30px;
+    max-height: 100vh;
+    overflow: hidden;
+    min-height: 300px;
+    padding: 4%;
+}
+
+.poste:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-body {
+    text-align: left;
+}
+
+
+.post-content {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-content1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-image {
+    /*left alined */
+    width: 80%;
+    height: 80%;
+    max-height: 500px;
+    min-height: 230px;
+    position: relative;
+    margin: 4%;
+    border-radius: 10px;
+}
+
+.post-description {
+    margin-top: 0;
+    margin-bottom: -5px;
+    min-width: 48%;
+    flex: 1;
+    margin-left: 2%;
+}
+
+.post-state {
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-style: italic;
+    color: gray;
+}
+
+.post-place {
+    font-size: 18px;
+    margin-bottom: 5px;
+    max-width: 70%;
+}
+
+.profile-image {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-bottom: -20px;
+}
+
+.Profile {
+    display: flex;
+    max-width: 50%;
+    width: auto;
+    margin-bottom: 15px;
+    height: auto;
+    max-height: 1300px;
+    flex-direction: column;
+}
+
+.Profilee {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    width: 80%;
+    justify-content: space-between;
+    height: 30px;
+}
+
+.post-username {
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.post-footer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.like-button img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.like-button img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.like-button img:active {
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 150px;
+}
+
+.limited-text {
+    height: 150px;
+    overflow: hidden;
+    max-height: 200px;
+    transition: max-height 0.5s;
+}
+
+.post-description-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 650px;
+}
+
+.post-description-text p {
+    margin: 15px;
+}
+
+.post-title {
+    margin-bottom: 10px;
+    font-size: 44px;
+    text-align: center;
+    font-family: Brush Script MT, sans-serif;
+}
+
+button {
+    background-color: rgba(0, 97, 149, 0.651);
+!important;
+    color: #fff;
+!important;
+    border-radius: 10px;
+!important;
+    border: none;
+    box-shadow: 1px 1px 1px 1px rgba(0, 97, 149, 0.5);
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    z-index: 9999;
+    right: 20px;
+    display: none;
+}
+
+/* Add arrow icon */
+.back-to-top i {
+    font-size: 24px;
+}
+

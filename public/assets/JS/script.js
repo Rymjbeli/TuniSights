@@ -55,3 +55,29 @@ var swiper2 = new Swiper(".slide-content", {
         },
     },
 });
+
+
+
+const selectBoxCat = document.querySelector('#category-select');
+const selectBoxState = document.querySelector('#state-select');
+
+
+// Set the initial value of the select box to the stored value, if any
+const storedValueCat = localStorage.getItem('category');
+if (storedValueCat) {
+    selectBoxCat.value = storedValueCat;
+}
+const storedValueState = localStorage.getItem('state');
+if (storedValueState) {
+    selectBoxState.value = storedValueState;
+}
+// Store the selected value in local storage when an option is selected
+selectBoxCat.addEventListener('change', (event) => {
+    const selectedValueCat = event.target.value;
+    localStorage.setItem('category', selectedValueCat);
+});
+
+selectBoxState.addEventListener('change', (event) => {
+    const selectedValueState = event.target.value;
+    localStorage.setItem('state', selectedValueState);
+});
