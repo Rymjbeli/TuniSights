@@ -1,3 +1,28 @@
+var colors = [
+    '#EF9A9A',
+    '#F48FB1',
+    '#CE93D8',
+    '#B39DDB',
+    '#9FA8DA',
+    '#90CAF9',
+    '#81D4FA',
+    '#80DEEA',
+    '#80CBC4',
+    '#A5D6A7',
+    '#C5E1A5',
+    '#E6EE9C',
+    '#FFF59D',
+    '#FFE082',
+    '#FFCC80',
+    '#FFAB91',
+    '#BCAAA4',
+    '#B0BEC5',
+    '#F8BBD0',
+    '#B2EBF2',
+    '#DCEDC8',
+    '#FFCCBC',
+    '#B2DFDB'
+];
 /* PostsByCategory chart */
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve the chart data passed from the controller
@@ -11,36 +36,15 @@ document.addEventListener('DOMContentLoaded', function () {
             datasets: [{
                 data: Object.values(chartDataByCategory),
                 backgroundColor: [
-                    '#000080',
-                    '#87CEEB',
-                    '#800080', // Violet
-                    '#FFD1DC',
-                    '#007bff',
-                    '#008080', // Vert bleuté
-                    '#1e90ff',
-                    '#4169e1',
-                    '#6495ed',
-                    '#87ceeb',
-                    '#87cefa',
-                    '#00bfff',
-                    '#1aa3ff',
-                    '#00ccff',
-                    '#00e5ff',
-                    '#33ccff',
-                    '#66ccff',
-                    '#99ccff',
-                    '#ccddff',
-                    '#e6f2ff',
-                    '#b3e0ff',
-                    '#80ccff',
-                    '#4db8ff',
-                    '#1a94ff',
-                    '#0066cc',
-                    '#003d99',
-                    '#001a66',
-                    '#000d33',
-                    '#00051a'
-
+                    '#ffe9c2',
+                    '#ecd08b',
+                    '#e57a9a',
+                    '#c767a3',
+                    '#6f68c0',
+                    '#4d77c5',
+                    '#71bdf0',
+                    '#6ec7a6',
+                    '#99df6d'
                 ]
             }]
         },
@@ -63,49 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
             labels: Object.keys(chartDataByState),
             datasets: [{
                 data: Object.values(chartDataByState),
-                backgroundColor: [
-                    '#000080',   // Bleu marine
-                    '#87CEEB',   // Bleu ciel
-                    '#FFD1DC',   // Rose pâle
-                    '#1e90ff',
-                    '#800080',   // Violet
-                    '#008080',   // Vert bleuté
-                    '#007BFF',   // Bleu primaire
-                    '#1E90FF',   // Bleu dodger
-                    '#4169E1',   // Bleu royal
-                    '#6495ED',   // Bleu acier clair
-                    '#FF1493',   // Rose vif
-                    '#FFA07A',   // Saumon clair
-                    '#FF6347',   // Rouge corail
-                    '#1aa3ff',
-                    '#00ccff',
-                    '#FF8C00',   // Orange foncé
-                    '#FFFF00',   // Jaune vif
-                    '#ADFF2F',   // Vert jaunâtre
-                    '#32CD32',   // Vert lime
-                    '#007bff',
-                    '#4169e1',
-                    '#6495ed',
-                    '#87ceeb',
-                    '#87cefa',
-                    '#00bfff',
-                    '#00ccff',
-                    '#00e5ff',
-                    '#33ccff',
-                    '#66ccff',
-                    '#99ccff',
-                    '#ccddff',
-                    '#e6f2ff',
-                    '#b3e0ff',
-                    '#80ccff',
-                    '#4db8ff',
-                    '#1a94ff',
-                    '#0066cc',
-                    '#003d99',
-                    '#001a66',
-                    '#000d33',
-                    '#00051a'
-                ]
+                backgroundColor: colors
             }]
         },
         options: {

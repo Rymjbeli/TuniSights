@@ -35,6 +35,8 @@ class Comment
     #[ORM\OneToMany(mappedBy: 'target', targetEntity: Reply::class, orphanRemoval: true)]
     private Collection $replies;
 
+    #[ORM\OneToOne(mappedBy: 'comment', orphanRemoval: true)]
+    private ?Notification $notification = null;
 
     public function __construct()
     {
@@ -149,4 +151,6 @@ class Comment
 
         return $this;
     }
+
+
 }

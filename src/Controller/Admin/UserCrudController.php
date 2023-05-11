@@ -19,6 +19,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use Symfony\Component\Form\{FormBuilderInterface, FormEvents};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
@@ -58,10 +60,24 @@ class UserCrudController extends AbstractCrudController
             ->setFormType(RepeatedType::class)
             ->setFormTypeOptions([
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password'],
+                'first_options' => ['label' => 'Password',
+                    'attr' => [
+                        'class' => 'password',
+                        'placeholder' => 'Password',
+                    ],
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a password',
+                        ]),
+                        new Regex([
+                            'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/',
+                            'message' => 'Your password must be at least 6 characters long and contain digits, uppercase and lowercase letters',
+                        ]),
+                    ],],
                 'second_options' => ['label' => '(Repeat)'],
                 'mapped' => false,
             ])
+
             ->setRequired($pageName === Crud::PAGE_NEW)
             ->onlyOnForms();
         yield DateField::new('dateOfBirth');

@@ -23,22 +23,19 @@ class EditProfileController extends AbstractController
         EntityManagerInterface $entityManager,
         UploaderService        $uploaderService,
         ManagerRegistry        $doctrine,
-        NavBarService          $navBarService  // inject navBarService
-
-
+        NavBarService          $navBarService,// inject navBarService
     ): Response
     {
         $user = $this->getUser();
 
         // Call the navBarService to get notification variables for the navbar
-        [
-            $notifications,
-            $unreadNotifications,
-            $hasUnreadNotifications,
+    [
+    $notifications,
+        $unreadNotifications,
+        $hasUnreadNotifications,
 
-        ] = $navBarService->navBarVariables($doctrine, $user);
+    ] = $navBarService->navBarVariables($doctrine, $user);
 
-        $user = $this->getUser();
         $form = $this->createForm(EditProfileFormType::class, $user);
         $form->handleRequest($request);
 

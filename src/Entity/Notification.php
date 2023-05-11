@@ -20,7 +20,7 @@ class Notification
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'notification')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $targetPost = null;
 
@@ -30,10 +30,10 @@ class Notification
     #[ORM\Column]
     private ?bool $isRead = null;
 
-    #[ORM\OneToOne(inversedBy: 'notification', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'notification')]
     private ?Like $forLike = null;
 
-    #[ORM\OneToOne(inversedBy: 'notification', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'notification')]
     private ?Comment $comment = null;
 
 

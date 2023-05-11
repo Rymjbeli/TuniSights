@@ -174,7 +174,8 @@ select:focus {
     max-height: 100vh;
     overflow: hidden;
     min-height: 300px;
-    padding: 4%;
+    padding: 3%;
+    padding-bottom: 1%;
 }
 
 .poste:hover {
@@ -193,6 +194,8 @@ select:focus {
     overflow: hidden;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+
 }
 
 .post-content1 {
@@ -200,6 +203,7 @@ select:focus {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .post-image {
@@ -219,6 +223,8 @@ select:focus {
     min-width: 48%;
     flex: 1;
     margin-left: 2%;
+    width: 100%;
+    max-width: 65%;
 }
 
 .post-state {
@@ -251,6 +257,12 @@ select:focus {
     height: auto;
     max-height: 1300px;
     flex-direction: column;
+    align-items: center;
+}
+
+.resultats{
+    min-height: 80vh;
+    width: 100%;
 }
 
 .Profilee {
@@ -304,7 +316,7 @@ select:focus {
 .comments-container {
     overflow-y: scroll;
 }
-
+/*
 .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
 }
@@ -324,6 +336,8 @@ select:focus {
     height: 50px;
     overflow: auto;
 }
+
+ */
 
 .notifications::-webkit-scrollbar {
     width: 0px;
@@ -379,3 +393,10 @@ button {
     font-size: 24px;
 }
 
+.dropdown-menu, .dropdown-menu-lg-end {
+    background-color: rgba(0, 97, 149, 0.651) !important;
+}
+
+li > a {
+    color: white !important;
+}

@@ -41,7 +41,7 @@ function CreateCommentElement(comment){
     usernameSmall.setAttribute('class', 'text-muted font-weight-bold');
     usernameSmall.textContent = comment.username;
     let contentDiv = document.createElement('div');
-    contentDiv.setAttribute('class', 'd-flex justify-content-between align-items-center');
+    contentDiv.setAttribute('class', 'd-flex justify-content-between align-items-center comment-item');
     let commentDiv = document.createElement('div');
     let commentP = document.createElement('p');
     commentP.setAttribute('class', 'mb-1');
@@ -53,9 +53,36 @@ function CreateCommentElement(comment){
     contentDiv.appendChild(commentDiv);
     contentDiv.appendChild(dateSmall);
     li.appendChild(usernameSmall);
+    if(comment.owned){
+        let deleteBtn = document.createElement('button');
+        deleteBtn.setAttribute('class', 'btn btn-danger btn-sm');
+        deleteBtn.style.borderRadius = '25%';
+        let deleteicon = document.createElement('i');
+        deleteicon.setAttribute('class', 'fas fa-trash');
+        deleteBtn.appendChild(deleteicon);
+        li.appendChild(deleteBtn);
+        deleteBtn.addEventListener('click', function (){
+            $.ajax({
+                url: 'http://127.0.0.1:8000/api/DeleteComment',
+                type: 'POST',
+                data: { Comment_id: comment.id},
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    console.log(response);
+                    li.remove();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error: ", error);
+                }
+            });
+        });
+    }
     li.appendChild(contentDiv);
     return li;
 }
+
 function Loadcomments(commentsection){
     $.ajax({
         url: 'http://127.0.0.1:8000/api/LoadComment',

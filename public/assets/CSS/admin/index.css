@@ -13,7 +13,7 @@
 }
 
 .content {
-    background-color: rgba(238, 245, 249, 0.75) !important;
+    background-color: transparent !important;
     height: auto;
     width: 1100px;
 }

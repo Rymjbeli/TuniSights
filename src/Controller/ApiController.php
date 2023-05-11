@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Like;
 use App\Entity\Reply;
+use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,16 +30,10 @@ class ApiController extends abstractController
         $this->registry = $managerRegistry;
     }
     #[Route('/LoadComment',name: 'LoadCommentApi', methods: ['POST','GET'])]
-    public function LoadComment(
-        Request $request,
-        PostRepository $postRepository,
-        SerializerInterface $serializer
-    ):Response
-    {
+    public function LoadComment(Request $request, PostRepository $postRepository,SerializerInterface $serializer):Response{
         $PostId = $request->get('Post_id');
         $start = $request->get('start');
-
-
+        $user = $this->getUser();
         if(!isset($PostId)||!isset($start)){
             return new Response('no parameters provided', Response::HTTP_METHOD_NOT_ALLOWED);
         }
@@ -54,12 +49,18 @@ class ApiController extends abstractController
                 'content' => $comment->getContent(),
                 'username' => $comment->getOwner()->getUsername(),
                 'date' => $comment->getCreatedAt()->format('Y-m-d'),
+                'owned' => $comment->getOwner() == $this->getUser(),
+                'id' => $comment->getId()
             ];
         }, $commentlist);
         $response = new JsonResponse($commentData);
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+
+
+
+
 
     #[Route('/AddComment',name: 'AddCommentApi', methods: ['POST'])]
     public function AddComment(Request $request,PostRepository $postRepository):Response{
@@ -113,7 +114,9 @@ class ApiController extends abstractController
         return $this->json([
             'username' => $comment->getOwner()->getUsername(),
             'content' => $comment->getContent(),
-            'date' => $comment->getCreatedAt()->format('Y-m-d')
+            'date' => $comment->getCreatedAt()->format('Y-m-d'),
+            'owned' => $comment->getOwner() == $this->getUser(),
+            'id' => $comment->getId()
         ]);
     }
     #[Route('/FetchPost', name: 'PostApi',methods: ['POST'])]
@@ -170,7 +173,7 @@ class ApiController extends abstractController
     {
         $entityManager = $registry->getManager();
         $userid = $this->getUser();//implement user get method
-        $PostId = $request->request->get('PostId');
+        $PostId = $request->get('PostId');
         if (!isset($PostId)) {
             return $this->json([
                 'error' => 'insufficient data'
@@ -195,11 +198,11 @@ class ApiController extends abstractController
             if($like->getOwner() === $userid){
                 // If the current user has already liked the post, remove the like entity
                 // and the associated notification (if the post owner is not the current user)
-                if($post->getOwner()!=$userid){
+              /*  if($post->getOwner()!=$userid){
                     $notification = $like->getNotification();
                     $entityManager->remove($notification);
                     $entityManager->flush();
-                }
+                }*/
                 $entityManager->remove($like);
                 $entityManager->flush();
                 $exists = true;
@@ -214,9 +217,9 @@ class ApiController extends abstractController
             $like->setTargetPost($post);
 
             // If the post owner is not the current user, send a notification to the post owner
-            if($userid !== $post->getOwner()){
+           /* if($userid !== $post->getOwner()){
                 $this->notificationController->sendNotification('like', $post,$userid,$entityManager,$like);
-            }
+            }*/
             $entityManager->persist($like);
             $entityManager->flush();
             $likes->add($like);
@@ -226,4 +229,29 @@ class ApiController extends abstractController
             'LikeCount' => count($likes)
         ]);
     }
+
+
+    #[Route('/DeleteComment',name: 'LoadPostApi', methods: ['POST'])]
+    public function DeleteComment(Request $request, CommentRepository $repository, ):Response{
+        $user = $this->getUser();
+        if(!isset($user)){
+            return new Response('you have to login to use this method', Response::HTTP_METHOD_NOT_ALLOWED);
+        }
+        $CommentId = $request->get('Comment_id');
+        if(!isset($CommentId)){
+            return new Response('no parameters provided', Response::HTTP_NON_AUTHORITATIVE_INFORMATION);
+        }
+        $comment = $repository->find($CommentId);
+        if(!isset($comment)){
+            return new Response('Comment doesnt exits', Response::HTTP_BAD_REQUEST);
+        }
+        if($comment->getOwner() != $user){
+            return new Response('you are not the owner of this comment', Response::HTTP_BAD_REQUEST);
+        }
+        $entityManager = $this->registry->getManager();
+        $entityManager->remove($comment);
+        $entityManager->flush();
+        return new Response('Comment deleted', Response::HTTP_OK);
+    }
+
 }

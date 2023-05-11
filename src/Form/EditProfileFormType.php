@@ -61,7 +61,7 @@ class EditProfileFormType extends AbstractType
                 'format' => 'yyyy-MM-dd',
                 'years' => range(date('Y') - 100, date('Y') - 13),
             ]);
-            }
+    }
 
 
     public function configureOptions(OptionsResolver $resolver): void

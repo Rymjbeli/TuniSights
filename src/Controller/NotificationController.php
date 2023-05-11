@@ -61,10 +61,10 @@ class NotificationController extends AbstractController
 
         // If the notification is for a like, set the corresponding like
         // object and the notification on the like object
-        if($type == 'like'){
+      /*  if($type == 'like'){
             $notification->setForLike($like);
             $like->setNotification($notification);
-        }
+        }*/
 
         // Set the notification as unread
         $notification->setIsRead(false);

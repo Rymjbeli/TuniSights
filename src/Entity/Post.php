@@ -56,7 +56,10 @@ class Post
     #[ORM\OneToMany(mappedBy: 'targetPost', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
 
-    #[ORM\Column(length: 255,type: 'string',nullable: true)]
+    #[ORM\OneToMany(mappedBy: 'targetPost', targetEntity: Notification::class, orphanRemoval: true)]
+    private Collection $notification;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $Image = null;
 
     #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'Image')]

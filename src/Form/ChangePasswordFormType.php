@@ -33,7 +33,7 @@ class ChangePasswordFormType extends AbstractType
                         ]),
                         new Regex([
                             'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/',
-                            'message' => 'Your password must be at least 6 characters long and contain digits, uppercase and lowercase letters',
+                            'message' => 'At least 6 characters long and contain digits, uppercase and lowercase letters',
                         ]),
                     ],
                 ],

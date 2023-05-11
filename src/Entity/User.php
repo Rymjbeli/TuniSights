@@ -36,10 +36,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[Assert\Regex(
-        pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/',
-        message: 'Password must be at least 8 characters : uppercases, lowercase letters and numbers'
-    )]
     #[ORM\Column(length: 255, nullable: false)]
     private string $password;
 
@@ -55,7 +51,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: PasswordResetToken::class, orphanRemoval: true)]
     private Collection $passwordResetTokens;
 
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Post::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Post::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $posts;
 
     #[ORM\Column(length: 255, unique: true, nullable: false)]
@@ -67,7 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private bool $isVerified = false;
 
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Reply::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Reply::class,cascade: ['remove'], orphanRemoval: true)]
     private Collection $replies;
 
     #[ORM\Column(nullable: true)]

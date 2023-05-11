@@ -25,7 +25,8 @@ class Like
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $targetPost = null;
 
-    #[ORM\OneToOne(mappedBy: 'forLike', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'forLike', targetEntity: Notification::class, cascade: ['persist','remove'], orphanRemoval: true)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Notification $notification = null;
 
 
