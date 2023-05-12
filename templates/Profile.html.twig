@@ -36,7 +36,7 @@
           {% if app.user.image %}
             <img class="profile_picture" src="{{ asset('assets/Images/' ~ app.user.image) }}">
           {% else %}
-            <img class="profile_picture" src="/assets/Images/avatar.png" />
+            <img class="profile_picture" src="{{ asset('assets/Images/avatar.png') }}" />
           {% endif %}
         </div>
         <div class="col-md-9" id="text">

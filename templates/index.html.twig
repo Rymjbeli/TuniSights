@@ -85,7 +85,7 @@
                             {% if app.user.image %}
                                 <img class="nav-img" src="{{ asset('assets/Images/' ~ app.user.image) }}">
                             {% else %}
-                                <img class="nav-img" src="/assets/Images/avatar.png" />
+                                <img class="nav-img" src="{{ asset('assets/Images/avatar.png') }}" />
                             {% endif %}
                         </div>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -206,9 +206,11 @@
                                     <div class="row">
                                         <a href="{{ path('app_profile',{'Userid': post.owner.id}) }}"
                                            class="col col-lg-2 col-md-6">
-                                            <img id="OwnerImage" class="avatar-img"
-                                                 src="{{ asset('assets/Images/' ~ post.owner.image) }}"
-                                                 alt="">
+                                            {% if post.owner.image %}
+                                                <img id="OwnerImage" class="avatar-img" src="{{ asset('assets/Images/' ~ post.owner.image) }}">
+                                            {% else %}
+                                                <img id="OwnerImage" class="avatar-img" src="{{ asset('assets/Images/avatar.png') }}" />
+                                            {% endif %}
                                         </a>
                                         <div class="col col-lg-6 col-md-6" id="namedate">
                                             <a href="{{ path('app_profile',{'Userid': post.owner.id}) }}"

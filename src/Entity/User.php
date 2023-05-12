@@ -272,7 +272,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getImageUrl(): ?string
     {
         if (!$this->image) {
-            return 'assets/Images/avatar.png';
+            return 'avatar.png';
         }
 
         if (strpos($this->image, '/') !== false) {
