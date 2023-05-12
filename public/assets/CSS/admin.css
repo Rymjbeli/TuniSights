@@ -49,11 +49,12 @@ body {
     padding: 50px;
     margin: auto;
     margin-top: 50px;
-    margin-bottom: -50px;
+    margin-bottom: 50px;
     border-radius: 10px;
 }
 
 .content-header {
+    position: unset !important;
     background-color: transparent !important;
 }
 
@@ -161,7 +162,7 @@ table tr:nth-child(odd) td {
         padding: 50px;
         margin: auto;
         margin-top: 50px;
-        margin-bottom: -50px;
+        margin-bottom: 50px;
         border-radius: 10px;    }
 
     .content-top.ea-search-disabled{

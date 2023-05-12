@@ -69,6 +69,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $hasUnreadNotifications = null;
 
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comment;
+
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Like::class, orphanRemoval: true)]
+    private Collection $like;
+
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Notification::class, orphanRemoval: true)]
+    private Collection $notifications;
 
     public function __construct()
     {

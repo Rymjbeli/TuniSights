@@ -34,53 +34,83 @@ function CommentEvent(commentarea){
     });
 
 }
-function CreateCommentElement(comment){
-    let li = document.createElement('li');
+function CreateCommentElement(comment) {
+    const li = document.createElement('li');
     li.setAttribute('class', 'list-group-item');
-    let usernameSmall = document.createElement('small');
-    usernameSmall.setAttribute('class', 'text-muted font-weight-bold');
-    usernameSmall.textContent = comment.username;
-    let contentDiv = document.createElement('div');
-    contentDiv.setAttribute('class', 'd-flex justify-content-between align-items-center comment-item');
-    let commentDiv = document.createElement('div');
-    let commentP = document.createElement('p');
-    commentP.setAttribute('class', 'mb-1');
-    commentP.textContent = comment.content;
-    commentDiv.appendChild(commentP);
-    let dateSmall = document.createElement('small');
-    dateSmall.setAttribute('class', 'text-muted');
-    dateSmall.textContent = comment.date;
-    contentDiv.appendChild(commentDiv);
-    contentDiv.appendChild(dateSmall);
+
+    const usernameSmall = createUsernameSmall(comment.username);
     li.appendChild(usernameSmall);
-    if(comment.owned){
-        let deleteBtn = document.createElement('button');
-        deleteBtn.setAttribute('class', 'btn btn-danger btn-sm');
-        deleteBtn.style.borderRadius = '25%';
-        let deleteicon = document.createElement('i');
-        deleteicon.setAttribute('class', 'fas fa-trash');
-        deleteBtn.appendChild(deleteicon);
-        li.appendChild(deleteBtn);
-        deleteBtn.addEventListener('click', function (){
-            $.ajax({
-                url: 'http://127.0.0.1:8000/api/DeleteComment',
-                type: 'POST',
-                data: { Comment_id: comment.id},
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(response) {
-                    console.log(response);
-                    li.remove();
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error: ", error);
-                }
-            });
-        });
-    }
+
+    const contentDiv = createContentDiv(comment.content, comment.date);
     li.appendChild(contentDiv);
+
+    if (comment.owned) {
+        const deleteBtn = createDeleteButton(comment.id);
+        li.appendChild(deleteBtn);
+    }
+
     return li;
+}
+
+function createUsernameSmall(username) {
+    const usernameSmall = document.createElement('small');
+    usernameSmall.setAttribute('class', 'text-muted font-weight-bold');
+    usernameSmall.textContent = username;
+    return usernameSmall;
+}
+
+function createContentDiv(content, date) {
+    const contentDiv = document.createElement('div');
+    contentDiv.setAttribute('class', 'd-flex justify-content-between align-items-center comment-item');
+
+    const commentDiv = document.createElement('div');
+    const commentP = document.createElement('p');
+    commentP.setAttribute('class', 'mb-1');
+    commentP.textContent = content;
+    commentDiv.appendChild(commentP);
+    contentDiv.appendChild(commentDiv);
+
+    const dateSmall = document.createElement('small');
+    dateSmall.setAttribute('class', 'text-muted');
+    dateSmall.textContent = date;
+    contentDiv.appendChild(dateSmall);
+
+    return contentDiv;
+}
+
+function createDeleteButton(commentId) {
+    const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('class', 'btn btn-danger btn-sm');
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.marginLeft = '90%';
+    deleteBtn.style.marginTop = '5px';
+    deleteBtn.style.opacity = '0.8';
+    deleteBtn.style.color = 'rgb(0, 97, 149)';
+    deleteBtn.style.backgroundColor = 'transparent';
+
+    const deleteicon = document.createElement('i');
+    deleteicon.setAttribute('class', 'fas fa-trash');
+    deleteBtn.appendChild(deleteicon);
+
+    deleteBtn.addEventListener('click', function () {
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/DeleteComment',
+            type: 'POST',
+            data: { Comment_id: commentId },
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (response) {
+                console.log(response);
+                deleteBtn.parentElement.remove();
+            },
+            error: function (xhr, status, error) {
+                console.error("Error: ", error);
+            }
+        });
+    });
+
+    return deleteBtn;
 }
 
 function Loadcomments(commentsection){

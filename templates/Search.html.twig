@@ -160,29 +160,25 @@
                                 {% if  SelectedCategory is defined and SelectedCategory == 'museum' %}selected{% endif %}>
                             Museum
                         </option>
-                        <option value="historical"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'historical' %}selected{% endif %}>
-                            Historical
+                        <option value="parc"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'parc' %}selected{% endif %}>
+                            Parc
+                        </option>
+                        <option value="cafe"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'cafe' %}selected{% endif %}>
+                            Cafe
                         </option>
                         <option value="monument"
                                 {% if  SelectedCategory is defined and SelectedCategory == 'monument' %}selected{% endif %}>
                             Monument
                         </option>
-                        <option value="city"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'city' %}selected{% endif %}>
-                            City
+                        <option value="restaurant"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'restaurant' %}selected{% endif %}>
+                            Restaurant
                         </option>
-                        <option value="culture"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'culture' %}selected{% endif %}>
-                            Culture
-                        </option>
-                        <option value="outdoor"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'outdoor' %}selected{% endif %}>
-                            Outdoor
-                        </option>
-                        <option value="desert"
-                                {% if  SelectedCategory is defined and SelectedCategory == 'desert' %}selected{% endif %}>
-                            Desert
+                        <option value="Natural view"
+                                {% if  SelectedCategory is defined and SelectedCategory == 'Natural view' %}selected{% endif %}>
+                            Natural view
                         </option>
                         <option value="other"
                                 {% if  SelectedCategory is defined and SelectedCategory == 'other' %}selected{% endif %}>
@@ -309,10 +305,7 @@
 
 {% block AddJSLinks %}
     <script src="{{ asset('assets/JS/Search.js') }}"></script>
-    <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
     <script src="{{ asset('assets/Libs/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/JS/Like.js') }}"></script>
-    <script src="{{ asset('assets/JS/Comment.js') }}"></script>
 {% endblock %}
 
 

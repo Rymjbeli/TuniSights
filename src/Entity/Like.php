@@ -17,7 +17,7 @@ class Like
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'likes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
@@ -25,8 +25,7 @@ class Like
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $targetPost = null;
 
-    #[ORM\OneToOne(mappedBy: 'forLike', targetEntity: Notification::class, cascade: ['persist','remove'], orphanRemoval: true)]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\OneToOne(mappedBy: 'forLike', cascade: ['persist','remove'], orphanRemoval: true)]
     private ?Notification $notification = null;
 
 

@@ -118,14 +118,11 @@
                     <div class="text-start header-elements">
                         {% for type, messages in app.flashes %}
                             {% for message in messages %}
-                                <div class="alert alert-{{ type }}"
-                                     style="text-align: center;color:white;background-color: rgba(0, 98, 149, 0.4);width: 40rem;margin-left: 28rem;margin-top: 20vh;margin-bottom: -10vh;">
+                                <div class="alert alert-{{ type }} cadre">
                                     {{ message }}
                                 </div>
                             {% endfor %}
                         {% endfor %}
-
-
                         <h1>Never stop <br>Exploring Tunisia</h1>
                     </div>
                 </div>
@@ -310,15 +307,13 @@
 </script>
 {% block AddJSLinks %}
     <script src="{{ asset('assets/Libs/swiper-bundle.js') }}"></script>
-    <script src="{{ asset('assets/JS/PostCard.js') }}"></script>
-    <script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
-    <script src="{{ asset('assets/JS/Like.js') }}"></script>
-    <script src="{{ asset('assets/JS/Comment.js') }}"></script>
-    <script src="{{ asset('assets/JS/Notification.js') }}"></script>
-
-
 {% endblock %}
+<script src="{{ asset('assets/JS/PostCard.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/JS/script.js') }}"></script>
+<script src="{{ asset('assets/Libs/jquery-3.6.4.min.js') }}"></script>
+<script src="{{ asset('assets/JS/Like.js') }}"></script>
+<script src="{{ asset('assets/JS/Comment.js') }}"></script>
+<script src="{{ asset('assets/JS/Notification.js') }}"></script>
 <script src="{{ asset('assets/JS/NavBar.js') }}"></script>
 
 

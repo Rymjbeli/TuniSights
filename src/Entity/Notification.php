@@ -16,7 +16,7 @@ class Notification
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'notification')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
@@ -30,7 +30,7 @@ class Notification
     #[ORM\Column]
     private ?bool $isRead = null;
 
-    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'notification')]
+    #[ORM\OneToOne(inversedBy: 'notification')]
     private ?Like $forLike = null;
 
     #[ORM\OneToOne(inversedBy: 'notification')]

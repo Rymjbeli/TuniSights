@@ -61,7 +61,7 @@ h1 {
 
 .main-header .container {
     margin-left: 50px;
-    margin-top: 9vh;
+    margin-top: 4vh;
 }
 
 .fa-solid.fa-angles-down {
@@ -197,7 +197,8 @@ h1 {
 .swiper-navBtn::after {
     font-size: 35px;
 }
-.title{
+
+.title {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -206,6 +207,7 @@ h1 {
     overflow-wrap: break-word;
 
 }
+
 .swiper-button-next {
     right: 0;
 }
@@ -238,7 +240,7 @@ h1 {
 
 .text-center {
     margin: 0;
-    margin-top: 30px!important;
+    margin-top: 30px !important;
 }
 
 /* End Discover */
@@ -263,7 +265,7 @@ h1 {
 }
 
 .About-us .container .row, .text-center, .header-elements, .image-About {
-    margin-top:100px;
+    margin-top: 100px;
 }
 
 /* Start of About Us Section */
@@ -387,7 +389,7 @@ h1 {
     }
 
     #thedreamer {
-      display: none;
+        display: none;
     }
 
     .HR-LINE-About {
@@ -397,9 +399,10 @@ h1 {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 996px) {
-    #namedate{
+    #namedate {
         margin-left: -80px;
     }
+
     .image-About {
         width: 60%;
         max-height: 100%;
@@ -429,7 +432,7 @@ h1 {
 }
 
 @media only screen and (min-width: 996px) and (max-width: 1200px) {
-    #namedate{
+    #namedate {
         margin-left: 0px;
     }
 
@@ -490,3 +493,10 @@ h1 {
     }
 }
 
+.cadre {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 98, 149, 0.4);
+    width: 70rem;
+    margin-left:0;
+}

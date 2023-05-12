@@ -42,12 +42,12 @@ class AddPostType extends AbstractType
                 'choices' => [
                     '-- Select a category --' => '',
                     'Cafe' => 'cafe',
-                    'Restaurant' => 'restau',
+                    'Restaurant' => 'restaurant',
                     'Parc' => 'parc',
                     'Museum' => 'museum',
                     'Monument' => 'monument',
                     'Beach' => 'beach',
-                    'Natural vue' => 'natural view',
+                    'Natural view' => 'natural view',
                     'Other' => 'other',
                 ],
                 'constraints' => [

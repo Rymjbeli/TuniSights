@@ -199,7 +199,7 @@ class PostFixture extends Fixture
         foreach ($postes as $i) {
             $post = new Post();
             $userRepository = $manager->getRepository(User::class);
-            $user = $userRepository->findOneBy(['id' => rand(6, 10)]);
+            $user = $userRepository->findOneBy(['id' => rand(1, 5)]);
             /* set the rand values depending on your database*/
             $post->setOwner($user);
             $post->setTitle($i['title']);

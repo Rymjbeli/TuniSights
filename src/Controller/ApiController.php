@@ -198,10 +198,9 @@ class ApiController extends abstractController
             if($like->getOwner() === $userid){
                 // If the current user has already liked the post, remove the like entity
                 // and the associated notification (if the post owner is not the current user)
-              /*  if($post->getOwner()!=$userid){
+                /*if($post->getOwner()!=$userid){
                     $notification = $like->getNotification();
                     $entityManager->remove($notification);
-                    $entityManager->flush();
                 }*/
                 $entityManager->remove($like);
                 $entityManager->flush();
@@ -215,14 +214,13 @@ class ApiController extends abstractController
             $like = new Like();
             $like->setOwner($userid);
             $like->setTargetPost($post);
-
-            // If the post owner is not the current user, send a notification to the post owner
-           /* if($userid !== $post->getOwner()){
-                $this->notificationController->sendNotification('like', $post,$userid,$entityManager,$like);
-            }*/
             $entityManager->persist($like);
             $entityManager->flush();
             $likes->add($like);
+            // If the post owner is not the current user, send a notification to the post owner
+            if($userid !== $post->getOwner()){
+                $this->notificationController->sendNotification('like', $post,$userid,$entityManager,$like);
+            }
         }
         return $this->json([
             'message' => 'success',
