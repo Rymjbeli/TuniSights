@@ -82,7 +82,11 @@
 
                     <li class="nav-item nav__profile ">
                         <div class="avatar">
-                            <img class="nav-img" src="{{ asset('assets/Images/' ~ app.user.image) }}">
+                            {% if app.user.image %}
+                                <img class="nav-img" src="{{ asset('assets/Images/' ~ app.user.image) }}">
+                            {% else %}
+                                <img class="nav-img" src="/assets/Images/avatar.png" />
+                            {% endif %}
                         </div>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li class="dropdown-user-details">

@@ -33,7 +33,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 mb-4">
-          <img class="profile_picture" src="{{ asset('assets/Images/' ~ Userid.image) }}">
+          {% if app.user.image %}
+            <img class="profile_picture" src="{{ asset('assets/Images/' ~ app.user.image) }}">
+          {% else %}
+            <img class="profile_picture" src="/assets/Images/avatar.png" />
+          {% endif %}
         </div>
         <div class="col-md-9" id="text">
           <h5 class="card-title">{{ Userid.username }}</h5>

@@ -15,7 +15,11 @@
                                 <i class="fa-solid fa-pen-to-square" style="color: rgba(0, 97, 149, 0.9); margin-left: 95%; "></i>
                             </a>
                         {% endif %}
-                        <img id="avatar" src="{{ asset('assets/Images/' ~ post.owner.image) }}" alt="Small Image">
+                        {% if app.user.image %}
+                            <img id="avatar" src="{{ asset('assets/Images/' ~ app.user.image) }}">
+                        {% else %}
+                            <img id="avatar" src="/assets/Images/avatar.png" />
+                        {% endif %}
                         <p class="fw-bold" style="display: inline;margin-right: 3px">{{ post.owner.username }}</p>
                         <h6 class="fw-light" style="display: inline;font-size: 11px;color:gray">{{ post.createdAt|date('d-m-Y') }}</h6>
                     </div>
