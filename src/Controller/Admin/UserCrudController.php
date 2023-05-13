@@ -45,7 +45,6 @@ class UserCrudController extends AbstractCrudController
         yield IdField::new('id')->hideOnForm();
 
         yield ImageField::new('Image')
-            ->setValue('avatar.png')
             ->hideWhenCreating()
             ->setBasePath('/assets/Images')
             ->hideOnIndex();

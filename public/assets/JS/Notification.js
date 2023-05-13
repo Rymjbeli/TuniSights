@@ -25,7 +25,7 @@ $(document).ready(function() {
                     },
                     success: function(response) {
                         LoadPost(loader, response.toString());
-                        Loadcomments($('.CommentSection[postid="'+ postid  +'"]'),0);
+                        //Loadcomments($('.CommentSection[postid="'+ postid  +'"]'),0);
                         console.log('.CommentSection[postid="'+ postid  +'"]')
                     },
                     error: function(xhr, status, error) {

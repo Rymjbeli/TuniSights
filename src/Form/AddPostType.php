@@ -48,6 +48,7 @@ class AddPostType extends AbstractType
                     'Monument' => 'monument',
                     'Beach' => 'beach',
                     'Natural view' => 'natural view',
+                    'Culture' => 'culture',
                     'Other' => 'other',
                 ],
                 'constraints' => [

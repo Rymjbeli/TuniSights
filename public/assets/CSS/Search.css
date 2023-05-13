@@ -323,7 +323,7 @@ select:focus {
 }
 
 .limited-text {
-    height: 150px;
+    height: 145px;
     overflow: hidden;
     max-height: 200px;
     transition: max-height 0.5s;

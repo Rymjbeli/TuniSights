@@ -16,7 +16,14 @@
 body {
     font-family: var(--main-font-family);
     scroll-behavior: smooth;
-    background: var(--main-bg-color);
+    background: url("../Images/mahdiaa.jpg");
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /*background-color: rgba(211, 240, 251, 1) ;*/
+    background-color: rgba(255, 255, 255, 0.90) ;
+    background-blend-mode: overlay;
     margin-bottom: 0px;
 }
 
@@ -497,6 +504,7 @@ h1 {
     text-align: center;
     color: white;
     background-color: rgba(0, 98, 149, 0.4);
+
     width: 70rem;
     margin-left:0;
 }

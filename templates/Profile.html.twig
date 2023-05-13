@@ -9,9 +9,7 @@
 
 {% block AddJSLinks %}
   <script src="{{asset('assets/Libs/jquery-3.6.4.min.js')}}"></script>
-  <script src="{{asset('assets/JS/PostCard.js')}}"></script>
-  <script src="{{asset('assets/JS/Like.js')}}"></script>
-  <script src="{{asset('assets/JS/Comment.js')}}"></script>
+
 {% endblock %}
 {% block SectionsOfTheBody %}
   <script>
@@ -33,8 +31,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 mb-4">
-          {% if app.user.image %}
-            <img class="profile_picture" src="{{ asset('assets/Images/' ~ app.user.image) }}">
+          {% if Userid.image %}
+            <img class="profile_picture" src="{{ asset('assets/Images/' ~ Userid.image) }}">
           {% else %}
             <img class="profile_picture" src="{{ asset('assets/Images/avatar.png') }}" />
           {% endif %}
@@ -52,7 +50,7 @@
 <div class="container">
       <div class="row">
         {% for post in posts %}
-        <div class="col-md-6 col-lg-4 mb-4 image-container">
+        <div class="col-md-6 col-lg-4 mb-4 image-container" style="width: auto">
           <img class="img-fluid Post" src="{{ asset('assets/Images/' ~post.Image) }}" Postid="{{ post.id }}" alt="Gallery Image">
         </div>
         {% endfor %}

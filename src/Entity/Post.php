@@ -59,7 +59,7 @@ class Post
     #[ORM\OneToMany(mappedBy: 'targetPost', targetEntity: Notification::class, orphanRemoval: true)]
     private Collection $notification;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column( length: 255, nullable: true)]
     private ?string $Image = null;
 
     #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'Image')]

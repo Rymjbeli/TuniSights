@@ -40,7 +40,7 @@ function LikePost(btn){
             withCredentials: true
         },
         success: function(response) {
-            if(response.error !== undefined){console.error(response.error);return false;}
+            if(response.error !== undefined){console.error(response.error); location.href = "/login"; return false;}
             let likeCounter= $('.LikeCounter[postid="'+btn.attr("postid")+'"]');
             if(btn.attr("Liked")==="true"){
                 btn.css("background-image","url('/assets/Images/heartI.png')");
